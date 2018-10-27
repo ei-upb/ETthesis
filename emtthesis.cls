@@ -59,6 +59,10 @@
 % }}}
 
 % {{{ Page layout
+% Set main content's line spacing to be respected by the DIV-calculation.
+\RequirePackage{setspace}
+\ifstr{\onehalfspacingmode}{never}{\singlespacing}{\onehalfspacing}
+
 % General page layout
 \KOMAoptions{%
     % Default binding correction.
@@ -85,8 +89,6 @@
 \RequirePackage{booktabs}
 \RequirePackage{longtable}
 
-% Line spacing
-\RequirePackage{setspace}
 % }}}
 
 % {{{ Document start and structure
