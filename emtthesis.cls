@@ -3,8 +3,8 @@
 
 % Class Options
 % Fallback option (for all options not explicitly defined above)
-\DeclareOption*{
-    \ClassError{emtthesis}{Unknown option '\CurrentOption'.}
+\DeclareOption*{%
+    \ClassError{emtthesis}{Unknown option '\CurrentOption'.}{Check the documentation for valid options.}
 }
 
 % End of options section
