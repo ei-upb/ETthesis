@@ -5,14 +5,18 @@
 % Don't forget to configure your editor accordingly!
 \usepackage[utf8]{inputenc}
 
+% Custom packages and configuration are handled separately.
+\usepackage{custom}
+
 \begin{document}
     % \input your regular content chapters (mainmatter).
     \input{mainmatter/introduction}
     % Add your own chapters here.
     \input{mainmatter/summary}
 
-    % After the regular content, the appendix follows.
+    % After the regular content, the appendix follows, starting with the bibliography.
     \appendix
+    \printbibliography[title=Literaturverzeichnis]
 
     % TODO: Add your own appendices here.
     \input{appendix/appendixA}

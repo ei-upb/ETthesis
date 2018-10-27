@@ -14,6 +14,13 @@
 
 % {{{ Load base class.
 \LoadClass[
+    % Show bibliography in table of contents.
+    % There is no distinct rule on this, but in the class author's opinion, the
+    % bibliography should be listed because it is placed between the main
+    % content and the appendix (which is usually present in theses) and might
+    % otherwise be overlooked.
+    bibliography=totoc,
+    %
     fontsize=12pt,
     %
     % Do not use a period/dot at the end of chapter/section numbers.
