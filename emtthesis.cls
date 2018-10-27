@@ -10,11 +10,13 @@
 % End of options section
 \ProcessOptions\relax
 
-% Essential packages
-\RequirePackage[T1]{fontenc}
-\RequirePackage{lmodern}
 
 % Load scrbook as the base class
 \LoadClass[
     fontsize=12pt,
 ]{scrbook}
+
+% Essential packages
+\RequirePackage[T1]{fontenc}
+\RequirePackage{lmodern}
+\RequirePackage{microtype}
