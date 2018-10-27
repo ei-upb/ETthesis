@@ -22,6 +22,18 @@
     {never}{never}%
 }
 
+% Preface display switch
+% Choices:
+% * auto: Display preface for doctoral theses, but not for Bachelor's or Master's theses.
+% * never: Do not display the preface for any thesis type.
+% * always: Display the preface for any thesis type.
+\newcommand{\preface}{auto}
+\FamilyNumericalKey{emtthesis}{preface}{preface}{%
+    {auto}{auto},%
+    {never}{never},%
+    {always}{always}%
+}
+
 % Thesis type (default: bsc)
 % * bsc: Bachelor of Science (B.Sc.)
 % * msc: Master of Science (M.Sc.)
@@ -117,7 +129,7 @@
 % {{{ Document start and structure
 % The overall document structure is this:
 % * Titlepage
-% * Preface
+% * Preface (default on for Dr., off for B.Sc. and M.Sc.)
 % * Abstract
 % * Abstract in english (only for Dr.)
 % * Table of Contents
@@ -139,7 +151,11 @@
     \KOMAoptions{DIV=current}
 
 % Preface
-    \input{frontmatter/preface}
+    \ifstr{\preface}{auto}{%
+        \ifstrstart{\thesistype}{dr}{\input{frontmatter/preface}}{}
+    }{%
+        \ifstr{\preface}{always}{\input{frontmatter/preface}}{}
+    }
 
 % Abstracts
     % German abstract
