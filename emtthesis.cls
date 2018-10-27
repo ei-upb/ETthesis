@@ -54,7 +54,7 @@
 
 % Language-related
 \RequirePackage[english,ngerman]{babel}
-\RequirePackage{csquotes}
+\RequirePackage[autostyle=true]{csquotes}
 
 % }}}
 
@@ -62,6 +62,15 @@
 % {{{ Preface
 \AtBeginDocument{%
     \input{frontmatter/preface}
+}
+% }}}
+% {{{ Abstracts
+\AtBeginDocument{%
+    % German abstract
+    \input{frontmatter/abstract_de}
+
+    % English abstract
+    \input{frontmatter/abstract_en}
 }
 % }}}
 % }}}
