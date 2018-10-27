@@ -2,13 +2,32 @@
 \ProvidesClass{emtthesis}[2018/10/18 EMTthesis]
 
 % {{{ Class options
+\RequirePackage{scrbase}
+\DefineFamily{emtthesis}
+\DefineFamilyMember{emtthesis}
+
+% Line spacing mode
+% Typically, theses are typeset with 1.5x line spacing for the text. The table
+% of contents, lists of figures, tables and symbols use regular single spacing.
+% Choices:
+% * auto: Use above rules (default).
+% * mainmatter: Use 1.5x spacing for the mainmatter only. This means that
+%               preface and abstracts are set with single spacing.
+% * never: Never use 1.5x spacing, i.e. use single spacing everywhere.
+\newcommand{\onehalfspacingmode}{auto}
+\FamilyNumericalKey{emtthesis}{onehalfspacingmode}{onehalfspacingmode}{%
+    {auto}{auto},%
+    {mainmatter}{mainmatter},%
+    {never}{never}%
+}
+
 % Fallback option (for all options not explicitly defined above)
 \DeclareOption*{%
     \ClassError{emtthesis}{Unknown option '\CurrentOption'.}{Check the documentation for valid options.}
 }
 
 % End of options section
-\ProcessOptions\relax
+\FamilyProcessOptions{emtthesis}
 
 % }}}
 
@@ -64,6 +83,9 @@
 % Table formatting
 \RequirePackage{booktabs}
 \RequirePackage{longtable}
+
+% Line spacing
+\RequirePackage{setspace}
 % }}}
 
 % {{{ Document start and structure
@@ -86,6 +108,10 @@
 % Begin frontmatter (enable roman page numbering etc.)
     \frontmatter
 
+    % Apply user-selected line spacing for preface and abstract
+    \ifstr{\onehalfspacingmode}{auto}{\onehalfspacing}{\singlespacing}
+    \KOMAoptions{DIV=current}
+
 % Preface
     \input{frontmatter/preface}
 
@@ -97,6 +123,8 @@
     \input{frontmatter/abstract_en}
 
 % Table of contents and lists of figures, tables, abbreviations etc.
+    \singlespacing\KOMAoptions{DIV=current}
+
     % Table of contents
     \tableofcontents
 
@@ -109,6 +137,9 @@
 
 % Begin mainmatter, i.e. author content
     \mainmatter%
+
+    \ifstr{\onehalfspacingmode}{never}{\singlespacing}{\onehalfspacing}
+    \KOMAoptions{DIV=current}
 }
 % }}}
 
