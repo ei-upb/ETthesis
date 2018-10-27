@@ -73,6 +73,16 @@
     \input{frontmatter/abstract_en}
 }
 % }}}
+% {{{ Table of contents and lists of figures and tables
+\AtBeginDocument{%
+    % Table of contents
+    \tableofcontents
+
+    % Lists of figures and tables
+    \listoffigures
+    \listoftables
+}
+% }}}
 % }}}
 
 % vim: foldmethod=marker
