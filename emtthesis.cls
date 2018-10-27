@@ -67,6 +67,20 @@
 % }}}
 
 % {{{ Document start and structure
+% The overall document structure is this:
+% * Titlepage
+% * Preface
+% * Abstract
+% * Abstract in english
+% * Table of Contents
+% * List of figures
+% * List of tables
+% * List of abbreviations
+% * List of mathematical symbols / operators
+% * List of mathematical variables
+% * Mainmatter chapters (as decided by the author)
+% * Bibliography
+% * Appendix (optional)
 % {{{ Preface
 \AtBeginDocument{%
     \input{frontmatter/preface}
