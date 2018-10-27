@@ -51,6 +51,10 @@
 \RequirePackage[T1]{fontenc}
 \RequirePackage{lmodern}
 \RequirePackage{microtype}
+
+% Language-related
+\RequirePackage[english,ngerman]{babel}
+\RequirePackage{csquotes}
 % }}}
 
 % vim: foldmethod=marker
