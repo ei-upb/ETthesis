@@ -22,6 +22,19 @@
     {never}{never}%
 }
 
+% Thesis type (default: bsc)
+% * bsc: Bachelor of Science (B.Sc.)
+% * msc: Master of Science (M.Sc.)
+% * dring: Doktor-Ingenieur (Dr.-Ing.)
+% * drrernat: Doktor der Naturwissenschaften (Dr. rer. nat.)
+\newcommand{\thesistype}{bsc}
+\FamilyNumericalKey{emtthesis}{thesistype}{thesistype}{%
+    {bsc}{bsc},%
+    {msc}{msc},%
+    {dring}{dring},%
+    {drrernat}{drrernat},%
+}
+
 % Fallback option (for all options not explicitly defined above)
 \DeclareOption*{%
     \ClassError{emtthesis}{Unknown option '\CurrentOption'.}{Check the documentation for valid options.}
@@ -30,6 +43,16 @@
 % End of options section
 \FamilyProcessOptions{emtthesis}
 
+% Define thesis name by type.
+\ifstr{\thesistype}{bsc}{%
+    \newcommand{\thesisname}{Bachelorarbeit}
+}{}
+\ifstr{\thesistype}{msc}{%
+    \newcommand{\thesisname}{Masterarbeit}
+}{}
+\ifstrstart{\thesistype}{dr}{%
+    \newcommand{\thesisname}{Dissertation}
+}{}
 % }}}
 
 % {{{ Load base class.
