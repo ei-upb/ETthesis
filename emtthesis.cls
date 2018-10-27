@@ -83,6 +83,9 @@
 % * Appendix (optional)
 
 \AtBeginDocument{%
+% Begin frontmatter (enable roman page numbering etc.)
+    \frontmatter
+
 % Preface
     \input{frontmatter/preface}
 
@@ -103,6 +106,9 @@
 
     % Index of abbreviations and symbols
     \input{frontmatter/symbols}
+
+% Begin mainmatter, i.e. author content
+    \mainmatter%
 }
 % }}}
 
