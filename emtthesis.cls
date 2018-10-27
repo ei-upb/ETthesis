@@ -21,6 +21,11 @@
     % otherwise be overlooked.
     bibliography=totoc,
     %
+    % Format table captions assuming placement above (not below) the table.
+    % Note: The actual placement of caption is still controlled by where you
+    % put the \caption statement. This setting only controls spacing etc.
+    captions=tableheading,
+    %
     fontsize=12pt,
     %
     % Do not use a period/dot at the end of chapter/section numbers.
