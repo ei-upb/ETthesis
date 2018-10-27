@@ -119,7 +119,7 @@
 % * Titlepage
 % * Preface
 % * Abstract
-% * Abstract in english
+% * Abstract in english (only for Dr.)
 % * Table of Contents
 % * List of figures
 % * List of tables
@@ -145,8 +145,11 @@
     % German abstract
     \input{frontmatter/abstract_de}
 
-    % English abstract
-    \input{frontmatter/abstract_en}
+    % English abstract (only for doctoral theses)
+    \ifstrstart{\thesistype}{dr}{%
+        \input{frontmatter/abstract_en}
+    }{}
+
 
 % Table of contents and lists of figures, tables, abbreviations etc.
     \singlespacing\KOMAoptions{DIV=current}
