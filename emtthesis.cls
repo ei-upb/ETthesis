@@ -61,6 +61,9 @@
 \RequirePackage[english,ngerman]{babel}
 \RequirePackage[autostyle=true]{csquotes}
 
+% Table formatting
+\RequirePackage{booktabs}
+\RequirePackage{longtable}
 % }}}
 
 % {{{ Document start and structure
@@ -78,7 +81,7 @@
     \input{frontmatter/abstract_en}
 }
 % }}}
-% {{{ Table of contents and lists of figures and tables
+% {{{ Table of contents and lists of figures, tables, abbreviations etc.
 \AtBeginDocument{%
     % Table of contents
     \tableofcontents
@@ -86,6 +89,9 @@
     % Lists of figures and tables
     \listoffigures
     \listoftables
+
+    % Index of abbreviations and symbols
+    \input{frontmatter/symbols}
 }
 % }}}
 % }}}

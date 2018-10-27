@@ -1,0 +1,53 @@
+\chapter{Verzeichnis der verwendeten Abkürzungen und Symbole}
+
+% If the tables are put on the same page, an identical table width over the
+% entire page (i.e. \textwidth) is desired.
+% However, since the table width results from the sum of column widths and
+% the sum of respective column separator widths, simply distributing \textwidth
+% between the columns yields a table wider than \textwidth.
+% As a solution, we compensate for the table's number of column separators
+% (two per column) using \ltfix, and distribute that value between the columns.
+\newlength{\ltfix}
+
+\section*{Abkürzungen}
+% Two columns, so compensate for 4 column separators.
+\setlength{\ltfix}{\dimexpr\textwidth-4\tabcolsep\relax}
+\begin{longtable}{p{0.25\ltfix}p{0.75\ltfix}}
+    \toprule
+    \textbf{Abkürzung}  & \textbf{Bedeutung}\\
+    \midrule \endhead%
+    \midrule \endfoot%
+    \bottomrule \endlastfoot%
+    FFT         & Fast Fourier Transform\\
+    USB         & Universal Serial Bus\\
+\end{longtable}
+% \clearpage % Optional page break, if desired
+
+
+\section*{Mathematische Symbole und Konventionen}
+% Two columns, so compensate for 4 column separators (reuse from above).
+\begin{longtable}{p{0.25\ltfix}p{0.75\ltfix}}
+    \toprule
+    \textbf{Symbol} & \textbf{Bedeutung}\\
+    \midrule \endhead%
+    \midrule \endfoot%
+    \bottomrule \endlastfoot%
+    \(\mathbb{C}\)     & Menge der komplexen Zahlen\\
+    \(\mathbb{R}\)     & Menge der reellen Zahlen\\
+\end{longtable}
+% \clearpage % Optional page break, if desired
+
+
+\section*{Formelzeichen}
+% Three columns, so compensate for 6 column separators.
+\setlength{\ltfix}{\dimexpr\textwidth-6\tabcolsep\relax}
+\begin{longtable}{p{0.2\ltfix}p{0.15\ltfix}p{0.65\ltfix}}
+    \toprule
+    \textbf{Zeichen}  & \textbf{Einheit}  & \textbf{Bedeutung}\\
+    \midrule \endhead%
+    \midrule \endfoot%
+    \bottomrule \endlastfoot%
+    \(C\)                   & \si{\farad}       & Elektrische Kapazität\\
+    \(L\)                   & \si{\henry}       & Induktivität\\
+    \(R\)                   & \si{\ohm}         & Elektrischer Widerstand\\
+\end{longtable}
