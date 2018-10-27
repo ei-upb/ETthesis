@@ -81,22 +81,19 @@
 % * Mainmatter chapters (as decided by the author)
 % * Bibliography
 % * Appendix (optional)
-% {{{ Preface
+
 \AtBeginDocument{%
+% Preface
     \input{frontmatter/preface}
-}
-% }}}
-% {{{ Abstracts
-\AtBeginDocument{%
+
+% Abstracts
     % German abstract
     \input{frontmatter/abstract_de}
 
     % English abstract
     \input{frontmatter/abstract_en}
-}
-% }}}
-% {{{ Table of contents and lists of figures, tables, abbreviations etc.
-\AtBeginDocument{%
+
+% Table of contents and lists of figures, tables, abbreviations etc.
     % Table of contents
     \tableofcontents
 
@@ -107,7 +104,6 @@
     % Index of abbreviations and symbols
     \input{frontmatter/symbols}
 }
-% }}}
 % }}}
 
 % vim: foldmethod=marker
