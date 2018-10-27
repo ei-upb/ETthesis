@@ -15,6 +15,14 @@
 % {{{ Load base class.
 \LoadClass[
     fontsize=12pt,
+    %
+    % Do not use a period/dot at the end of chapter/section numbers.
+    % Note: This is in direct violation of DUDEN guidelines! Normally, ending
+    % periods are required whenever non-arabic digits are used for numbering.
+    % When using an appendix (with numbering A, B etc.), this rule applies.
+    % However, the class author strongly dislikes ending periods and therefore
+    % takes the liberty of intentionally violating the guidelines.
+    numbers=noendperiod,
 ]{scrbook}
 % }}}
 
