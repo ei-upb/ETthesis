@@ -55,6 +55,15 @@
 % Language-related
 \RequirePackage[english,ngerman]{babel}
 \RequirePackage{csquotes}
+
+% }}}
+
+% {{{ Document start and structure
+% {{{ Preface
+\AtBeginDocument{%
+    \input{frontmatter/preface}
+}
+% }}}
 % }}}
 
 % vim: foldmethod=marker
