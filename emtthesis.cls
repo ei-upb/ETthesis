@@ -138,6 +138,8 @@
 % }}}
 
 % {{{ Document metadata
+\newcommand{\@salutation}{}
+\newcommand{\salutation}[1]{\gdef\@salutation{#1}}
 \newcommand{\@advisorA}{}
 \newcommand{\advisorA}[1]{\gdef\@advisorA{#1}}
 \newcommand{\@advisorB}{}
@@ -166,6 +168,7 @@
 % {{{ Document start and structure
 % The overall document structure is this:
 % * Titlepage
+% * Problem statement (B.Sc. and M.Sc. only)
 % * Preface (default on for Dr., off for B.Sc. and M.Sc.)
 % * Abstract
 % * Abstract in english (only for Dr.)
@@ -189,7 +192,7 @@
     \ifstrstart{\thesistype}{dr}{%
         % Titlepage for doctoral theses.
     }{%
-        % Titlepage for Bachelor's and Master's theses.
+        % Titlepage and problem statement for Bachelor's and Master's theses.
         \begin{titlepage}
             \eimheader%
 
@@ -218,6 +221,33 @@
 
                 Paderborn, im \@date
             \end{center}
+
+            \emtfooter%
+        \end{titlepage}
+        \begin{titlepage}
+            \eimheader%
+
+            \begin{center}
+                \large\thesisname%
+                \vspace{3mm}
+
+                für
+                \vspace{3mm}
+
+                \@salutation~\@author
+            \end{center}
+
+            \vspace{5mm}
+
+            \noindent\textbf{\@title}
+
+            \vspace{5mm}
+
+            \noindent\input{frontmatter/problemstatement}
+
+            \vspace{10mm}
+
+            \noindent\@advisorA
 
             \emtfooter%
         \end{titlepage}
