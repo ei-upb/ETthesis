@@ -108,6 +108,40 @@
     DIV=calc,
 }
 
+% Page header with UPB / EIM branding
+\newcommand{\eimheader}{%
+    \begin{minipage}{0.4\textwidth}
+        \includegraphics[height=20mm]{logos/upb.pdf}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.4\textwidth}
+        \flushright%
+        \includegraphics[height=20mm]{logos/eim.pdf}
+    \end{minipage}
+    \vspace{10mm}
+}
+
+% Page footer with EMT branding
+\newcommand{\emtfooter}{%
+    \vfill
+    \begin{minipage}{0.7\textwidth}
+        \footnotesize
+        Fachgebiet Elektrische Messtechnik \(\cdot\) EIM-E\\
+        Warburger Straße 100 \(\cdot\) 33098 Paderborn
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.25\textwidth}
+        \flushright%
+        \includegraphics[height=15mm]{logos/emt.pdf}
+    \end{minipage}
+}
+% }}}
+
+% {{{ Document metadata
+\newcommand{\@advisorA}{}
+\newcommand{\advisorA}[1]{\gdef\@advisorA{#1}}
+\newcommand{\@advisorB}{}
+\newcommand{\advisorB}[1]{\gdef\@advisorB{#1}}
 % }}}
 
 % {{{ Used Packages
@@ -119,6 +153,9 @@
 % Language-related
 \RequirePackage[english,ngerman]{babel}
 \RequirePackage[autostyle=true]{csquotes}
+
+% Figure handling
+\usepackage{graphicx}
 
 % Table formatting
 \RequirePackage{booktabs}
@@ -143,8 +180,48 @@
 % * Appendix (optional)
 
 \AtBeginDocument{%
-% Begin frontmatter (enable roman page numbering etc.)
+    % Begin frontmatter (enable roman page numbering etc.)
     \frontmatter
+
+% Titlepage
+    \singlespacing\KOMAoptions{DIV=current}
+
+    \ifstrstart{\thesistype}{dr}{%
+        % Titlepage for doctoral theses.
+    }{%
+        % Titlepage for Bachelor's and Master's theses.
+        \begin{titlepage}
+            \eimheader%
+
+            \vspace{10mm}
+
+            \begin{center}
+                \large
+                {\thesisname}
+                \vspace{10mm}
+
+                % Note: \par at the end is required for proper line spacing.
+                {\LARGE \textbf{\@title}\par}
+                \vspace{10mm}
+
+                von
+                \vspace{5mm}
+
+                {\Large \@author}
+                \vspace{20mm}
+
+                \begin{tabular}{ll}
+                    Betreuer:   & \@advisorA\\
+                                & \@advisorB
+                \end{tabular}
+                \vspace{10mm}
+
+                Paderborn, im \@date
+            \end{center}
+
+            \emtfooter%
+        \end{titlepage}
+    }
 
     % Apply user-selected line spacing for preface and abstract
     \ifstr{\onehalfspacingmode}{auto}{\onehalfspacing}{\singlespacing}
