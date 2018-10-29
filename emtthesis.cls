@@ -140,10 +140,18 @@
 % {{{ Document metadata
 \newcommand{\@salutation}{}
 \newcommand{\salutation}[1]{\gdef\@salutation{#1}}
+\newcommand{\@nameprefix}{}
+\newcommand{\nameprefix}[1]{\gdef\@nameprefix{#1}}
+\newcommand{\@namesuffix}{}
+\newcommand{\namesuffix}[2][,]{\gdef\@namesuffix{#1~#2}}
 \newcommand{\@advisorA}{}
 \newcommand{\advisorA}[1]{\gdef\@advisorA{#1}}
 \newcommand{\@advisorB}{}
 \newcommand{\advisorB}[1]{\gdef\@advisorB{#1}}
+\newcommand{\@examdate}{}
+\newcommand{\examdate}[1]{\gdef\@examdate{#1}}
+\newcommand{\@thesisnumber}{}
+\newcommand{\thesisnumber}[1]{\gdef\@thesisnumber{#1}}
 % }}}
 
 % {{{ Used Packages
@@ -191,6 +199,48 @@
 
     \ifstrstart{\thesistype}{dr}{%
         % Titlepage for doctoral theses.
+        \begin{titlepage}
+            \eimheader%
+
+            \vspace{15mm}
+            \begin{center}
+                {\Large\bfseries\@title\par}
+                \vspace{15mm}
+
+                {\noindent Von der Fakultät für Elektrotechnik, Informatik und Mathematik\\ der Universität Paderborn}
+                \vspace{2mm}
+
+                zur Erlangung des akademischen Grades
+                \vspace{5mm}
+
+                {\large
+                \ifstr{\thesistype}{dring}{Doktor der Ingenieurswissenschaften (Dr.-Ing.)}{}
+                \ifstr{\thesistype}{drrernat}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}{}
+                }
+                \vspace{5mm}
+
+                genehmigte Dissertation
+                \vspace{2mm}
+
+                von
+                \vspace{5mm}
+
+                {\large\@nameprefix~\@author\@namesuffix}
+                \vspace{10mm}
+
+                \begin{tabular}{ll}
+                    Erster Gutachter: & \@advisorA\\
+                    Zweiter Gutachter: & \@advisorB\\[1em]
+                    Tag der mündlichen Prüfung: & \@examdate\\
+                \end{tabular}
+                \vspace{10mm}
+
+                Paderborn, \@date
+                \vspace{10mm}
+
+                Diss. EIM-E/\@thesisnumber
+            \end{center}
+        \end{titlepage}
     }{%
         % Titlepage and problem statement for Bachelor's and Master's theses.
         \begin{titlepage}
