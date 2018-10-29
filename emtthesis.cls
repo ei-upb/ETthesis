@@ -6,6 +6,19 @@
 \DefineFamily{emtthesis}
 \DefineFamilyMember{emtthesis}
 
+% Thesis acceptance flag
+% For doctoral theses, two variants of the title page are required, depending
+% on whether the thesis is being submitted ("Prüfungsexemplar") or has already
+% been accepted and is now to be published ("Belegexemplar").
+% Choices:
+% * no: Typeset the submission variant / Prüfungsexemplar.
+% * yes: Typeset the publishing variant / Belegexemplar.
+\newcommand{\accepted}{no}
+\FamilyNumericalKey{emtthesis}{accepted}{accepted}{%
+    {no}{no},%
+    {yes}{yes},%
+}
+
 % Line spacing mode
 % Typically, theses are typeset with 1.5x line spacing for the text. The table
 % of contents, lists of figures, tables and symbols and bibliography use
@@ -152,6 +165,10 @@
 \newcommand{\examdate}[1]{\gdef\@examdate{#1}}
 \newcommand{\@thesisnumber}{}
 \newcommand{\thesisnumber}[1]{\gdef\@thesisnumber{#1}}
+\newcommand{\@birthdate}{}
+\newcommand{\birthdate}[1]{\gdef\@birthdate{#1}}
+\newcommand{\@birthplace}{}
+\newcommand{\birthplace}[1]{\gdef\@birthplace{#1}}
 % }}}
 
 % {{{ Used Packages
@@ -202,43 +219,74 @@
         \begin{titlepage}
             \eimheader%
 
-            \vspace{15mm}
             \begin{center}
-                {\Large\bfseries\@title\par}
-                \vspace{15mm}
+                \ifstr{\accepted}{yes}{%
+                    % Accepted thesis title page ("Belegexemplar")
+                    \vspace{15mm}
+                    {\Large\bfseries\@title\par}
+                    \vspace{15mm}
 
-                {\noindent Von der Fakultät für Elektrotechnik, Informatik und Mathematik\\ der Universität Paderborn}
-                \vspace{2mm}
+                    {\noindent Von der Fakultät für Elektrotechnik, Informatik und Mathematik\\ der Universität Paderborn}
+                    \vspace{2mm}
 
-                zur Erlangung des akademischen Grades
-                \vspace{5mm}
+                    zur Erlangung des akademischen Grades
+                    \vspace{5mm}
 
-                {\large
-                \ifstr{\thesistype}{dring}{Doktor der Ingenieurswissenschaften (Dr.-Ing.)}{}
-                \ifstr{\thesistype}{drrernat}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}{}
+                    {\large
+                    \ifstr{\thesistype}{dring}{Doktor der Ingenieurswissenschaften (Dr.-Ing.)}{}
+                    \ifstr{\thesistype}{drrernat}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}{}
+                    }
+                    \vspace{5mm}
+
+                    genehmigte Dissertation
+                    \vspace{2mm}
+
+                    von
+                    \vspace{5mm}
+
+                    {\large\@nameprefix~\@author\@namesuffix}
+                    \vspace{10mm}
+
+                    \begin{tabular}{ll}
+                        Erster Gutachter: & \@advisorA\\
+                        Zweiter Gutachter: & \@advisorB\\[1em]
+                        Tag der mündlichen Prüfung: & \@examdate\\
+                    \end{tabular}
+                    \vspace{10mm}
+
+                    Paderborn, \@date
+                    \vspace{10mm}
+
+                    Diss. EIM-E/\@thesisnumber
+                }{%
+                    % To-be-submitted thesis title page ("Prüfexemplar")
+                    \vspace{25mm}
+                    {\Large\bfseries\@title\par}
+                    \vspace{15mm}
+
+                    {\noindent Der Fakultät für Elektrotechnik, Informatik und Mathematik\\ der Universität Paderborn}
+                    \vspace{2mm}
+
+                    zur Erlangung des akademischen Grades
+                    \vspace{5mm}
+
+                    {\large
+                    \ifstr{\thesistype}{dring}{Doktor der Ingenieurswissenschaften (Dr.-Ing.)}{}
+                    \ifstr{\thesistype}{drrernat}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}{}
+                    }
+                    \vspace{5mm}
+
+                    vorgelegte Dissertation
+                    \vspace{2mm}
+
+                    von
+                    \vspace{5mm}
+
+                    {\large\@nameprefix~\@author\@namesuffix}
+                    \vspace{5mm}
+
+                    geboren am \@birthdate~in \@birthplace
                 }
-                \vspace{5mm}
-
-                genehmigte Dissertation
-                \vspace{2mm}
-
-                von
-                \vspace{5mm}
-
-                {\large\@nameprefix~\@author\@namesuffix}
-                \vspace{10mm}
-
-                \begin{tabular}{ll}
-                    Erster Gutachter: & \@advisorA\\
-                    Zweiter Gutachter: & \@advisorB\\[1em]
-                    Tag der mündlichen Prüfung: & \@examdate\\
-                \end{tabular}
-                \vspace{10mm}
-
-                Paderborn, \@date
-                \vspace{10mm}
-
-                Diss. EIM-E/\@thesisnumber
             \end{center}
         \end{titlepage}
     }{%
