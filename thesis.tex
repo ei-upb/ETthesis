@@ -48,8 +48,20 @@
     \appendix
 
     % Insert the bibliography, using the correct single line spacing page layout.
+    % Note: When creating a doctoral thesis in submission variant (i.e.
+    % accepted=no), the main bibliography does not include the author's own
+    % publications. These are put into a separate list. See below for details.
     \insertbibliography%
 
     % TODO: Add your own appendices here.
     \input{appendix/appendixA}
+
+    % For doctoral theses in submission variant (i.e. accepted=no), an
+    % additional backmatter is automatically created, including:
+    % * The author's CV (from backmatter/cv.tex)
+    % * Separate list of all author's publications, automatically generated.
+    %   Own publications are identified by the author's name as given above
+    %   via \author{}. Publications not cited in the thesis text are included
+    %   (\nocite-like behaviour).
+    % * Keywords (from backmatter/keywords.tex)
 \end{document}
