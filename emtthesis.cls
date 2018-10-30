@@ -408,4 +408,18 @@
 }
 % }}}
 
+% {{{ Backmatter
+\ifstrstart{\thesistype}{dr}{%
+    \ifstr{\accepted}{no}{%
+        \AtEndDocument{%
+            \backmatter%
+            \singlespacing\KOMAoptions{DIV=current}
+
+            \input{backmatter/cv}
+
+            \input{backmatter/keywords}
+        }
+    }{}
+}{}
+% }}}}
 % vim: foldmethod=marker
