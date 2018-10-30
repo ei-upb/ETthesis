@@ -193,6 +193,10 @@
     backend=biber,
     style=alphabetic,
 ]{biblatex}
+
+\RequirePackage[
+    hidelinks,
+]{hyperref}
 % }}}
 
 % {{{ Document start and structure
