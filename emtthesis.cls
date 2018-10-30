@@ -188,6 +188,11 @@
 \RequirePackage{booktabs}
 \RequirePackage{longtable}
 
+% Bibliography
+\RequirePackage[
+    backend=biber,
+    style=alphabetic,
+]{biblatex}
 % }}}
 
 % {{{ Document start and structure
@@ -393,7 +398,25 @@
 }
 % }}}
 
-% {{{ Bibliography helper
+% {{{ Bibliography
+% Automatically mark own publications with keyword "own", for later filtering.
+%
+% Note: We want the user to be able to \addbibresource as desired, using their
+% document preamble. Since the following mapping must execute *after* adding
+% the resources, we use \AtBeginDocument.
+\AtBeginDocument{%
+    \DeclareSourcemap{%
+        \maps[datatype=bibtex]{%
+            \map{%
+                \step[fieldsource=author,
+                    match=\@author,
+                    final]
+                \step[fieldset=keywords, fieldvalue=own]
+            }
+        }
+    }
+}
+
 % The bibliography is typeset with single line spacing, while the previous
 % content (mainmatter) is usually set with 1.5x spacing. So, spacing must
 % be switched, followed by a re-calculation of the typearea.
@@ -403,12 +426,26 @@
 % actual document file (e.g. thesis.tex).
 \newcommand{\insertbibliography}{%
     \singlespacing\KOMAoptions{DIV=current}
-    \printbibliography[title=Literaturverzeichnis]
+    \ifstrstart{\thesistype}{dr}{%
+        \ifstr{\accepted}{yes}{%
+            % Include everything for the accepted variant of doctoral theses.
+            \printbibliography[title=Literaturverzeichnis, segment=0]
+        }{%
+            % Include only other's publications for submission variant of doctoral theses.
+            % In this variant, the author's own publications are set in a separate bibliography.
+            \printbibliography[title=Literaturverzeichnis, notkeyword=own, segment=0]
+        }
+    }{%
+        % Include everything for B.Sc. and M.Sc. theses.
+        \printbibliography[title=Literaturverzeichnis]
+    }
     \ifstr{\onehalfspacingmode}{never}{}{\onehalfspacing}
 }
 % }}}
 
 % {{{ Backmatter
+% For the submission / non-accepted variant of doctoral theses, the backmatter
+% includes the author's CV, their list of publications and some keywords.
 \ifstrstart{\thesistype}{dr}{%
     \ifstr{\accepted}{no}{%
         \AtEndDocument{%
@@ -416,6 +453,12 @@
             \singlespacing\KOMAoptions{DIV=current}
 
             \input{backmatter/cv}
+
+            % Automatically include all sources that are marked with the keyword "own".
+            \begin{refsegment}
+                \nocite{*}
+            \end{refsegment}
+            \printbibliography[title={Eigene Publikationen}, keyword=own, segment=1]
 
             \input{backmatter/keywords}
         }
