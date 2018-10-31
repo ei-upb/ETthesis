@@ -203,6 +203,7 @@
 
 % Figure handling
 \RequirePackage{graphicx}
+\RequirePackage{xcolor}
 
 % Table formatting
 \RequirePackage{booktabs}
