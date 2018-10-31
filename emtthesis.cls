@@ -209,6 +209,7 @@
 \RequirePackage[
     backend=biber,
     style=alphabetic,
+    sorting=nyt,
 ]{biblatex}
 
 \RequirePackage[
@@ -438,6 +439,9 @@
     }
 }
 
+% Define note describing bibliography sorting.
+\defbibnote{bibsorting}{Die Literaturangaben sind alphabetisch nach dem Nachnamen des ersten Autors und anschließend nach dem Erscheinungsjahr sortiert.}
+
 % The bibliography is typeset with single line spacing, while the previous
 % content (mainmatter) is usually set with 1.5x spacing. So, spacing must
 % be switched, followed by a re-calculation of the typearea.
@@ -450,11 +454,11 @@
     \ifstrstart{\thesistype}{dr}{%
         \ifstr{\accepted}{yes}{%
             % Include everything for the accepted variant of doctoral theses.
-            \printbibliography[title=Literaturverzeichnis, segment=0]
+            \printbibliography[title=Literaturverzeichnis, segment=0, prenote=bibsorting]
         }{%
             % Include only other's publications for submission variant of doctoral theses.
             % In this variant, the author's own publications are set in a separate bibliography.
-            \printbibliography[title=Literaturverzeichnis, notkeyword=own, segment=0]
+            \printbibliography[title=Literaturverzeichnis, notkeyword=own, segment=0, prenote=bibsorting]
         }
     }{%
         % Include everything for B.Sc. and M.Sc. theses.
