@@ -235,7 +235,7 @@
                     \vfill
                     \vspace{15mm}
 
-                    {\noindent Von der Fakultät für Elektrotechnik, Informatik und Mathematik\\ der Universität Paderborn}
+                    {Von der Fakultät für Elektrotechnik, Informatik und Mathematik\\ der Universität Paderborn}
                     \vspace{2mm}
 
                     zur Erlangung des akademischen Grades
@@ -273,7 +273,7 @@
                     {\Large\bfseries\@title\par}
                     \vspace{15mm}
 
-                    {\noindent Der Fakultät für Elektrotechnik, Informatik und Mathematik\\ der Universität Paderborn}
+                    {Der Fakultät für Elektrotechnik, Informatik und Mathematik\\ der Universität Paderborn}
                     \vspace{2mm}
 
                     zur Erlangung des akademischen Grades
