@@ -6,7 +6,14 @@
 
 % Additional math packages
 \usepackage{amssymb}
-\usepackage{siunitx}
+
+% Properly formatted physical units
+\usepackage[
+    list-final-separator={ und },
+    list-pair-separator={ und },
+    range-phrase={ bis },
+    output-decimal-marker={,}
+]{siunitx}
 
 % Bibliography
 \addbibresource{thesis.bib}
