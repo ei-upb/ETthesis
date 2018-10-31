@@ -231,8 +231,8 @@
             \begin{center}
                 \ifstr{\accepted}{yes}{%
                     % Accepted thesis title page ("Belegexemplar")
-                    {\Large\bfseries\@title\par}
                     \vfill
+                    {\Large\bfseries\sffamily\@title\par}
                     \vspace{15mm}
 
                     {Von der Fakultät für Elektrotechnik, Informatik und Mathematik\\ der Universität Paderborn}
@@ -270,7 +270,7 @@
                 }{%
                     % To-be-submitted thesis title page ("Prüfexemplar")
                     \vspace{25mm}
-                    {\Large\bfseries\@title\par}
+                    {\Large\bfseries\sffamily\@title\par}
                     \vspace{15mm}
 
                     {Der Fakultät für Elektrotechnik, Informatik und Mathematik\\ der Universität Paderborn}
@@ -311,7 +311,7 @@
                 \vspace{10mm}
 
                 % Note: \par at the end is required for proper line spacing.
-                {\LARGE \textbf{\@title}\par}
+                {\LARGE\bfseries\sffamily\@title\par}
                 \vspace{10mm}
 
                 von
@@ -346,7 +346,7 @@
 
             \vspace{5mm}
 
-            \noindent\textbf{\@title}
+            \noindent\textsf{\textbf{\@title}}
 
             \vspace{5mm}
 
