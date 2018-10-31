@@ -171,6 +171,23 @@
 \newcommand{\birthplace}[1]{\gdef\@birthplace{#1}}
 % }}}
 
+% {{{ Included file names
+% This class includes a number of external files that the user should fill with
+% their content, e.g. preface, abstract or CV. Including a file provides better
+% separation of content and better formatted code, compared to using macros for
+% setting the corresponding (potentially substantial) content.
+% However, the class should not include hard-coded file names, but allow the
+% user to configure file inclusion. Therefore, we provide macros for each file,
+% to be redefined if the user so chooses.
+\newcommand{\prefacefile}{frontmatter/preface}
+\newcommand{\germanabstractfile}{frontmatter/abstract_de}
+\newcommand{\englishabstractfile}{frontmatter/abstract_en}
+\newcommand{\symbolsfile}{frontmatter/symbols}
+\newcommand{\problemstatementfile}{frontmatter/problemstatement}
+\newcommand{\cvfile}{backmatter/cv}
+\newcommand{\keywordsfile}{backmatter/keywords}
+% }}}
+
 % {{{ Used Packages
 % Essential packages
 \RequirePackage[T1]{fontenc}
@@ -350,7 +367,7 @@
 
             \vspace{5mm}
 
-            \noindent\input{frontmatter/problemstatement}
+            \noindent\input{\problemstatementfile}
 
             \vspace{10mm}
 
@@ -366,18 +383,18 @@
 
 % Preface
     \ifstr{\preface}{auto}{%
-        \ifstrstart{\thesistype}{dr}{\input{frontmatter/preface}}{}
+        \ifstrstart{\thesistype}{dr}{\input{\prefacefile}}{}
     }{%
-        \ifstr{\preface}{always}{\input{frontmatter/preface}}{}
+        \ifstr{\preface}{always}{\input{\prefacefile}}{}
     }
 
 % Abstracts
     % German abstract
-    \input{frontmatter/abstract_de}
+    \input{\germanabstractfile}
 
     % English abstract (only for doctoral theses)
     \ifstrstart{\thesistype}{dr}{%
-        \input{frontmatter/abstract_en}
+        \input{\englishabstractfile}
     }{}
 
 
@@ -392,7 +409,7 @@
     \listoftables
 
     % Index of abbreviations and symbols
-    \input{frontmatter/symbols}
+    \input{\symbolsfile}
 
 % Begin mainmatter, i.e. author content
     \mainmatter%
@@ -456,7 +473,7 @@
             \backmatter%
             \singlespacing\KOMAoptions{DIV=current}
 
-            \input{backmatter/cv}
+            \input{\cvfile}
 
             % Automatically include all sources that are marked with the keyword "own".
             \begin{refsegment}
@@ -464,7 +481,7 @@
             \end{refsegment}
             \printbibliography[title={Eigene Publikationen}, keyword=own, segment=1]
 
-            \input{backmatter/keywords}
+            \input{\keywordsfile}
         }
     }{}
 }{}
