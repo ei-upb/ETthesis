@@ -231,8 +231,8 @@
             \begin{center}
                 \ifstr{\accepted}{yes}{%
                     % Accepted thesis title page ("Belegexemplar")
-                    \vspace{15mm}
                     {\Large\bfseries\@title\par}
+                    \vfill
                     \vspace{15mm}
 
                     {\noindent Von der Fakultät für Elektrotechnik, Informatik und Mathematik\\ der Universität Paderborn}
@@ -254,7 +254,7 @@
                     \vspace{5mm}
 
                     {\large\@nameprefix~\@author\@namesuffix}
-                    \vspace{10mm}
+                    \vspace{15mm}
 
                     \begin{tabular}{ll}
                         Erster Gutachter: & \@advisorA\\
