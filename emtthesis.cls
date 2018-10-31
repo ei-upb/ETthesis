@@ -1,6 +1,9 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{emtthesis}[2018/10/18 EMTthesis]
 
+% We live in 2018.
+\usepackage[utf8]{inputenc}
+
 % {{{ Class options
 \RequirePackage{scrbase}
 \DefineFamily{emtthesis}
