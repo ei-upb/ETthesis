@@ -202,7 +202,7 @@
 \RequirePackage[autostyle=true]{csquotes}
 
 % Figure handling
-\usepackage{graphicx}
+\RequirePackage{graphicx}
 
 % Table formatting
 \RequirePackage{booktabs}
