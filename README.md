@@ -77,6 +77,9 @@ The EMTthesis document class supports the following options, which can be given 
 * **singlecitelabel**: Toggle cite label format for multi-author sources.
   * `false`: Use up to three author's initials in label. For Mustermann and Doe, set [MD18]. [default]
   * `true`: Always use only the first author's name in label. For Mustermann and Doe, set [Mus18].
+* **useminted**: Toggle package usage for `minted`.
+  * `true`: Automatically include `minted` package. [default]
+  * `false`: Do not include `minted`, e.g. when using `listings` instead.
 
 
 Using with Git

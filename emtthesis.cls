@@ -76,6 +76,20 @@
     {drrernat}{drrernat},%
 }
 
+% Minted package loading
+% Source code listings are often required in theses. Typically, they are
+% typeset with either the listings package or the newer minted package.
+% Because of sub-dependencies on packages required by this class, minted cannot
+% be loaded by the user in their preamble, so it must be supported here.
+% Choices:
+% * true Do load the minted package [default].
+% * false Do not load the minted package.
+\newcommand{\useminted}{true}
+\FamilyNumericalKey{emtthesis}{useminted}{useminted}{%
+    {false}{false},%
+    {true}{true},%
+}
+
 % Fallback option (for all options not explicitly defined above)
 \DeclareOption*{%
     \ClassError{emtthesis}{Unknown option '\CurrentOption'.}{Check the documentation for valid options.}
@@ -215,6 +229,32 @@
 \RequirePackage[T1]{fontenc}
 \RequirePackage{lmodern}
 \RequirePackage{microtype}
+
+% Source code listings
+% Note: minted must be loaded before csquotes because of a sub-dependency.
+\ifstr{\useminted}{true}{%
+    \RequirePackage[
+        chapter,
+        newfloat=true,
+    ]{minted}
+
+    % Default options for code listings.
+    \setminted{%
+        autogobble=true, % Remove common leading whitespace.
+        breaklines=true, % Break lines if too long.
+        fontsize=\scriptsize,
+        frame=lines, % Lines above and below the code.
+        linenos=true,
+    }
+
+    % Default options for inline code.
+    \setmintedinline{%
+        fontsize=\normalsize,
+    }
+
+    % Name to be used for floating listings.
+    \SetupFloatingEnvironment{listing}{name={Codebeispiel}}
+}{}
 
 % Language-related
 \RequirePackage[english,ngerman]{babel}
