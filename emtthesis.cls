@@ -214,7 +214,12 @@
     backend=biber,
     style=alphabetic,
     sorting=nyt,
+    maxnames=5, % For more than maxnames authors, shorten bibliography entry to minnames plus "et al".
+    minnames=1,
+    maxalphanames=3, % For more than maxalphanames authors, shorten the cite label to minalphanames.
+    minalphanames=3,
 ]{biblatex}
+\renewcommand*{\labelalphaothers}{} % Remove plus-sign for more than maxalphanames authors.
 
 \RequirePackage[
     hidelinks,
