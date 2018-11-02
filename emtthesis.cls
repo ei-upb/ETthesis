@@ -221,6 +221,11 @@
     minalphanames=3,
 ]{biblatex}
 \renewcommand*{\labelalphaothers}{} % Remove plus-sign for more than maxalphanames authors.
+\AtBeginBibliography{%
+    % Typeset URLs/DOIs in regular font instead of monospace to prevent overly
+    % emphasizing that part of the entry.
+    \renewcommand*{\UrlFont}{}
+}
 
 \RequirePackage[
     hidelinks,
