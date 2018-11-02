@@ -221,6 +221,10 @@
     minalphanames=3,
 ]{biblatex}
 \renewcommand*{\labelalphaothers}{} % Remove plus-sign for more than maxalphanames authors.
+\DefineBibliographyStrings{ngerman}{%
+    % When truncating author lists, put "et al." instead of "u.a.".
+    andothers={et\addabbrvspace{}al\adddot},
+}
 \AtBeginBibliography{%
     % Typeset URLs/DOIs in regular font instead of monospace to prevent overly
     % emphasizing that part of the entry.
