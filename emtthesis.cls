@@ -399,7 +399,9 @@
 
 % Preface
     \ifstr{\preface}{auto}{%
-        \ifstrstart{\thesistype}{dr}{\input{\prefacefile}}{}
+        \ifstrstart{\thesistype}{dr}{%
+            \ifstr{\accepted}{yes}{\input{\prefacefile}}{}
+        }{}
     }{%
         \ifstr{\preface}{always}{\input{\prefacefile}}{}
     }

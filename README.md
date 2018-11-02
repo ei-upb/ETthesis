@@ -29,6 +29,7 @@ Features
     * Keywords
   * Accepted variant, for publication ("Belegexemplar")
     * Required title page
+    * Preface enabled by default
     * Regular bibliography with other's and own publications.
     * No CV and keywords.
 * Compliance with university, faculty and work group requirements (no guarantees though)
@@ -63,7 +64,7 @@ The EMTthesis document class supports the following options, which can be given 
   * `dring`: Doktor der Ingenieurwissenschaften (Dr.-Ing.)
   * `drrernat`: Doktor der Naturwissenschaften (Dr. rer. nat.)
 * **preface**: Whether to include a preface in the document.
-  * `auto`: Include for doctoral theses, but not for Bachelor's and Master's. [default]
+  * `auto`: Include for accepted doctoral theses only. [default]
   * `always`: Enable preface.
   * `never`: Disable preface.
 * **onehalfspacingmode**: When to use 1.5x line spacing in the document.
