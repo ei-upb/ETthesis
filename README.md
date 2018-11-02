@@ -49,6 +49,14 @@ Features
   * CV (doctoral, submission variant only)
   * Own publications (doctoral, submission variant only)
   * Keywords (doctoral, submission variant only)
+* Common packages already included, e.g.
+  * babel
+  * biblatex
+  * booktabs
+  * hyperref
+  * longtable
+  * microtype
+  * minted
 
 
 Class options
