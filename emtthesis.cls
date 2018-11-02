@@ -9,17 +9,21 @@
 \DefineFamily{emtthesis}
 \DefineFamilyMember{emtthesis}
 
-% Thesis acceptance flag
+% Document state
 % For doctoral theses, two variants of the title page are required, depending
 % on whether the thesis is being submitted ("Prüfungsexemplar") or has already
 % been accepted and is now to be published ("Belegexemplar").
+% In addition, for preliminary work, the "official" parts, especially the
+% formal title page, may be omitted for reduced-anxiety editing.
 % Choices:
-% * no: Typeset the submission variant / Prüfungsexemplar.
-% * yes: Typeset the publishing variant / Belegexemplar.
-\newcommand{\accepted}{no}
-\FamilyNumericalKey{emtthesis}{accepted}{accepted}{%
-    {no}{no},%
-    {yes}{yes},%
+% * submission: Typeset the submission variant / Prüfungsexemplar (default).
+% * accepted: Typeset the publishing variant / Belegexemplar.
+% * preliminary: Omit possible sources of anxiety.
+\newcommand{\docstate}{submission}
+\FamilyNumericalKey{emtthesis}{docstate}{docstate}{%
+    {submission}{submission},%
+    {accepted}{accepted},%
+    {preliminary}{preliminary},%
 }
 
 % Line spacing mode
@@ -322,11 +326,11 @@
     \ifstrstart{\thesistype}{dr}{%
         % Titlepage for doctoral theses.
         \begin{titlepage}
-            \eimheader%
-
             \begin{center}
-                \ifstr{\accepted}{yes}{%
+                \ifstr{\docstate}{accepted}{%
                     % Accepted thesis title page ("Belegexemplar")
+                    \eimheader%
+
                     \vfill
                     {\Large\bfseries\sffamily\@title\par}
                     \vspace{15mm}
@@ -363,8 +367,11 @@
                     \vspace{10mm}
 
                     Diss. EIM-E/\@thesisnumber
-                }{%
+                }{}
+                \ifstr{\docstate}{submission}{%
                     % To-be-submitted thesis title page ("Prüfexemplar")
+                    \eimheader%
+
                     \vspace{25mm}
                     {\Large\bfseries\sffamily\@title\par}
                     \vspace{15mm}
@@ -391,7 +398,11 @@
                     \vspace{5mm}
 
                     geboren am \@birthdate~in \@birthplace
-                }
+                }{}
+                \ifstr{\docstate}{preliminary}{%
+                    % Reduced-anxiety title page
+                    Einige Notizen von \@author~zum Thema \@title.
+                }{}
             \end{center}
         \end{titlepage}
     }{%
@@ -463,20 +474,22 @@
 % Preface
     \ifstr{\preface}{auto}{%
         \ifstrstart{\thesistype}{dr}{%
-            \ifstr{\accepted}{yes}{\input{\prefacefile}}{}
+            \ifstr{\docstate}{accepted}{\input{\prefacefile}}{}
         }{}
     }{%
         \ifstr{\preface}{always}{\input{\prefacefile}}{}
     }
 
 % Abstracts
-    % German abstract
-    \input{\germanabstractfile}
+    \ifstr{\docstate}{preliminary}{}{%
+        % German abstract
+        \input{\germanabstractfile}
 
-    % English abstract (only for doctoral theses)
-    \ifstrstart{\thesistype}{dr}{%
-        \input{\englishabstractfile}
-    }{}
+        % English abstract (only for doctoral theses)
+        \ifstrstart{\thesistype}{dr}{%
+            \input{\englishabstractfile}
+        }{}
+    }
 
 
 % Table of contents and lists of figures, tables, abbreviations etc.
@@ -532,7 +545,7 @@
 \newcommand{\insertbibliography}{%
     \singlespacing\KOMAoptions{DIV=current}
     \ifstrstart{\thesistype}{dr}{%
-        \ifstr{\accepted}{yes}{%
+        \ifstr{\docstate}{accepted}{%
             % Include everything for the accepted variant of doctoral theses.
             \printbibliography[title=Literaturverzeichnis, segment=0, prenote=bibsorting]
         }{%
@@ -552,7 +565,7 @@
 % For the submission / non-accepted variant of doctoral theses, the backmatter
 % includes the author's CV, their list of publications and some keywords.
 \ifstrstart{\thesistype}{dr}{%
-    \ifstr{\accepted}{no}{%
+    \ifstr{\docstate}{submission}{%
         \AtEndDocument{%
             \backmatter%
             \singlespacing\KOMAoptions{DIV=current}
