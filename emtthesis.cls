@@ -294,6 +294,7 @@
     \renewcommand*{\UrlFont}{}
 }
 
+% Hyperref should be loaded last
 \RequirePackage[
     hidelinks,
 ]{hyperref}
