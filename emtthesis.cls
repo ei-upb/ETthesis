@@ -214,6 +214,7 @@
     backend=biber,
     style=alphabetic,
     sorting=nyt,
+    giveninits=true, % Shorten given names to initials.
     maxnames=5, % For more than maxnames authors, shorten bibliography entry to minnames plus "et al".
     minnames=1,
     maxalphanames=3, % For more than maxalphanames authors, shorten the cite label to minalphanames.
