@@ -74,6 +74,9 @@ The EMTthesis document class supports the following options, which can be given 
 * **accepted**: Toggle accepted variant for doctoral theses.
   * `no`: Typeset the to-be-submitted variant ("Prüfexemplar") with the appropriate title page and a backmatter containing the CV, list of all own publications and keywords. [default]
   * `yes`: Typeset the accepted variant, for publishing ("Belegexemplar).
+* **singlecitelabel**: Toggle cite label format for multi-author sources.
+  * `false`: Use up to three author's initials in label. For Mustermann and Doe, set [MD18]. [default]
+  * `true`: Always use only the first author's name in label. For Mustermann and Doe, set [Mus18].
 
 
 Using with Git

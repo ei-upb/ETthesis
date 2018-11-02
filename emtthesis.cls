@@ -50,6 +50,19 @@
     {always}{always}%
 }
 
+% Single author cite labels
+% If enabled, publications are always represented by a single-name cite label,
+% even if multiple authors are defined. For authors Mustermann and Doe, the
+% result would e.g. be [Mus18], not [MD18].
+% Choices:
+% * false Disable single-author labels [default].
+% * true: Enable single-author labels.
+\newcommand{\singlecitelabel}{false}
+\FamilyNumericalKey{emtthesis}{singlecitelabel}{singlecitelabel}{%
+    {false}{false},%
+    {true}{true},%
+}
+
 % Thesis type (default: bsc)
 % * bsc: Bachelor of Science (B.Sc.)
 % * msc: Master of Science (M.Sc.)
@@ -81,6 +94,12 @@
 \ifstrstart{\thesistype}{dr}{%
     \newcommand{\thesisname}{Dissertation}
 }{}
+
+\ifstr{\singlecitelabel}{true}{%
+    \newcommand{\citelabelauthornum}{1}
+}{%
+    \newcommand{\citelabelauthornum}{3}
+}
 % }}}
 
 % {{{ Load base class.
@@ -217,8 +236,8 @@
     giveninits=true, % Shorten given names to initials.
     maxnames=10, % For more than maxnames authors, shorten bibliography entry to minnames plus "et al".
     minnames=1,
-    maxalphanames=3, % For more than maxalphanames authors, shorten the cite label to minalphanames.
-    minalphanames=3,
+    maxalphanames=\citelabelauthornum, % For more than maxalphanames authors, shorten the cite label to minalphanames.
+    minalphanames=\citelabelauthornum,
 ]{biblatex}
 \renewcommand*{\labelalphaothers}{} % Remove plus-sign for more than maxalphanames authors.
 \DefineBibliographyStrings{ngerman}{%
