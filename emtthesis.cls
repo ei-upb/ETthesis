@@ -482,16 +482,13 @@
     }
 
 % Abstracts
-    \ifstr{\docstate}{preliminary}{}{%
-        % German abstract
-        \input{\germanabstractfile}
+    % German abstract
+    \input{\germanabstractfile}
 
-        % English abstract (only for doctoral theses)
-        \ifstrstart{\thesistype}{dr}{%
-            \input{\englishabstractfile}
-        }{}
-    }
-
+    % English abstract (only for doctoral theses)
+    \ifstrstart{\thesistype}{dr}{%
+        \input{\englishabstractfile}
+    }{}
 
 % Table of contents and lists of figures, tables, abbreviations etc.
     \singlespacing\KOMAoptions{DIV=current}
@@ -566,7 +563,7 @@
 % For the submission / non-accepted variant of doctoral theses, the backmatter
 % includes the author's CV, their list of publications and some keywords.
 \ifstrstart{\thesistype}{dr}{%
-    \ifstr{\docstate}{submission}{%
+    \ifstr{\docstate}{accepted}{}{%
         \AtEndDocument{%
             \backmatter%
             \singlespacing\KOMAoptions{DIV=current}
@@ -581,7 +578,7 @@
 
             \input{\keywordsfile}
         }
-    }{}
+    }
 }{}
 % }}}}
 % vim: foldmethod=marker
