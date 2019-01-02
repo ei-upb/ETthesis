@@ -33,9 +33,7 @@ Features
     * Regular bibliography with other's and own publications.
     * No CV and keywords.
   * Preliminary variant, for reduced-anxiety editing
-    * No title page
-    * No abstracts
-    * No backmatter
+    * Unofficial-looking title page
 * Compliance with university, faculty and work group requirements (no guarantees though)
 * Metadata (author name, thesis title etc.) centrally defined in main document
 * Page layout, fonts etc. according to typographical standards
@@ -84,9 +82,9 @@ The EMTthesis document class supports the following options, which can be given 
   * `mainmatter`: Use 1.5x spacing only for the mainmatter, i.e. keep preface and abstracts in single spacing.
   * `never`: Typeset the entire document with single spacing.
 * **docstate**: Select document state / variant for doctoral theses.
-  * `submission`: Typeset the to-be-submitted variant ("Prüfexemplar") with the appropriate title page and a backmatter containing the CV, list of all own publications and keywords. [default]
+  * `preliminary`: Typeset the `submission` variant with possible causes for author anxiety omitted. [default]
+  * `submission`: Typeset the to-be-submitted variant ("Prüfexemplar") with the appropriate title page and a backmatter containing the CV, list of all own publications and keywords.
   * `accepted`: Typeset the accepted variant, for publishing ("Belegexemplar").
-  * `preliminary`: Typeset a document with possible causes for author anxiety omitted.
 * **singlecitelabel**: Toggle cite label format for multi-author sources.
   * `false`: Use up to three author's initials in label. For Mustermann and Doe, set [MD18]. [default]
   * `true`: Always use only the first author's name in label. For Mustermann and Doe, set [Mus18].

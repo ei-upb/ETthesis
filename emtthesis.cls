@@ -12,14 +12,19 @@
 % Document state
 % For doctoral theses, two variants of the title page are required, depending
 % on whether the thesis is being submitted ("Prüfungsexemplar") or has already
-% been accepted and is now to be published ("Belegexemplar").
-% In addition, for preliminary work, the "official" parts, especially the
-% formal title page, may be omitted for reduced-anxiety editing.
+% been accepted and is now to be published ("Belegexemplar"). This also
+% enables or disables some pages in the back of the document that are required
+% upon submission by official regulations ("Promotionsordnung").
+% For reduced-anxiety editing, a preliminary mode is also available, providing
+% document like the "submission" variant, but with scary parts like the very
+% officially-looking title page removed.
+%
 % Choices:
-% * submission: Typeset the submission variant / Prüfungsexemplar (default).
+% * preliminary: Like "submission", but eliminate possible sources of author
+%                anxiety (default).
+% * submission: Typeset the submission variant / Prüfungsexemplar.
 % * accepted: Typeset the publishing variant / Belegexemplar.
-% * preliminary: Omit possible sources of anxiety.
-\newcommand{\docstate}{submission}
+\newcommand{\docstate}{preliminary}
 \FamilyNumericalKey{emtthesis}{docstate}{docstate}{%
     {submission}{submission},%
     {accepted}{accepted},%
