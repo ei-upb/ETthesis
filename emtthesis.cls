@@ -91,9 +91,9 @@
 % Because of sub-dependencies on packages required by this class, minted cannot
 % be loaded by the user in their preamble, so it must be supported here.
 % Choices:
-% * true Do load the minted package [default].
-% * false Do not load the minted package.
-\newcommand{\useminted}{true}
+% * false Do not load the minted package (default).
+% * true Do load the minted package.
+\newcommand{\useminted}{false}
 \FamilyNumericalKey{emtthesis}{useminted}{useminted}{%
     {false}{false},%
     {true}{true},%
