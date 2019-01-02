@@ -304,6 +304,19 @@
 \RequirePackage[
     hidelinks,
 ]{hyperref}
+
+% Automatically mark publications containing the given author name with the
+% keyword "own", for later filtering.
+\newcommand*{\autodetectOwnPubs}[1]{%
+    \DeclareSourcemap{%
+        \maps[datatype=bibtex]{%
+            \map[overwrite=true]{%
+                \step[fieldsource=author, match={#1}, final]
+                \step[fieldset=keywords, fieldvalue=own]
+            }
+        }
+    }
+}
 % }}}
 
 % {{{ Document start and structure
@@ -518,24 +531,6 @@
 % }}}
 
 % {{{ Bibliography
-% Automatically mark own publications with keyword "own", for later filtering.
-%
-% Note: We want the user to be able to \addbibresource as desired, using their
-% document preamble. Since the following mapping must execute *after* adding
-% the resources, we use \AtBeginDocument.
-\AtBeginDocument{%
-    \DeclareSourcemap{%
-        \maps[datatype=bibtex]{%
-            \map{%
-                \step[fieldsource=author,
-                    match=\@author,
-                    final]
-                \step[fieldset=keywords, fieldvalue=own]
-            }
-        }
-    }
-}
-
 % Define note describing bibliography sorting.
 \defbibnote{bibsorting}{Die Literaturangaben sind alphabetisch nach dem Nachnamen des ersten Autors und anschließend nach dem Erscheinungsjahr sortiert.}
 
