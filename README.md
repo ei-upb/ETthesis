@@ -30,8 +30,8 @@ Features
   * Accepted variant, for publication ("Belegexemplar")
     * Required title page
     * Preface enabled by default
-    * Regular bibliography with other's and own publications.
-    * No CV and keywords.
+    * Regular bibliography with other's and own publications
+    * No CV and keywords
   * Preliminary variant, for reduced-anxiety editing
     * Unofficial-looking title page
 * Compliance with university, faculty and work group requirements (no guarantees though)
@@ -47,7 +47,7 @@ Features
   * List of abbreviations and symbols
   * (Main content)
   * Bibliography
-  * Appendixes (optional)
+  * Appendices (optional)
   * CV (doctoral, submission variant only)
   * Own publications (doctoral, submission variant only)
   * Keywords (doctoral, submission variant only)

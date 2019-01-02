@@ -49,7 +49,8 @@
 
 % Preface display switch
 % Choices:
-% * auto: Display preface for doctoral theses, but not for Bachelor's or Master's theses.
+% * auto: Display preface for doctoral theses, but not for Bachelor's or
+%         Master's theses (default).
 % * never: Do not display the preface for any thesis type.
 % * always: Display the preface for any thesis type.
 \newcommand{\preface}{auto}
@@ -64,7 +65,7 @@
 % even if multiple authors are defined. For authors Mustermann and Doe, the
 % result would e.g. be [Mus18], not [MD18].
 % Choices:
-% * false Disable single-author labels [default].
+% * false Disable single-author labels (default).
 % * true: Enable single-author labels.
 \newcommand{\singlecitelabel}{false}
 \FamilyNumericalKey{emtthesis}{singlecitelabel}{singlecitelabel}{%
@@ -72,8 +73,8 @@
     {true}{true},%
 }
 
-% Thesis type (default: bsc)
-% * bsc: Bachelor of Science (B.Sc.)
+% Thesis type
+% * bsc: Bachelor of Science (B.Sc.) (default)
 % * msc: Master of Science (M.Sc.)
 % * dring: Doktor-Ingenieur (Dr.-Ing.)
 % * drrernat: Doktor der Naturwissenschaften (Dr. rer. nat.)
@@ -585,5 +586,5 @@
         }
     }
 }{}
-% }}}}
+% }}}
 % vim: foldmethod=marker
