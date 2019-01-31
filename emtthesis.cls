@@ -288,6 +288,7 @@
     minnames=1,
     maxalphanames=\citelabelauthornum, % For more than maxalphanames authors, shorten the cite label to minalphanames.
     minalphanames=\citelabelauthornum,
+    datamodel=biblatex_custom,
 ]{biblatex}
 \renewcommand*{\labelalphaothers}{} % Remove plus-sign for more than maxalphanames authors.
 \DefineBibliographyStrings{ngerman}{%

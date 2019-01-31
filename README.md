@@ -59,6 +59,9 @@ Features
   * longtable
   * microtype
   * minted (optional)
+* Custom BibLaTeX entry type `@norm` for citing norms and standards.
+  * Supported fields: `type`, `number`, `title`, `year`, `publisher`
+  * See `thesis.bib` for an example
 
 
 Class options

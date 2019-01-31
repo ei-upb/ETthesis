@@ -1,0 +1,45 @@
+% BibLaTeX customization for EMTthesis
+%
+% Provides a new entry type "@norm" for citing norms and standards.
+% Norms are defined via type (e.g. DIN, ISO) and number, as well as title and
+% year.
+%
+% Note that a `label` must be specified explicitly when using alphanumeric
+% citation shorthands, because @norm has no author field to derive the label
+% from.
+
+% Custom entry type @norm
+\DeclareDatamodelEntrytypes{norm}
+\DeclareDatamodelEntryfields[norm]{title,type,number,year}
+\DeclareDatamodelConstraints[norm]{
+    \constraint[type=mandatory]{\constraintfield{title}}
+    \constraint[type=mandatory]{\constraintfield{type}}
+    \constraint[type=mandatory]{\constraintfield{number}}
+    \constraint[type=mandatory]{\constraintfield{year}}
+}
+\DeclareBibliographyDriver{norm}{%
+    \usebibmacro{bibindex}%
+    \usebibmacro{begentry}%
+    \printfield{type}\setunit{\addnbspace}%
+    \printfield{number}\setunit{\labelnamepunct}%
+    \newblock%
+    %
+    \usebibmacro{title}\newunit%
+    \newblock%
+    %
+    \iflistundef{publisher}{}{\printlist{publisher}\setunit{\addcomma\addspace}}
+    \usebibmacro{date}\newunit%
+    \newblock%
+    %
+    \iftoggle{bbx:url}{\usebibmacro{url+urldate}}{}\newunit%
+    \newblock%
+    %
+    \usebibmacro{addendum+pubstate}\setunit{\bibpagerefpunct}%
+    \newblock%
+    %
+    \usebibmacro{pageref}\newunit%
+    \newblock%
+    %
+    \usebibmacro{related}%
+    \usebibmacro{finentry}%
+}
