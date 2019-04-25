@@ -113,7 +113,7 @@ If you use git to track changes in your thesis (which you should!), the followin
 
 3. Add the thesis template as an alternate remote:
 
-       git remote add template https://gogs.emt.uni-paderborn.de/emt/EMTthesis.git
+       git remote add template https://gogs.emt.uni-paderborn.de/gogs/emt/EMTthesis.git
 
 4. Pull the template:
 
