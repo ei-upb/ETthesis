@@ -337,7 +337,7 @@
 % * Bibliography
 % * Appendix (optional)
 
-\AtBeginDocument{%
+\newcommand*{\emtfront}{%
     % Begin frontmatter (enable roman page numbering etc.)
     \frontmatter
 
@@ -528,6 +528,10 @@
 
     \ifstr{\onehalfspacingmode}{never}{\singlespacing}{\onehalfspacing}
     \KOMAoptions{DIV=current}
+}
+\AtBeginDocument{%
+    \providecommand\tikzifexternalizing[2]{#2} % Prevent errors if not using tikz.
+    \tikzifexternalizing{}{\emtfront}
 }
 % }}}
 
