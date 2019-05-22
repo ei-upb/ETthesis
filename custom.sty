@@ -43,3 +43,14 @@
 % is propably missing.
 \usetikzlibrary{external}
 % \tikzexternalize[prefix=tikz/]
+
+% Optional helper command for inputting tikz files.
+% Use as \tikzinput{foobar} for a file "figures/foobar.tikz", i.e. omit the
+% path prefix and file extension.
+% This results in externalized PDF documents being named according to the
+% original file instead of numbered like "thesis-figure0.pdf".
+% Note: Requires the "external" tikz library!
+\newcommand*{\tikzinput}[1]{%
+    \tikzsetnextfilename{#1}
+    \input{figures/#1.tikz}
+}
