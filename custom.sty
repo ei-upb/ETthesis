@@ -28,3 +28,18 @@
 % Note that the entire name given below is matched, so if you specify something
 % like "Max Mustermann", it will not match "Mustermann, Max".
 \autodetectOwnPubs{Mustermann}
+
+%% Figures & plotting
+% TikZ
+\usepackage{tikz}
+
+% PGFplots
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+
+% TikZ externalize
+% Enable when desired. Note that the "tikz" subdirectory is not automatically
+% created! If you get an error like "can't write to file ...", the directory
+% is propably missing.
+\usetikzlibrary{external}
+% \tikzexternalize[prefix=tikz/]
