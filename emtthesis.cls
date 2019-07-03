@@ -272,7 +272,7 @@
 
 % Figure handling
 \RequirePackage{graphicx}
-\RequirePackage{xcolor}
+\RequirePackage[dvipsnames]{xcolor}
 
 % Table formatting
 \RequirePackage{booktabs}
