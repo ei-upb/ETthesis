@@ -36,7 +36,11 @@
 
 % PGFplots
 \usepackage{pgfplots}
-\pgfplotsset{compat=newest}
+\pgfplotsset{
+    compat=newest,
+    /pgf/number format/use comma,
+    /pgf/number format/1000 sep={},
+}
 
 % TikZ externalize
 % Enable when desired. Note that the "tikz" subdirectory is not automatically
