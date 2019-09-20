@@ -31,13 +31,13 @@
     \usebibmacro{date}\newunit%
     \newblock%
     %
-    \iftoggle{bbx:url}{\usebibmacro{url+urldate}}{}\newunit%
-    \newblock%
-    %
     \usebibmacro{addendum+pubstate}\setunit{\bibpagerefpunct}%
     \newblock%
     %
     \usebibmacro{pageref}\newunit%
+    \newblock%
+    %
+    \usebibmacro{doi+eprint+url}\newunit%
     \newblock%
     %
     \usebibmacro{related}%
