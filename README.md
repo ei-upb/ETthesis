@@ -101,11 +101,11 @@ Using with Git
 
 If you use git to track changes in your thesis (which you should!), the following workflow is recommended:
 
-1. (Optional) Create remote repository (e.g. on [Gogs](https://gogs.emt.uni-paderborn.de/))
+1. (Optional) Create remote repository (e.g. on [Atuin](https://atuin.emt.uni-paderborn.de/git))
 2. Clone or create local repository
    * When using a remote repository as per Step 1, create a local clone:
 
-         git clone https://gogs.emt.uni-paderborn.de/gogs/<yourname>/<yourrepo>.git
+         git clone https://atuin.emt.uni-paderborn.de/git/YOUR_NAME/YOUR_REPO.git
 
    * Otherwise, create a new repository:
 
@@ -113,7 +113,7 @@ If you use git to track changes in your thesis (which you should!), the followin
 
 3. Add the thesis template as an alternate remote:
 
-       git remote add template https://gogs.emt.uni-paderborn.de/gogs/emt/EMTthesis.git
+       git remote add template https://atuin.emt.uni-paderborn.de/git/emt/EMTthesis.git
 
 4. Pull the template:
 
