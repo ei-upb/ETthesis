@@ -580,6 +580,10 @@
             \begin{refsegment}
                 \nocite{*}
             \end{refsegment}
+
+            % Sort author's own publications chronologically (i.e. by year, name instead of name, year)
+            \newrefcontext[sorting=ynt]
+
             \printbibliography[title={Eigene Publikationen}, keyword=own, segment=1]
 
             \input{\keywordsfile}
