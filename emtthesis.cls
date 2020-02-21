@@ -109,17 +109,17 @@
 \FamilyProcessOptions{emtthesis}
 
 % Define thesis name by type.
-\ifstr{\thesistype}{bsc}{%
+\Ifstr{\thesistype}{bsc}{%
     \newcommand{\thesisname}{Bachelorarbeit}
 }{}
-\ifstr{\thesistype}{msc}{%
+\Ifstr{\thesistype}{msc}{%
     \newcommand{\thesisname}{Masterarbeit}
 }{}
-\ifstrstart{\thesistype}{dr}{%
+\Ifstrstart{\thesistype}{dr}{%
     \newcommand{\thesisname}{Dissertation}
 }{}
 
-\ifstr{\singlecitelabel}{true}{%
+\Ifstr{\singlecitelabel}{true}{%
     \newcommand{\citelabelauthornum}{1}
 }{%
     \newcommand{\citelabelauthornum}{3}
@@ -155,7 +155,7 @@
 % {{{ Page layout
 % Set main content's line spacing to be respected by the DIV-calculation.
 \RequirePackage{setspace}
-\ifstr{\onehalfspacingmode}{never}{\singlespacing}{\onehalfspacing}
+\Ifstr{\onehalfspacingmode}{never}{\singlespacing}{\onehalfspacing}
 
 % General page layout
 \KOMAoptions{%
@@ -242,7 +242,7 @@
 
 % Source code listings
 % Note: minted must be loaded before csquotes because of a sub-dependency.
-\ifstr{\useminted}{true}{%
+\Ifstr{\useminted}{true}{%
     \RequirePackage[
         chapter,
         newfloat=true,
@@ -344,11 +344,11 @@
 % Titlepage
     \singlespacing\KOMAoptions{DIV=current}
 
-    \ifstrstart{\thesistype}{dr}{%
+    \Ifstrstart{\thesistype}{dr}{%
         % Titlepage for doctoral theses.
         \begin{titlepage}
             \begin{center}
-                \ifstr{\docstate}{accepted}{%
+                \Ifstr{\docstate}{accepted}{%
                     % Accepted thesis title page ("Belegexemplar")
                     \eimheader%
 
@@ -363,8 +363,8 @@
                     \vspace{5mm}
 
                     {\large
-                    \ifstr{\thesistype}{dring}{Doktor der Ingenieurswissenschaften (Dr.-Ing.)}{}
-                    \ifstr{\thesistype}{drrernat}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}{}
+                    \Ifstr{\thesistype}{dring}{Doktor der Ingenieurswissenschaften (Dr.-Ing.)}{}
+                    \Ifstr{\thesistype}{drrernat}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}{}
                     }
                     \vspace{5mm}
 
@@ -389,7 +389,7 @@
 
                     Diss. EIM-E/\@thesisnumber
                 }{}
-                \ifstr{\docstate}{submission}{%
+                \Ifstr{\docstate}{submission}{%
                     % To-be-submitted thesis title page ("Prüfexemplar")
                     \eimheader%
 
@@ -404,8 +404,8 @@
                     \vspace{5mm}
 
                     {\large
-                    \ifstr{\thesistype}{dring}{Doktor der Ingenieurswissenschaften (Dr.-Ing.)}{}
-                    \ifstr{\thesistype}{drrernat}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}{}
+                    \Ifstr{\thesistype}{dring}{Doktor der Ingenieurswissenschaften (Dr.-Ing.)}{}
+                    \Ifstr{\thesistype}{drrernat}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}{}
                     }
                     \vspace{5mm}
 
@@ -420,7 +420,7 @@
 
                     geboren am \@birthdate~in \@birthplace
                 }{}
-                \ifstr{\docstate}{preliminary}{%
+                \Ifstr{\docstate}{preliminary}{%
                     % Reduced-anxiety title page
                     Einige Notizen von \@author~zum Thema \@title.
                 }{}
@@ -489,16 +489,16 @@
     }
 
     % Apply user-selected line spacing for preface and abstract
-    \ifstr{\onehalfspacingmode}{auto}{\onehalfspacing}{\singlespacing}
+    \Ifstr{\onehalfspacingmode}{auto}{\onehalfspacing}{\singlespacing}
     \KOMAoptions{DIV=current}
 
 % Preface
-    \ifstr{\preface}{auto}{%
-        \ifstrstart{\thesistype}{dr}{%
-            \ifstr{\docstate}{accepted}{\input{\prefacefile}}{}
+    \Ifstr{\preface}{auto}{%
+        \Ifstrstart{\thesistype}{dr}{%
+            \Ifstr{\docstate}{accepted}{\input{\prefacefile}}{}
         }{}
     }{%
-        \ifstr{\preface}{always}{\input{\prefacefile}}{}
+        \Ifstr{\preface}{always}{\input{\prefacefile}}{}
     }
 
 % Abstracts
@@ -506,7 +506,7 @@
     \input{\germanabstractfile}
 
     % English abstract (only for doctoral theses)
-    \ifstrstart{\thesistype}{dr}{%
+    \Ifstrstart{\thesistype}{dr}{%
         \input{\englishabstractfile}
     }{}
 
@@ -526,7 +526,7 @@
 % Begin mainmatter, i.e. author content
     \mainmatter%
 
-    \ifstr{\onehalfspacingmode}{never}{\singlespacing}{\onehalfspacing}
+    \Ifstr{\onehalfspacingmode}{never}{\singlespacing}{\onehalfspacing}
     \KOMAoptions{DIV=current}
 }
 \AtBeginDocument{%
@@ -548,8 +548,8 @@
 % actual document file (e.g. thesis.tex).
 \newcommand{\insertbibliography}{%
     \singlespacing\KOMAoptions{DIV=current}
-    \ifstrstart{\thesistype}{dr}{%
-        \ifstr{\docstate}{accepted}{%
+    \Ifstrstart{\thesistype}{dr}{%
+        \Ifstr{\docstate}{accepted}{%
             % Include everything for the accepted variant of doctoral theses.
             \printbibliography[title=Literaturverzeichnis, segment=0, prenote=bibsorting]
         }{%
@@ -561,15 +561,15 @@
         % Include everything for B.Sc. and M.Sc. theses.
         \printbibliography[title=Literaturverzeichnis]
     }
-    \ifstr{\onehalfspacingmode}{never}{}{\onehalfspacing}
+    \Ifstr{\onehalfspacingmode}{never}{}{\onehalfspacing}
 }
 % }}}
 
 % {{{ Backmatter
 % For the submission / non-accepted variant of doctoral theses, the backmatter
 % includes the author's CV, their list of publications and some keywords.
-\ifstrstart{\thesistype}{dr}{%
-    \ifstr{\docstate}{accepted}{}{%
+\Ifstrstart{\thesistype}{dr}{%
+    \Ifstr{\docstate}{accepted}{}{%
         \AtEndDocument{%
             \backmatter%
             \singlespacing\KOMAoptions{DIV=current}
