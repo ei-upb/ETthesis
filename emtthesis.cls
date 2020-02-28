@@ -196,6 +196,11 @@
 }
 % }}}
 
+% {{{ General formatting (only native and KOMA-Script settings)
+% Fix overfull hboxes in TOC with three-digit page numbers
+\renewcommand*{\@pnumwidth}{1.8em}
+% }}}
+
 % {{{ Document metadata
 \newcommand{\@salutation}{}
 \newcommand{\salutation}[1]{\gdef\@salutation{#1}}
