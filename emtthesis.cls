@@ -169,7 +169,7 @@
 
 % Page header with UPB / EIM branding
 \newcommand{\eimheader}{%
-    \begin{minipage}{0.4\textwidth}
+    \begin{minipage}{0.45\textwidth}
         \includegraphics[height=20mm]{logos/upb.pdf}
     \end{minipage}
     \hfill
