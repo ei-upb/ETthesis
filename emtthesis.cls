@@ -236,7 +236,6 @@
 \newcommand{\symbolsfile}{frontmatter/symbols}
 \newcommand{\problemstatementfile}{frontmatter/problemstatement}
 \newcommand{\cvfile}{backmatter/cv}
-\newcommand{\keywordsfile}{backmatter/keywords}
 % }}}
 
 % {{{ Used Packages
@@ -572,7 +571,7 @@
 
 % {{{ Backmatter
 % For the submission / non-accepted variant of doctoral theses, the backmatter
-% includes the author's CV, their list of publications and some keywords.
+% includes the author's CV and their list of publications.
 \Ifstrstart{\thesistype}{dr}{%
     \Ifstr{\docstate}{accepted}{}{%
         \AtEndDocument{%
@@ -590,8 +589,6 @@
             \newrefcontext[sorting=ynt]
 
             \printbibliography[title={Eigene Publikationen}, keyword=own, segment=1]
-
-            \input{\keywordsfile}
         }
     }
 }{}
