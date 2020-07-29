@@ -199,6 +199,9 @@
 % {{{ General formatting (only native and KOMA-Script settings)
 % Fix overfull hboxes in TOC with three-digit page numbers
 \renewcommand*{\@pnumwidth}{1.8em}
+
+% Display TOC in PDF bookmarks (without adding an entry in itself)
+\BeforeTOCHead[toc]{{\cleardoublepage\pdfbookmark[0]{\contentsname}{toc}}}
 % }}}
 
 % {{{ Document metadata
