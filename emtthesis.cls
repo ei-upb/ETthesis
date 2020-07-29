@@ -324,197 +324,255 @@
 }
 % }}}
 
-% {{{ Document start and structure
-% The overall document structure is this:
+% {{{ Document components
+% Predefined document parts, such as the title page, are defined here as
+% commands. In the following section, they are patched together as needed
+% according to the selected document type and class options.
+%
+% Titlepages
+% - Doctoral theses, accepted variant ("Belegexemplar")
+\newcommand*{\emtTitleDocAccepted}{%
+    \begin{titlepage}
+        \begin{center}
+            \eimheader%
+
+            \vfill
+            {\Large\bfseries\sffamily\@title\par}
+            \vspace{15mm}
+
+            {Von der Fakultät für Elektrotechnik, Informatik und Mathematik\\ der Universität Paderborn}
+            \vspace{2mm}
+
+            zur Erlangung des akademischen Grades
+            \vspace{5mm}
+
+            {\large
+                \Ifstr{\thesistype}{dring}{Doktor der Ingenieurswissenschaften (Dr.-Ing.)}{}
+                \Ifstr{\thesistype}{drrernat}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}{}
+            }
+            \vspace{5mm}
+
+            genehmigte Dissertation
+            \vspace{2mm}
+
+            von
+            \vspace{5mm}
+
+            {\large\@nameprefix~\@author\@namesuffix}
+            \vspace{15mm}
+
+            \begin{tabular}{ll}
+                Erster Gutachter: & \@advisorA\\
+                Zweiter Gutachter: & \@advisorB\\[1em]
+                Tag der mündlichen Prüfung: & \@examdate\\
+            \end{tabular}
+            \vspace{10mm}
+
+            Paderborn, \@date
+            \vspace{10mm}
+
+            Diss. EIM-E/\@thesisnumber
+        \end{center}
+    \end{titlepage}
+}
+
+% - Doctoral theses, submission variant ("Belegexemplar")
+\newcommand*{\emtTitleDocSubmission}{%
+    \begin{titlepage}
+        \begin{center}
+            \eimheader%
+
+            \vspace{25mm}
+            {\Large\bfseries\sffamily\@title\par}
+            \vspace{15mm}
+
+            {Der Fakultät für Elektrotechnik, Informatik und Mathematik\\ der Universität Paderborn}
+            \vspace{2mm}
+
+            zur Erlangung des akademischen Grades
+            \vspace{5mm}
+
+            {\large
+                \Ifstr{\thesistype}{dring}{Doktor der Ingenieurswissenschaften (Dr.-Ing.)}{}
+                \Ifstr{\thesistype}{drrernat}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}{}
+            }
+            \vspace{5mm}
+
+            vorgelegte Dissertation
+            \vspace{2mm}
+
+            von
+            \vspace{5mm}
+
+            {\large\@nameprefix~\@author\@namesuffix}
+            \vspace{5mm}
+
+            geboren am \@birthdate~in \@birthplace
+        \end{center}
+    \end{titlepage}
+}
+
+% - Student theses (Bachelor's and Master's)
+\newcommand*{\emtTitleStudent}{%
+    \begin{titlepage}
+        \eimheader%
+
+        \vspace{10mm}
+
+        \begin{center}
+            \large
+            {\thesisname}
+            \vspace{10mm}
+
+            % Note: \par at the end is required for proper line spacing.
+            {\LARGE\bfseries\sffamily\@title\par}
+            \vspace{10mm}
+
+            von
+            \vspace{5mm}
+
+            {\Large \@author}
+            \vspace{20mm}
+
+            \begin{tabular}{ll}
+                Betreuer:   & \@advisorA\\
+                            & \@advisorB
+            \end{tabular}
+            \vspace{10mm}
+
+            Paderborn, im \@date
+        \end{center}
+
+        \emtfooter%
+    \end{titlepage}
+}
+
+% - Preliminary mode (reduced-anxiety title page)
+\newcommand*{\emtTitlePrelim}{%
+    \begin{titlepage}
+        \begin{center}
+            Einige Notizen von \@author~zum Thema \@title.
+        \end{center}
+    \end{titlepage}
+}
+
+% Problem statement
+\newcommand*{\emtProblemStatement}{%
+    \begin{titlepage}
+        \eimheader%
+
+        \begin{center}
+            \large\thesisname%
+            \vspace{3mm}
+
+            für
+            \vspace{3mm}
+
+            \@salutation~\@author
+        \end{center}
+
+        \vspace{5mm}
+
+        \noindent\textsf{\textbf{\@title}}
+
+        \vspace{5mm}
+
+        \noindent\input{\problemstatementfile}
+
+        \vspace{10mm}
+
+        \noindent\@advisorA
+
+        \emtfooter%
+    \end{titlepage}
+}
+
+% Preface
+\newcommand*{\emtPreface}{%
+    \input{\prefacefile}
+}
+
+% Bibliography
+% - All cited sources (accepted doctoral and student theses)
+\newcommand*{\emtBibAll}{%
+    \printbibliography[title=Literaturverzeichnis, segment=0, prenote=bibsorting]
+}
+% - Cited sources by others (i.e. not the thesis author), to be combined with \emtBibOwn
+\newcommand*{\emtBibOthers}{%
+    % Include only other's publications for submission variant of doctoral theses.
+    % In this variant, the author's own publications are set in a separate bibliography.
+    \printbibliography[title=Literaturverzeichnis, notkeyword=own, segment=0, prenote=bibsorting]
+}
+% - Author's own sources, even if not cited in the document
+\newcommand*{\emtBibOwn}{%
+    % Automatically include all sources that are marked with the keyword "own".
+    \begin{refsegment}
+        \nocite{*}
+    \end{refsegment}
+
+    % Sort author's own publications chronologically (i.e. by year, name instead of name, year)
+    \newrefcontext[sorting=ynt]
+
+    \printbibliography[title={Eigene Publikationen}, keyword=own, segment=1]
+}
+% }}}
+
+% {{{ Frontmatter composition
+% The overall structure of the frontmatter is this:
 % * Titlepage
-% * Problem statement (B.Sc. and M.Sc. only)
-% * Preface (default on for Dr., off for B.Sc. and M.Sc.)
+% * Problem statement (student theses only)
+% * Preface (default on for doctoral, off for student theses)
 % * Abstract
-% * Abstract in english (only for Dr.)
+% * Abstract in english (only for doctoral theses)
 % * Table of Contents
 % * List of figures
 % * List of tables
 % * List of abbreviations
 % * List of mathematical symbols / operators
 % * List of mathematical variables
-% * Mainmatter chapters (as decided by the author)
-% * Bibliography
-% * Appendix (optional)
 
-\newcommand*{\emtfront}{%
+\newcommand*{\emtFront}{%
     % Begin frontmatter (enable roman page numbering etc.)
     \frontmatter
 
-% Titlepage
     \singlespacing\KOMAoptions{DIV=current}
 
-    \Ifstrstart{\thesistype}{dr}{%
-        % Titlepage for doctoral theses.
-        \begin{titlepage}
-            \begin{center}
-                \Ifstr{\docstate}{accepted}{%
-                    % Accepted thesis title page ("Belegexemplar")
-                    \eimheader%
-
-                    \vfill
-                    {\Large\bfseries\sffamily\@title\par}
-                    \vspace{15mm}
-
-                    {Von der Fakultät für Elektrotechnik, Informatik und Mathematik\\ der Universität Paderborn}
-                    \vspace{2mm}
-
-                    zur Erlangung des akademischen Grades
-                    \vspace{5mm}
-
-                    {\large
-                    \Ifstr{\thesistype}{dring}{Doktor der Ingenieurswissenschaften (Dr.-Ing.)}{}
-                    \Ifstr{\thesistype}{drrernat}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}{}
-                    }
-                    \vspace{5mm}
-
-                    genehmigte Dissertation
-                    \vspace{2mm}
-
-                    von
-                    \vspace{5mm}
-
-                    {\large\@nameprefix~\@author\@namesuffix}
-                    \vspace{15mm}
-
-                    \begin{tabular}{ll}
-                        Erster Gutachter: & \@advisorA\\
-                        Zweiter Gutachter: & \@advisorB\\[1em]
-                        Tag der mündlichen Prüfung: & \@examdate\\
-                    \end{tabular}
-                    \vspace{10mm}
-
-                    Paderborn, \@date
-                    \vspace{10mm}
-
-                    Diss. EIM-E/\@thesisnumber
-                }{}
-                \Ifstr{\docstate}{submission}{%
-                    % To-be-submitted thesis title page ("Prüfexemplar")
-                    \eimheader%
-
-                    \vspace{25mm}
-                    {\Large\bfseries\sffamily\@title\par}
-                    \vspace{15mm}
-
-                    {Der Fakultät für Elektrotechnik, Informatik und Mathematik\\ der Universität Paderborn}
-                    \vspace{2mm}
-
-                    zur Erlangung des akademischen Grades
-                    \vspace{5mm}
-
-                    {\large
-                    \Ifstr{\thesistype}{dring}{Doktor der Ingenieurswissenschaften (Dr.-Ing.)}{}
-                    \Ifstr{\thesistype}{drrernat}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}{}
-                    }
-                    \vspace{5mm}
-
-                    vorgelegte Dissertation
-                    \vspace{2mm}
-
-                    von
-                    \vspace{5mm}
-
-                    {\large\@nameprefix~\@author\@namesuffix}
-                    \vspace{5mm}
-
-                    geboren am \@birthdate~in \@birthplace
-                }{}
-                \Ifstr{\docstate}{preliminary}{%
-                    % Reduced-anxiety title page
-                    Einige Notizen von \@author~zum Thema \@title.
-                }{}
-            \end{center}
-        \end{titlepage}
+    % Title page
+    \Ifstr{\docstate}{preliminary}{
+        \emtTitlePrelim
     }{%
-        % Titlepage and problem statement for Bachelor's and Master's theses.
-        \begin{titlepage}
-            \eimheader%
-
-            \vspace{10mm}
-
-            \begin{center}
-                \large
-                {\thesisname}
-                \vspace{10mm}
-
-                % Note: \par at the end is required for proper line spacing.
-                {\LARGE\bfseries\sffamily\@title\par}
-                \vspace{10mm}
-
-                von
-                \vspace{5mm}
-
-                {\Large \@author}
-                \vspace{20mm}
-
-                \begin{tabular}{ll}
-                    Betreuer:   & \@advisorA\\
-                                & \@advisorB
-                \end{tabular}
-                \vspace{10mm}
-
-                Paderborn, im \@date
-            \end{center}
-
-            \emtfooter%
-        \end{titlepage}
-        \begin{titlepage}
-            \eimheader%
-
-            \begin{center}
-                \large\thesisname%
-                \vspace{3mm}
-
-                für
-                \vspace{3mm}
-
-                \@salutation~\@author
-            \end{center}
-
-            \vspace{5mm}
-
-            \noindent\textsf{\textbf{\@title}}
-
-            \vspace{5mm}
-
-            \noindent\input{\problemstatementfile}
-
-            \vspace{10mm}
-
-            \noindent\@advisorA
-
-            \emtfooter%
-        \end{titlepage}
+        \Ifstrstart{\thesistype}{dr}{%
+            \Ifstr{\docstate}{accepted}{\emtTitleDocAccepted}{\emtTitleDocSubmission}
+        }{%
+            \emtTitleStudent
+        }
     }
 
-    % Apply user-selected line spacing for preface and abstract
+    % Problem statement and affirmation (Student theses only)
+    \Ifstrstart{\thesistype}{dr}{}{%
+        \emtProblemStatement
+    }
+
     \Ifstr{\onehalfspacingmode}{auto}{\onehalfspacing}{\singlespacing}
     \KOMAoptions{DIV=current}
 
-% Preface
+    % Preface
     \Ifstr{\preface}{auto}{%
         \Ifstrstart{\thesistype}{dr}{%
-            \Ifstr{\docstate}{accepted}{\input{\prefacefile}}{}
+            \Ifstr{\docstate}{accepted}{\emtPreface}{}
         }{}
     }{%
-        \Ifstr{\preface}{always}{\input{\prefacefile}}{}
+        \Ifstr{\preface}{always}{\emtPreface}{}
     }
 
-% Abstracts
-    % German abstract
+    % Abstract
     \input{\germanabstractfile}
 
-    % English abstract (only for doctoral theses)
+    % Abstract in english (only for Dr.)
     \Ifstrstart{\thesistype}{dr}{%
         \input{\englishabstractfile}
     }{}
 
-% Table of contents and lists of figures, tables, abbreviations etc.
     \singlespacing\KOMAoptions{DIV=current}
 
     % Table of contents
@@ -527,15 +585,42 @@
     % Index of abbreviations and symbols
     \input{\symbolsfile}
 
-% Begin mainmatter, i.e. author content
     \mainmatter%
 
     \Ifstr{\onehalfspacingmode}{never}{\singlespacing}{\onehalfspacing}
     \KOMAoptions{DIV=current}
 }
+% }}}
+
+% {{{ Backmatter composition
+% An automatic backmatter is only created for the submission variant of
+% doctoral theses. Its structure is this:
+% * CV
+% * Bibliography of own publications
+\newcommand*{\emtBack}{%
+    \backmatter%
+
+    \singlespacing\KOMAoptions{DIV=current}
+
+    \Ifstrstart{\thesistype}{dr}{%
+        \Ifstr{\docstate}{accepted}{}{%
+            % CV
+            \input{\cvfile}
+
+            % Bibliography of own publications
+            \emtBibOwn
+        }
+    }{}
+}
+% }}}
+
+% {{{ Document structure
 \AtBeginDocument{%
     \providecommand\tikzifexternalizing[2]{#2} % Prevent errors if not using tikz.
-    \tikzifexternalizing{}{\emtfront}
+    \tikzifexternalizing{}{\emtFront}
+}
+\AtEndDocument{%
+    \emtBack
 }
 % }}}
 
@@ -554,43 +639,14 @@
     \singlespacing\KOMAoptions{DIV=current}
     \Ifstrstart{\thesistype}{dr}{%
         \Ifstr{\docstate}{accepted}{%
-            % Include everything for the accepted variant of doctoral theses.
-            \printbibliography[title=Literaturverzeichnis, segment=0, prenote=bibsorting]
+            \emtBibAll
         }{%
-            % Include only other's publications for submission variant of doctoral theses.
-            % In this variant, the author's own publications are set in a separate bibliography.
-            \printbibliography[title=Literaturverzeichnis, notkeyword=own, segment=0, prenote=bibsorting]
+            \emtBibOthers
         }
     }{%
-        % Include everything for B.Sc. and M.Sc. theses.
-        \printbibliography[title=Literaturverzeichnis]
+        \emtBibAll
     }
     \Ifstr{\onehalfspacingmode}{never}{}{\onehalfspacing}
 }
-% }}}
-
-% {{{ Backmatter
-% For the submission / non-accepted variant of doctoral theses, the backmatter
-% includes the author's CV and their list of publications.
-\Ifstrstart{\thesistype}{dr}{%
-    \Ifstr{\docstate}{accepted}{}{%
-        \AtEndDocument{%
-            \backmatter%
-            \singlespacing\KOMAoptions{DIV=current}
-
-            \input{\cvfile}
-
-            % Automatically include all sources that are marked with the keyword "own".
-            \begin{refsegment}
-                \nocite{*}
-            \end{refsegment}
-
-            % Sort author's own publications chronologically (i.e. by year, name instead of name, year)
-            \newrefcontext[sorting=ynt]
-
-            \printbibliography[title={Eigene Publikationen}, keyword=own, segment=1]
-        }
-    }
-}{}
 % }}}
 % vim: foldmethod=marker
