@@ -230,6 +230,7 @@
 % However, the class should not include hard-coded file names, but allow the
 % user to configure file inclusion. Therefore, we provide macros for each file,
 % to be redefined if the user so chooses.
+\newcommand{\affirmationfile}{frontmatter/affirmation}
 \newcommand{\prefacefile}{frontmatter/preface}
 \newcommand{\germanabstractfile}{frontmatter/abstract_de}
 \newcommand{\englishabstractfile}{frontmatter/abstract_en}
@@ -521,6 +522,7 @@
 % The overall structure of the frontmatter is this:
 % * Titlepage
 % * Problem statement (student theses only)
+% * Affirmation (student theses only)
 % * Preface (default on for doctoral, off for student theses)
 % * Abstract
 % * Abstract in english (only for doctoral theses)
@@ -551,6 +553,7 @@
     % Problem statement and affirmation (Student theses only)
     \Ifstrstart{\thesistype}{dr}{}{%
         \emtProblemStatement
+        \input{\affirmationfile}
     }
 
     \Ifstr{\onehalfspacingmode}{auto}{\onehalfspacing}{\singlespacing}
