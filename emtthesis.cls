@@ -230,13 +230,13 @@
 % However, the class should not include hard-coded file names, but allow the
 % user to configure file inclusion. Therefore, we provide macros for each file,
 % to be redefined if the user so chooses.
-\newcommand{\affirmationfile}{frontmatter/affirmation}
 \newcommand{\prefacefile}{frontmatter/preface}
 \newcommand{\germanabstractfile}{frontmatter/abstract_de}
 \newcommand{\englishabstractfile}{frontmatter/abstract_en}
 \newcommand{\symbolsfile}{frontmatter/symbols}
 \newcommand{\problemstatementfile}{frontmatter/problemstatement}
 \newcommand{\cvfile}{backmatter/cv}
+\newcommand{\affirmationfile}{backmatter/affirmation}
 % }}}
 
 % {{{ Used Packages
@@ -550,10 +550,9 @@
         }
     }
 
-    % Problem statement and affirmation (Student theses only)
+    % Problem statement (Student theses only)
     \Ifstrstart{\thesistype}{dr}{}{%
         \emtProblemStatement
-        \input{\affirmationfile}
     }
 
     \Ifstr{\onehalfspacingmode}{auto}{\onehalfspacing}{\singlespacing}
@@ -596,16 +595,17 @@
 % }}}
 
 % {{{ Backmatter composition
-% An automatic backmatter is only created for the submission variant of
-% doctoral theses. Its structure is this:
-% * CV
-% * Bibliography of own publications
+% The structure of the backmatter is this:
+% * CV (doctoral theses only)
+% * Bibliography of own publications (doctoral theses only)
+% * Affirmation (student theses only)
 \newcommand*{\emtBack}{%
     \backmatter%
 
     \singlespacing\KOMAoptions{DIV=current}
 
     \Ifstrstart{\thesistype}{dr}{%
+        % Doctoral theses
         \Ifstr{\docstate}{accepted}{}{%
             % CV
             \input{\cvfile}
@@ -613,7 +613,10 @@
             % Bibliography of own publications
             \emtBibOwn
         }
-    }{}
+    }{%
+        % Student theses
+        \input{\affirmationfile}
+    }
 }
 % }}}
 
