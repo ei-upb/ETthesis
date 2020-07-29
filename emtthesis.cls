@@ -308,6 +308,24 @@
     % emphasizing that part of the entry.
     \renewcommand*{\UrlFont}{}
 }
+\DeclareFieldFormat{eprint:arxiv}{%
+    % Typeset arXiv eprintclass entries in regular font instead of monospace
+    arXiv\addcolon\space%
+    \ifhyperref{%
+        \href{https://arxiv.org/\abx@arxivpath/#1}{%
+            \nolinkurl{#1}%
+            \iffieldundef{eprintclass}{}{%
+                \addspace\mkbibbrackets{\thefield{eprintclass}%
+            }%
+        }%
+        }%
+    }{%
+        \nolinkurl{#1}
+        \iffieldundef{eprintclass}{}{%
+            \addspace\mkbibbrackets{\thefield{eprintclass}}%
+        }%
+    }
+}
 
 % Hyperref should be loaded last
 \RequirePackage[
