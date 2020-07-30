@@ -85,6 +85,24 @@
     {always}{always}%
 }
 
+% Abstract display switch
+% Typically, abstracts in german and english are required for doctoral theses.
+% For student theses, it is just the german abstract.
+% Choices:
+% * auto: Enable both abstracts for doctoral theses, german for student theses.
+% * both: Enable both abstracts.
+% * english: Enable only the english abstract.
+% * german: Enable only the german abstract.
+% * none: Disable abstracts.
+\newcommand{\abstracts}{auto}
+\FamilyNumericalKey{emtthesis}{abstracts}{abstracts}{%
+    {auto}{auto},%
+    {both}{both},%
+    {english}{english},%
+    {german}{german},%
+    {none}{none},%
+}
+
 % Single author cite labels
 % If enabled, publications are always represented by a single-name cite label,
 % even if multiple authors are defined. For authors Mustermann and Doe, the
@@ -211,6 +229,37 @@
     }{%
         \newcommand*{\includepreface}{}
     }
+}
+
+% Abstracts
+\newcommand*{\includeabstracts}{}
+\Ifstr{\abstracts}{auto}{%
+    \Ifstrstart{\doctype}{dr}{%
+        \renewcommand*{\includeabstracts}{\emtAbstractDE \emtAbstractEN}
+    }{%
+        \Ifstr{\doctype}{bachelors}{%
+            \renewcommand*{\includeabstracts}{\emtAbstractDE}
+        }{}
+        \Ifstr{\doctype}{masters}{%
+            \renewcommand*{\includeabstracts}{\emtAbstractDE}
+        }{}
+        \Ifstr{\doctype}{project}{%
+            \renewcommand*{\includeabstracts}{\emtAbstractDE}
+        }{}
+        \Ifstr{\doctype}{sa}{%
+            \renewcommand*{\includeabstracts}{\emtAbstractDE}
+        }{}
+    }
+}{%
+    \Ifstr{\abstracts}{both}{%
+        \renewcommand*{\includeabstracts}{\emtAbstractDE \emtAbstractEN}
+    }{}
+    \Ifstr{\abstracts}{english}{%
+        \renewcommand*{\includeabstracts}{\emtAbstractEN}
+    }{}
+    \Ifstr{\abstracts}{german}{%
+        \renewcommand*{\includeabstracts}{\emtAbstractDE}
+    }{}
 }
 
 % Problem statement
@@ -656,6 +705,10 @@
     \input{\prefacefile}
 }
 
+% Abstracts
+\newcommand*{\emtAbstractDE}{\input{\germanabstractfile}}
+\newcommand*{\emtAbstractEN}{\input{\englishabstractfile}}
+
 % Bibliography
 % - All cited sources (accepted doctoral and student theses)
 \newcommand*{\emtBibAll}{%
@@ -714,12 +767,7 @@
     \includepreface
 
     % Abstract
-    \input{\germanabstractfile}
-
-    % Abstract in english (only for Dr.)
-    \Ifstrstart{\doctype}{dr}{%
-        \input{\englishabstractfile}
-    }{}
+    \includeabstracts
 
     \singlespacing\KOMAoptions{DIV=current}
 
