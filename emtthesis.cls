@@ -31,17 +31,30 @@
     {preliminary}{preliminary},%
 }
 
-% Line spacing mode
-% Typically, theses are typeset with 1.5x line spacing for the text. The table
-% of contents, lists of figures, tables and symbols and bibliography use
-% regular single spacing.
+% Line spacing
+% By default, when theses are typeset for submission and grading, we use 1.5x
+% line spacing, while for publishing, we use regular single spacing (the
+% latter usually occurring for doctoral theses only).
+% Note that this rule only applies to the author's own written text, i.e. the
+% main body of the document. Conversely, the table of contents, list of figures
+% and tables, list of symbols, bibliography, problem statement and affirmation
+% are always typeset with single spacing.
 % Choices:
-% * auto: Use above rules (default).
-% * mainmatter: Use 1.5x spacing for the mainmatter only. This means that
-%               preface and abstracts are set with single spacing.
-% * never: Never use 1.5x spacing, i.e. use single spacing everywhere.
-\newcommand{\onehalfspacingmode}{auto}
+% * auto: Use above rules, according to the publication state (default).
+% * single: Use single spacing everywhere.
+% * onehalf: Use 1.5x line spacing for author text (main chapters, appendices,
+%            abstracts and preface).
+\newcommand{\linespacing}{auto}
+\FamilyNumericalKey{emtthesis}{linespacing}{linespacing}{%
+    {auto}{auto},%
+    {single}{single},%
+    {onehalf}{onehalf}%
+}
+
+% Line spacing mode (OBSOLETE)
+\newcommand{\onehalfspacingmode}{unused}
 \FamilyNumericalKey{emtthesis}{onehalfspacingmode}{onehalfspacingmode}{%
+    {unused}{unused},%
     {auto}{auto},%
     {mainmatter}{mainmatter},%
     {never}{never}%
@@ -107,6 +120,9 @@
 
 % End of options section
 \FamilyProcessOptions{emtthesis}
+% }}}
+
+% {{{ Class option handling
 
 % Define thesis name by type.
 \Ifstr{\thesistype}{bsc}{%
@@ -123,6 +139,26 @@
     \newcommand{\citelabelauthornum}{1}
 }{%
     \newcommand{\citelabelauthornum}{3}
+}
+
+% Decide on line spacing in the main body of the document
+\Ifstr{\linespacing}{auto}{%
+    \Ifstr{\docstate}{accepted}{%
+        \newcommand*{\bodylinespacing}{\singlespacing}
+    }{%
+        \newcommand*{\bodylinespacing}{\onehalfspacing}
+    }
+}{%
+    \Ifstr{\linespacing}{onehalf}{%
+        \newcommand*{\bodylinespacing}{\onehalfspacing}
+    }{%
+        \newcommand*{\bodylinespacing}{\singlespacing}
+    }
+}
+
+% Warn if using obsolete class options
+\Ifstr{\onehalfspacingmode}{unused}{}{%
+    \ClassError{emtthesis}{Using obsolete option 'onehalfspacingmode'. Use 'linespacing' instead.}{Check the documentation for further information.}
 }
 % }}}
 
@@ -155,7 +191,7 @@
 % {{{ Page layout
 % Set main content's line spacing to be respected by the DIV-calculation.
 \RequirePackage{setspace}
-\Ifstr{\onehalfspacingmode}{never}{\singlespacing}{\onehalfspacing}
+\bodylinespacing
 
 % General page layout
 \KOMAoptions{%
@@ -373,7 +409,7 @@
     }{%
         \emtBibAll
     }
-    \Ifstr{\onehalfspacingmode}{never}{}{\onehalfspacing}
+    \bodylinespacing\KOMAoptions{DIV=current}
 }
 % }}}
 
@@ -607,8 +643,7 @@
         \emtProblemStatement
     }
 
-    \Ifstr{\onehalfspacingmode}{auto}{\onehalfspacing}{\singlespacing}
-    \KOMAoptions{DIV=current}
+    \bodylinespacing\KOMAoptions{DIV=current}
 
     % Preface
     \Ifstr{\preface}{auto}{%
@@ -646,8 +681,7 @@
 
     \mainmatter%
 
-    \Ifstr{\onehalfspacingmode}{never}{\singlespacing}{\onehalfspacing}
-    \KOMAoptions{DIV=current}
+    \bodylinespacing\KOMAoptions{DIV=current}
 }
 % }}}
 
