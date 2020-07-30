@@ -288,6 +288,9 @@
 \RequirePackage{booktabs}
 \RequirePackage{longtable}
 
+% Figure/table counting for conditional "list of" inclusion
+\RequirePackage[figure,table]{totalcount}
+
 % Bibliography
 \RequirePackage[
     backend=biber,
@@ -604,8 +607,13 @@
     \tableofcontents
 
     % Lists of figures and tables
-    \listoffigures
-    \listoftables
+    % Conditionally included, i.e. the list is not shown if it is emtpy.
+    \iftotalfigures
+        \listoffigures
+    \fi
+    \iftotaltables
+        \listoftables
+    \fi
 
     % Index of abbreviations and symbols
     \input{\symbolsfile}

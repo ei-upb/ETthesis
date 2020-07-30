@@ -51,3 +51,13 @@
     \(L\)                   & \si{\henry}       & Induktivität\\
     \(R\)                   & \si{\ohm}         & Elektrischer Widerstand\\
 \end{longtable}
+
+
+% The above three tables should not be counted as tables
+% Remember to change the value if you change the number of tables above
+%
+% Background: The EMTthesis class automatically shows a "List of Tables"
+% chapter if there are tables present in the document, but the longtables
+% above are incorrectly counted as tables (despite not having numbers or
+% captions).
+\addtocounter{table}{-3}
