@@ -98,12 +98,22 @@
     {true}{true},%
 }
 
-% Thesis type
-% * bsc: Bachelor of Science (B.Sc.) (default)
-% * msc: Master of Science (M.Sc.)
-% * dring: Doktor-Ingenieur (Dr.-Ing.)
-% * drrernat: Doktor der Naturwissenschaften (Dr. rer. nat.)
-\newcommand{\thesistype}{bsc}
+% Document type
+% Choices:
+% * bachelors: Bachelor's thesis (default).
+% * dring: Doctoral thesis (Dr. Ing.).
+% * drrernat: Doctoral thesis (Dr. rer. nat.).
+% * masters: Master's thesis.
+\newcommand{\doctype}{bsc}
+\FamilyNumericalKey{emtthesis}{doctype}{doctype}{%
+    {bachelors}{bachelors},%
+    {dring}{dring},%
+    {drrernat}{drrernat},%
+    {masters}{masters},%
+}
+
+% Thesis type (OBSOLETE)
+\newcommand{\thesistype}{}
 \FamilyNumericalKey{emtthesis}{thesistype}{thesistype}{%
     {bsc}{bsc},%
     {msc}{msc},%
@@ -137,13 +147,13 @@
 % {{{ Class option handling
 
 % Define thesis name by type.
-\Ifstr{\thesistype}{bsc}{%
+\Ifstr{\doctype}{bachelors}{%
     \newcommand{\thesisname}{Bachelorarbeit}
 }{}
-\Ifstr{\thesistype}{msc}{%
+\Ifstr{\doctype}{masters}{%
     \newcommand{\thesisname}{Masterarbeit}
 }{}
-\Ifstrstart{\thesistype}{dr}{%
+\Ifstrstart{\doctype}{dr}{%
     \newcommand{\thesisname}{Dissertation}
 }{}
 
@@ -173,7 +183,7 @@
 \Ifstr{\docstate}{preliminary}{
     \newcommand*{\includetitlepage}{\emtTitlePrelim}
 }{%
-    \Ifstrstart{\thesistype}{dr}{%
+    \Ifstrstart{\doctype}{dr}{%
         \Ifstr{\docstate}{accepted}{%
             \newcommand*{\includetitlepage}{\emtTitleDocAccepted}
         }{%
@@ -186,7 +196,7 @@
 
 % Preface
 \Ifstr{\preface}{auto}{%
-    \Ifstrstart{\thesistype}{dr}{%
+    \Ifstrstart{\doctype}{dr}{%
         \Ifstr{\docstate}{accepted}{%
             \newcommand*{\includepreface}{\emtPreface}
         }{%
@@ -205,7 +215,7 @@
 
 % Problem statement
 \Ifstr{\problem}{auto}{%
-    \Ifstrstart{\thesistype}{dr}{%
+    \Ifstrstart{\doctype}{dr}{%
         \newcommand*{\includeproblemstatement}{}
     }{%
         \newcommand*{\includeproblemstatement}{\emtProblemStatement}
@@ -219,6 +229,9 @@
 }
 
 % Warn if using obsolete class options
+\Ifstr{\thesistype}{}{}{%
+    \ClassError{emtthesis}{Using obsolete option 'thesistype'. Use 'doctype' instead.}{Check the documentation for further information.}
+}
 \Ifstr{\onehalfspacingmode}{unused}{}{%
     \ClassError{emtthesis}{Using obsolete option 'onehalfspacingmode'. Use 'linespacing' instead.}{Check the documentation for further information.}
 }
@@ -462,7 +475,7 @@
 % actual document file (e.g. thesis.tex).
 \newcommand{\insertbibliography}{%
     \singlespacing\KOMAoptions{DIV=current}
-    \Ifstrstart{\thesistype}{dr}{%
+    \Ifstrstart{\doctype}{dr}{%
         \Ifstr{\docstate}{accepted}{%
             \emtBibAll
         }{%
@@ -498,8 +511,8 @@
             \vspace{5mm}
 
             {\large
-                \Ifstr{\thesistype}{dring}{Doktor der Ingenieurswissenschaften (Dr.-Ing.)}{}
-                \Ifstr{\thesistype}{drrernat}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}{}
+                \Ifstr{\doctype}{dring}{Doktor der Ingenieurswissenschaften (Dr.-Ing.)}{}
+                \Ifstr{\doctype}{drrernat}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}{}
             }
             \vspace{5mm}
 
@@ -544,8 +557,8 @@
             \vspace{5mm}
 
             {\large
-                \Ifstr{\thesistype}{dring}{Doktor der Ingenieurswissenschaften (Dr.-Ing.)}{}
-                \Ifstr{\thesistype}{drrernat}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}{}
+                \Ifstr{\doctype}{dring}{Doktor der Ingenieurswissenschaften (Dr.-Ing.)}{}
+                \Ifstr{\doctype}{drrernat}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}{}
             }
             \vspace{5mm}
 
@@ -704,7 +717,7 @@
     \input{\germanabstractfile}
 
     % Abstract in english (only for Dr.)
-    \Ifstrstart{\thesistype}{dr}{%
+    \Ifstrstart{\doctype}{dr}{%
         \input{\englishabstractfile}
     }{}
 
@@ -741,7 +754,7 @@
 
     \singlespacing\KOMAoptions{DIV=current}
 
-    \Ifstrstart{\thesistype}{dr}{%
+    \Ifstrstart{\doctype}{dr}{%
         % Doctoral theses
         \Ifstr{\docstate}{accepted}{}{%
             % CV
