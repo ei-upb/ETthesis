@@ -351,6 +351,32 @@
 }
 % }}}
 
+% {{{ Bibliography
+% Define note describing bibliography sorting.
+\defbibnote{bibsorting}{Die Literaturangaben sind alphabetisch nach dem Nachnamen des ersten Autors und anschließend nach dem Erscheinungsjahr sortiert.}
+
+% The bibliography is typeset with single line spacing, while the previous
+% content (mainmatter) is usually set with 1.5x spacing. So, spacing must
+% be switched, followed by a re-calculation of the typearea.
+% However, using \KOMAoptions{DIV=current} in \AtBeginBibliography results in
+% an unwanted page break directly after the bibliography heading, so it cannot
+% be used. The following command is defined to prevent cluttering of the
+% actual document file (e.g. thesis.tex).
+\newcommand{\insertbibliography}{%
+    \singlespacing\KOMAoptions{DIV=current}
+    \Ifstrstart{\thesistype}{dr}{%
+        \Ifstr{\docstate}{accepted}{%
+            \emtBibAll
+        }{%
+            \emtBibOthers
+        }
+    }{%
+        \emtBibAll
+    }
+    \Ifstr{\onehalfspacingmode}{never}{}{\onehalfspacing}
+}
+% }}}
+
 % {{{ Document components
 % Predefined document parts, such as the title page, are defined here as
 % commands. In the following section, they are patched together as needed
@@ -658,32 +684,6 @@
 }
 \AtEndDocument{%
     \emtBack
-}
-% }}}
-
-% {{{ Bibliography
-% Define note describing bibliography sorting.
-\defbibnote{bibsorting}{Die Literaturangaben sind alphabetisch nach dem Nachnamen des ersten Autors und anschließend nach dem Erscheinungsjahr sortiert.}
-
-% The bibliography is typeset with single line spacing, while the previous
-% content (mainmatter) is usually set with 1.5x spacing. So, spacing must
-% be switched, followed by a re-calculation of the typearea.
-% However, using \KOMAoptions{DIV=current} in \AtBeginBibliography results in
-% an unwanted page break directly after the bibliography heading, so it cannot
-% be used. The following command is defined to prevent cluttering of the
-% actual document file (e.g. thesis.tex).
-\newcommand{\insertbibliography}{%
-    \singlespacing\KOMAoptions{DIV=current}
-    \Ifstrstart{\thesistype}{dr}{%
-        \Ifstr{\docstate}{accepted}{%
-            \emtBibAll
-        }{%
-            \emtBibOthers
-        }
-    }{%
-        \emtBibAll
-    }
-    \Ifstr{\onehalfspacingmode}{never}{}{\onehalfspacing}
 }
 % }}}
 % vim: foldmethod=marker
