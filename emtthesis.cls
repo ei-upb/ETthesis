@@ -202,6 +202,8 @@
 
 % Display TOC in PDF bookmarks (without adding an entry in itself)
 \BeforeTOCHead[toc]{{\cleardoublepage\pdfbookmark[0]{\contentsname}{toc}}}
+\BeforeTOCHead[lof]{{\cleardoublepage\pdfbookmark[0]{\listfigurename}{listoffigures}}}
+\BeforeTOCHead[lot]{{\cleardoublepage\pdfbookmark[0]{\listtablename}{listoftables}}}
 % }}}
 
 % {{{ Document metadata
