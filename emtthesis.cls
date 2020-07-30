@@ -73,6 +73,18 @@
     {always}{always}%
 }
 
+% Problem statement display switch
+% Choices:
+% * auto: Display problem statement for student theses only (default).
+% * never: Do not display the problem statement.
+% * always: Display the problem statement.
+\newcommand{\problem}{auto}
+\FamilyNumericalKey{emtthesis}{problem}{problem}{%
+    {auto}{auto},%
+    {never}{never},%
+    {always}{always}%
+}
+
 % Single author cite labels
 % If enabled, publications are always represented by a single-name cite label,
 % even if multiple authors are defined. For authors Mustermann and Doe, the
@@ -188,6 +200,21 @@
         \newcommand*{\includepreface}{\emtPreface}
     }{%
         \newcommand*{\includepreface}{}
+    }
+}
+
+% Problem statement
+\Ifstr{\problem}{auto}{%
+    \Ifstrstart{\thesistype}{dr}{%
+        \newcommand*{\includeproblemstatement}{}
+    }{%
+        \newcommand*{\includeproblemstatement}{\emtProblemStatement}
+    }
+}{%
+    \Ifstr{\problem}{always}{%
+        \newcommand*{\includeproblemstatement}{\emtProblemStatement}
+    }{%
+        \newcommand*{\includeproblemstatement}{}
     }
 }
 
@@ -666,9 +693,7 @@
     \includetitlepage
 
     % Problem statement (Student theses only)
-    \Ifstrstart{\thesistype}{dr}{}{%
-        \emtProblemStatement
-    }
+    \includeproblemstatement
 
     \bodylinespacing\KOMAoptions{DIV=current}
 
