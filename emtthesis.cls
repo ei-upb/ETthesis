@@ -156,6 +156,41 @@
     }
 }
 
+% Decide on inclusion of document parts
+% Title page
+\Ifstr{\docstate}{preliminary}{
+    \newcommand*{\includetitlepage}{\emtTitlePrelim}
+}{%
+    \Ifstrstart{\thesistype}{dr}{%
+        \Ifstr{\docstate}{accepted}{%
+            \newcommand*{\includetitlepage}{\emtTitleDocAccepted}
+        }{%
+            \newcommand*{\includetitlepage}{\emtTitleDocSubmission}
+        }
+    }{%
+        \newcommand*{\includetitlepage}{\emtTitleStudent}
+    }
+}
+
+% Preface
+\Ifstr{\preface}{auto}{%
+    \Ifstrstart{\thesistype}{dr}{%
+        \Ifstr{\docstate}{accepted}{%
+            \newcommand*{\includepreface}{\emtPreface}
+        }{%
+            \newcommand*{\includepreface}{}
+        }
+    }{%
+        \newcommand*{\includepreface}{}
+    }
+}{%
+    \Ifstr{\preface}{always}{%
+        \newcommand*{\includepreface}{\emtPreface}
+    }{%
+        \newcommand*{\includepreface}{}
+    }
+}
+
 % Warn if using obsolete class options
 \Ifstr{\onehalfspacingmode}{unused}{}{%
     \ClassError{emtthesis}{Using obsolete option 'onehalfspacingmode'. Use 'linespacing' instead.}{Check the documentation for further information.}
@@ -628,15 +663,7 @@
     \singlespacing\KOMAoptions{DIV=current}
 
     % Title page
-    \Ifstr{\docstate}{preliminary}{
-        \emtTitlePrelim
-    }{%
-        \Ifstrstart{\thesistype}{dr}{%
-            \Ifstr{\docstate}{accepted}{\emtTitleDocAccepted}{\emtTitleDocSubmission}
-        }{%
-            \emtTitleStudent
-        }
-    }
+    \includetitlepage
 
     % Problem statement (Student theses only)
     \Ifstrstart{\thesistype}{dr}{}{%
@@ -646,13 +673,7 @@
     \bodylinespacing\KOMAoptions{DIV=current}
 
     % Preface
-    \Ifstr{\preface}{auto}{%
-        \Ifstrstart{\thesistype}{dr}{%
-            \Ifstr{\docstate}{accepted}{\emtPreface}{}
-        }{}
-    }{%
-        \Ifstr{\preface}{always}{\emtPreface}{}
-    }
+    \includepreface
 
     % Abstract
     \input{\germanabstractfile}
