@@ -139,7 +139,7 @@
 % * masters: Master's thesis.
 % * project: Project ("Projektarbeit").
 % * sa: "Studienarbeit".
-\newcommand{\doctype}{bsc}
+\newcommand{\doctype}{bachelors}
 \FamilyNumericalKey{emtthesis}{doctype}{doctype}{%
     {bachelors}{bachelors},%
     {dring}{dring},%
