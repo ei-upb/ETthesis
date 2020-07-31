@@ -165,15 +165,9 @@
 % {{{ Class option handling
 
 % Define thesis name by type.
-\Ifstr{\doctype}{bachelors}{%
-    \newcommand{\thesisname}{Bachelorarbeit}
-}{}
-\Ifstr{\doctype}{masters}{%
-    \newcommand{\thesisname}{Masterarbeit}
-}{}
-\Ifstrstart{\doctype}{dr}{%
-    \newcommand{\thesisname}{Dissertation}
-}{}
+\Ifstr{\doctype}{bachelors}{\newcommand{\thesisname}{Bachelorarbeit}}{}
+\Ifstr{\doctype}{masters}{\newcommand{\thesisname}{Masterarbeit}}{}
+\Ifstrstart{\doctype}{dr}{\newcommand{\thesisname}{Dissertation}}{}
 
 \Ifstr{\singlecitelabel}{true}{%
     \newcommand{\citelabelauthornum}{1}
@@ -182,19 +176,11 @@
 }
 
 % Decide on line spacing in the main body of the document
+\newcommand*{\bodylinespacing}{\singlespacing}
 \Ifstr{\linespacing}{auto}{%
-    \Ifstr{\docstate}{accepted}{%
-        \newcommand*{\bodylinespacing}{\singlespacing}
-    }{%
-        \newcommand*{\bodylinespacing}{\onehalfspacing}
-    }
-}{%
-    \Ifstr{\linespacing}{onehalf}{%
-        \newcommand*{\bodylinespacing}{\onehalfspacing}
-    }{%
-        \newcommand*{\bodylinespacing}{\singlespacing}
-    }
-}
+    \Ifstr{\docstate}{accepted}{}{\renewcommand*{\bodylinespacing}{\onehalfspacing}}
+}{}
+\Ifstr{\linespacing}{onehalf}{\newcommand*{\bodylinespacing}{\onehalfspacing}}{}
 
 % Decide on inclusion of document parts
 % Title page
@@ -213,69 +199,32 @@
 }
 
 % Preface
+\newcommand*{\includepreface}{}
 \Ifstr{\preface}{auto}{%
     \Ifstrstart{\doctype}{dr}{%
-        \Ifstr{\docstate}{accepted}{%
-            \newcommand*{\includepreface}{\emtPreface}
-        }{%
-            \newcommand*{\includepreface}{}
-        }
-    }{%
-        \newcommand*{\includepreface}{}
-    }
-}{%
-    \Ifstr{\preface}{always}{%
-        \newcommand*{\includepreface}{\emtPreface}
-    }{%
-        \newcommand*{\includepreface}{}
-    }
-}
+        \Ifstr{\docstate}{accepted}{\renewcommand*{\includepreface}{\emtPreface}}{}
+    }{}
+}{}
+\Ifstr{\preface}{always}{\renewcommand*{\includepreface}{\emtPreface}}{}
 
 % Abstracts
-\newcommand*{\includeabstracts}{}
+\newcommand*{\includeabstracts}{\emtAbstractDE}
 \Ifstr{\abstracts}{auto}{%
     \Ifstrstart{\doctype}{dr}{%
         \renewcommand*{\includeabstracts}{\emtAbstractDE \emtAbstractEN}
-    }{%
-        \Ifstr{\doctype}{bachelors}{%
-            \renewcommand*{\includeabstracts}{\emtAbstractDE}
-        }{}
-        \Ifstr{\doctype}{masters}{%
-            \renewcommand*{\includeabstracts}{\emtAbstractDE}
-        }{}
-        \Ifstr{\doctype}{project}{%
-            \renewcommand*{\includeabstracts}{\emtAbstractDE}
-        }{}
-        \Ifstr{\doctype}{sa}{%
-            \renewcommand*{\includeabstracts}{\emtAbstractDE}
-        }{}
-    }
-}{%
-    \Ifstr{\abstracts}{both}{%
-        \renewcommand*{\includeabstracts}{\emtAbstractDE \emtAbstractEN}
     }{}
-    \Ifstr{\abstracts}{english}{%
-        \renewcommand*{\includeabstracts}{\emtAbstractEN}
-    }{}
-    \Ifstr{\abstracts}{german}{%
-        \renewcommand*{\includeabstracts}{\emtAbstractDE}
-    }{}
-}
+}{}
+\Ifstr{\abstracts}{both}{\renewcommand*{\includeabstracts}{\emtAbstractDE \emtAbstractEN}}{}
+\Ifstr{\abstracts}{english}{\renewcommand*{\includeabstracts}{\emtAbstractEN}}{}
+\Ifstr{\abstracts}{german}{\renewcommand*{\includeabstracts}{\emtAbstractDE}}{}
+\Ifstr{\abstracts}{none}{\renewcommand*{\includeabstracts}{}}{}
 
 % Problem statement
+\newcommand*{\includeproblemstatement}{}
 \Ifstr{\problem}{auto}{%
-    \Ifstrstart{\doctype}{dr}{%
-        \newcommand*{\includeproblemstatement}{}
-    }{%
-        \newcommand*{\includeproblemstatement}{\emtProblemStatement}
-    }
-}{%
-    \Ifstr{\problem}{always}{%
-        \newcommand*{\includeproblemstatement}{\emtProblemStatement}
-    }{%
-        \newcommand*{\includeproblemstatement}{}
-    }
-}
+    \Ifstrstart{\doctype}{dr}{}{\renewcommand*{\includeproblemstatement}{\emtProblemStatement}}
+}{}
+\Ifstr{\problem}{always}{\renewcommand*{\includeproblemstatement}{\emtProblemStatement}}{}
 
 % Warn if using obsolete class options
 \Ifstr{\thesistype}{}{}{%
