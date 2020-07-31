@@ -137,6 +137,7 @@
 % * dring: Doctoral thesis (Dr. Ing.).
 % * drrernat: Doctoral thesis (Dr. rer. nat.).
 % * masters: Master's thesis.
+% * project: Project ("Projektarbeit").
 % * sa: "Studienarbeit".
 \newcommand{\doctype}{bsc}
 \FamilyNumericalKey{emtthesis}{doctype}{doctype}{%
@@ -144,6 +145,7 @@
     {dring}{dring},%
     {drrernat}{drrernat},%
     {masters}{masters},%
+    {project}{project},%
     {sa}{sa},%
 }
 
@@ -199,6 +201,10 @@
     \newcommand*{\includetitlepage}{\emtTitleStudent}
     \renewcommand*{\includeproblemstatement}{\emtProblemStatement}
     \renewcommand*{\includeaffirmation}{\emtAffirmation}
+}{}
+\Ifstr{\doctype}{project}{%
+    \newcommand{\thesisname}{Projektarbeit}
+    \newcommand*{\includetitlepage}{\emtTitleStudent}
 }{}
 \Ifstr{\doctype}{sa}{%
     \newcommand{\thesisname}{Studienarbeit}
