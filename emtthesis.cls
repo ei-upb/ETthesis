@@ -122,12 +122,14 @@
 % * dring: Doctoral thesis (Dr. Ing.).
 % * drrernat: Doctoral thesis (Dr. rer. nat.).
 % * masters: Master's thesis.
+% * sa: "Studienarbeit".
 \newcommand{\doctype}{bsc}
 \FamilyNumericalKey{emtthesis}{doctype}{doctype}{%
     {bachelors}{bachelors},%
     {dring}{dring},%
     {drrernat}{drrernat},%
     {masters}{masters},%
+    {sa}{sa},%
 }
 
 % Thesis type (OBSOLETE)
@@ -177,6 +179,11 @@
 }{}
 \Ifstr{\doctype}{masters}{%
     \newcommand{\thesisname}{Masterarbeit}
+    \newcommand*{\includetitlepage}{\emtTitleStudent}
+    \renewcommand*{\includeproblemstatement}{\emtProblemStatement}
+}{}
+\Ifstr{\doctype}{sa}{%
+    \newcommand{\thesisname}{Studienarbeit}
     \newcommand*{\includetitlepage}{\emtTitleStudent}
     \renewcommand*{\includeproblemstatement}{\emtProblemStatement}
 }{}
