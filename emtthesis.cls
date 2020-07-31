@@ -167,7 +167,11 @@
 % Define thesis name by type.
 \Ifstr{\doctype}{bachelors}{\newcommand{\thesisname}{Bachelorarbeit}}{}
 \Ifstr{\doctype}{masters}{\newcommand{\thesisname}{Masterarbeit}}{}
-\Ifstrstart{\doctype}{dr}{\newcommand{\thesisname}{Dissertation}}{}
+\Ifstrstart{\doctype}{dr}{%
+    \newcommand{\thesisname}{Dissertation}
+    \Ifstr{\doctype}{dring}{\newcommand*{\doctoraltitle}{Doktor der Ingenieurswissenschaften (Dr.-Ing.)}}{}
+    \Ifstr{\doctype}{drrernat}{\newcommand*{\doctoraltitle}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}}{}
+}{}
 
 \Ifstr{\singlecitelabel}{true}{%
     \newcommand{\citelabelauthornum}{1}
@@ -508,10 +512,7 @@
             zur Erlangung des akademischen Grades
             \vspace{5mm}
 
-            {\large
-                \Ifstr{\doctype}{dring}{Doktor der Ingenieurswissenschaften (Dr.-Ing.)}{}
-                \Ifstr{\doctype}{drrernat}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}{}
-            }
+            {\large\doctoraltitle}
             \vspace{5mm}
 
             genehmigte Dissertation
@@ -554,10 +555,7 @@
             zur Erlangung des akademischen Grades
             \vspace{5mm}
 
-            {\large
-                \Ifstr{\doctype}{dring}{Doktor der Ingenieurswissenschaften (Dr.-Ing.)}{}
-                \Ifstr{\doctype}{drrernat}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}{}
-            }
+            {\large\doctoraltitle}
             \vspace{5mm}
 
             vorgelegte Dissertation
