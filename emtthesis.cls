@@ -116,6 +116,21 @@
     {true}{true},%
 }
 
+% Affirmation
+% For student theses, this is to affirm that the submitting author is the
+% original author of the content and all external content has been fully
+% declared.
+% Choices:
+% * auto: Enable for student theses, disable for other documents (default).
+% * always: Enable affirmation.
+% * never: Disable affirmation.
+\newcommand{\affirmation}{auto}
+\FamilyNumericalKey{emtthesis}{affirmation}{affirmation}{%
+    {auto}{auto},%
+    {always}{always},%
+    {never}{never},%
+}
+
 % Document type
 % Choices:
 % * bachelors: Bachelor's thesis (default).
@@ -170,22 +185,26 @@
 \newcommand*{\includepreface}{}
 \newcommand*{\includeabstracts}{\emtAbstractDE}
 \newcommand*{\includeproblemstatement}{}
+\newcommand*{\includeaffirmation}{}
 
 % Decisions by document type
 \Ifstr{\doctype}{bachelors}{%
     \newcommand{\thesisname}{Bachelorarbeit}
     \newcommand*{\includetitlepage}{\emtTitleStudent}
     \renewcommand*{\includeproblemstatement}{\emtProblemStatement}
+    \renewcommand*{\includeaffirmation}{\emtAffirmation}
 }{}
 \Ifstr{\doctype}{masters}{%
     \newcommand{\thesisname}{Masterarbeit}
     \newcommand*{\includetitlepage}{\emtTitleStudent}
     \renewcommand*{\includeproblemstatement}{\emtProblemStatement}
+    \renewcommand*{\includeaffirmation}{\emtAffirmation}
 }{}
 \Ifstr{\doctype}{sa}{%
     \newcommand{\thesisname}{Studienarbeit}
     \newcommand*{\includetitlepage}{\emtTitleStudent}
     \renewcommand*{\includeproblemstatement}{\emtProblemStatement}
+    \renewcommand*{\includeaffirmation}{\emtAffirmation}
 }{}
 \Ifstrstart{\doctype}{dr}{%
     \newcommand{\thesisname}{Dissertation}
@@ -224,6 +243,8 @@
 \Ifstr{\abstracts}{none}{\renewcommand*{\includeabstracts}{}}{}
 \Ifstr{\problem}{always}{\renewcommand*{\includeproblemstatement}{\emtProblemStatement}}{}
 \Ifstr{\problem}{never}{\renewcommand*{\includeproblemstatement}{}}{}
+\Ifstr{\affirmation}{always}{\renewcommand*{\includeaffirmation}{\emtAffirmation}}{}
+\Ifstr{\affirmation}{never}{\renewcommand*{\includeaffirmation}{}}{}
 
 % Warn if using obsolete class options
 \Ifstr{\thesistype}{}{}{%
@@ -674,6 +695,9 @@
 
     \printbibliography[title={Eigene Publikationen}, keyword=own, segment=1]
 }
+
+% Affirmation
+\newcommand*{\emtAffirmation}{\input{\affirmationfile}}
 % }}}
 
 % {{{ Frontmatter composition
@@ -753,10 +777,8 @@
             % Bibliography of own publications
             \emtBibOwn
         }
-    }{%
-        % Student theses
-        \input{\affirmationfile}
-    }
+    }{}
+    \includeaffirmation
 }
 % }}}
 
