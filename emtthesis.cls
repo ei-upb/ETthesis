@@ -173,6 +173,7 @@
     \Ifstr{\doctype}{drrernat}{\newcommand*{\doctoraltitle}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}}{}
 }{}
 
+% Decide citation label format
 \Ifstr{\singlecitelabel}{true}{%
     \newcommand{\citelabelauthornum}{1}
 }{%
