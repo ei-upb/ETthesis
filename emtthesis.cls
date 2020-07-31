@@ -51,15 +51,6 @@
     {onehalf}{onehalf}%
 }
 
-% Line spacing mode (OBSOLETE)
-\newcommand{\onehalfspacingmode}{unused}
-\FamilyNumericalKey{emtthesis}{onehalfspacingmode}{onehalfspacingmode}{%
-    {unused}{unused},%
-    {auto}{auto},%
-    {mainmatter}{mainmatter},%
-    {never}{never}%
-}
-
 % Preface display switch
 % Choices:
 % * auto: Display preface for doctoral theses, but not for Bachelor's or
@@ -149,15 +140,6 @@
     {sa}{sa},%
 }
 
-% Thesis type (OBSOLETE)
-\newcommand{\thesistype}{}
-\FamilyNumericalKey{emtthesis}{thesistype}{thesistype}{%
-    {bsc}{bsc},%
-    {msc}{msc},%
-    {dring}{dring},%
-    {drrernat}{drrernat},%
-}
-
 % Minted package loading
 % Source code listings are often required in theses. Typically, they are
 % typeset with either the listings package or the newer minted package.
@@ -174,6 +156,13 @@
 
 % Fallback option (for all options not explicitly defined above)
 \DeclareOption*{%
+    % Show error if using obsolete class options
+    \Ifstrstart{\CurrentOption}{thesistype}{%
+        \ClassError{emtthesis}{Using obsolete option 'thesistype', use 'doctype' instead}{The 'thesistype' option is obsolete and can no longer be used. Use 'doctype' instead.}
+    }{}
+    \Ifstrstart{\CurrentOption}{onehalfspacingmode}{%
+        \ClassError{emtthesis}{Using obsolete option 'onehalfspacingmode', use 'linespacing' instead}{The 'onehalfspacingmode' option is obsolete and can no longer be used. Use 'linespacing' instead.}
+    }{}
     \ClassError{emtthesis}{Unknown option '\CurrentOption'.}{Check the documentation for valid options.}
 }
 
@@ -252,13 +241,6 @@
 \Ifstr{\affirmation}{always}{\renewcommand*{\includeaffirmation}{\emtAffirmation}}{}
 \Ifstr{\affirmation}{never}{\renewcommand*{\includeaffirmation}{}}{}
 
-% Warn if using obsolete class options
-\Ifstr{\thesistype}{}{}{%
-    \ClassError{emtthesis}{Using obsolete option 'thesistype'. Use 'doctype' instead.}{Check the documentation for further information.}
-}
-\Ifstr{\onehalfspacingmode}{unused}{}{%
-    \ClassError{emtthesis}{Using obsolete option 'onehalfspacingmode'. Use 'linespacing' instead.}{Check the documentation for further information.}
-}
 % }}}
 
 % {{{ Load base class.
