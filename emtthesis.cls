@@ -164,13 +164,33 @@
 
 % {{{ Class option handling
 
-% Define thesis name by type.
-\Ifstr{\doctype}{bachelors}{\newcommand{\thesisname}{Bachelorarbeit}}{}
-\Ifstr{\doctype}{masters}{\newcommand{\thesisname}{Masterarbeit}}{}
+% Default options
+\newcommand*{\includepreface}{}
+\newcommand*{\includeabstracts}{\emtAbstractDE}
+\newcommand*{\includeproblemstatement}{}
+
+% Decisions by document type
+\Ifstr{\doctype}{bachelors}{%
+    \newcommand{\thesisname}{Bachelorarbeit}
+    \newcommand*{\includetitlepage}{\emtTitleStudent}
+    \renewcommand*{\includeproblemstatement}{\emtProblemStatement}
+}{}
+\Ifstr{\doctype}{masters}{%
+    \newcommand{\thesisname}{Masterarbeit}
+    \newcommand*{\includetitlepage}{\emtTitleStudent}
+    \renewcommand*{\includeproblemstatement}{\emtProblemStatement}
+}{}
 \Ifstrstart{\doctype}{dr}{%
     \newcommand{\thesisname}{Dissertation}
     \Ifstr{\doctype}{dring}{\newcommand*{\doctoraltitle}{Doktor der Ingenieurswissenschaften (Dr.-Ing.)}}{}
     \Ifstr{\doctype}{drrernat}{\newcommand*{\doctoraltitle}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}}{}
+    \Ifstr{\docstate}{accepted}{%
+        \newcommand*{\includetitlepage}{\emtTitleDocAccepted}
+        \renewcommand*{\includepreface}{\emtPreface}
+    }{%
+        \newcommand*{\includetitlepage}{\emtTitleDocSubmission}
+    }
+    \renewcommand*{\includeabstracts}{\emtAbstractDE\emtAbstractEN}
 }{}
 
 % Decide citation label format
@@ -187,48 +207,13 @@
 }{}
 \Ifstr{\linespacing}{onehalf}{\newcommand*{\bodylinespacing}{\onehalfspacing}}{}
 
-% Decide on inclusion of document parts
-% Title page
-\Ifstr{\docstate}{preliminary}{
-    \newcommand*{\includetitlepage}{\emtTitlePrelim}
-}{%
-    \Ifstrstart{\doctype}{dr}{%
-        \Ifstr{\docstate}{accepted}{%
-            \newcommand*{\includetitlepage}{\emtTitleDocAccepted}
-        }{%
-            \newcommand*{\includetitlepage}{\emtTitleDocSubmission}
-        }
-    }{%
-        \newcommand*{\includetitlepage}{\emtTitleStudent}
-    }
-}
-
-% Preface
-\newcommand*{\includepreface}{}
-\Ifstr{\preface}{auto}{%
-    \Ifstrstart{\doctype}{dr}{%
-        \Ifstr{\docstate}{accepted}{\renewcommand*{\includepreface}{\emtPreface}}{}
-    }{}
-}{}
+% Explicit / independent settings
+\Ifstr{\docstate}{preliminary}{\newcommand*{\includetitlepage}{\emtTitlePrelim}}{}
 \Ifstr{\preface}{always}{\renewcommand*{\includepreface}{\emtPreface}}{}
-
-% Abstracts
-\newcommand*{\includeabstracts}{\emtAbstractDE}
-\Ifstr{\abstracts}{auto}{%
-    \Ifstrstart{\doctype}{dr}{%
-        \renewcommand*{\includeabstracts}{\emtAbstractDE \emtAbstractEN}
-    }{}
-}{}
-\Ifstr{\abstracts}{both}{\renewcommand*{\includeabstracts}{\emtAbstractDE \emtAbstractEN}}{}
+\Ifstr{\abstracts}{both}{\renewcommand*{\includeabstracts}{\emtAbstractDE\emtAbstractEN}}{}
 \Ifstr{\abstracts}{english}{\renewcommand*{\includeabstracts}{\emtAbstractEN}}{}
 \Ifstr{\abstracts}{german}{\renewcommand*{\includeabstracts}{\emtAbstractDE}}{}
 \Ifstr{\abstracts}{none}{\renewcommand*{\includeabstracts}{}}{}
-
-% Problem statement
-\newcommand*{\includeproblemstatement}{}
-\Ifstr{\problem}{auto}{%
-    \Ifstrstart{\doctype}{dr}{}{\renewcommand*{\includeproblemstatement}{\emtProblemStatement}}
-}{}
 \Ifstr{\problem}{always}{\renewcommand*{\includeproblemstatement}{\emtProblemStatement}}{}
 
 % Warn if using obsolete class options
