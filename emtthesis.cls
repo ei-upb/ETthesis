@@ -217,11 +217,13 @@
 % Explicit / independent settings
 \Ifstr{\docstate}{preliminary}{\newcommand*{\includetitlepage}{\emtTitlePrelim}}{}
 \Ifstr{\preface}{always}{\renewcommand*{\includepreface}{\emtPreface}}{}
+\Ifstr{\preface}{never}{\renewcommand*{\includepreface}{}}{}
 \Ifstr{\abstracts}{both}{\renewcommand*{\includeabstracts}{\emtAbstractDE\emtAbstractEN}}{}
 \Ifstr{\abstracts}{english}{\renewcommand*{\includeabstracts}{\emtAbstractEN}}{}
 \Ifstr{\abstracts}{german}{\renewcommand*{\includeabstracts}{\emtAbstractDE}}{}
 \Ifstr{\abstracts}{none}{\renewcommand*{\includeabstracts}{}}{}
 \Ifstr{\problem}{always}{\renewcommand*{\includeproblemstatement}{\emtProblemStatement}}{}
+\Ifstr{\problem}{never}{\renewcommand*{\includeproblemstatement}{}}{}
 
 % Warn if using obsolete class options
 \Ifstr{\thesistype}{}{}{%
