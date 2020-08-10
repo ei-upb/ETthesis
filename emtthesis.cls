@@ -179,6 +179,7 @@
 \newcommand*{\includeabstracts}{\emtAbstractDE}
 \newcommand*{\includeproblemstatement}{}
 \newcommand*{\includeaffirmation}{}
+\newcommand*{\hasbackmatter}{false}
 
 % Decisions by document type
 \Ifstr{\doctype}{bachelors}{%
@@ -186,12 +187,14 @@
     \newcommand*{\includetitlepage}{\emtTitleStudent}
     \renewcommand*{\includeproblemstatement}{\emtProblemStatement}
     \renewcommand*{\includeaffirmation}{\emtAffirmation}
+    \renewcommand*{\hasbackmatter}{true}
 }{}
 \Ifstr{\doctype}{masters}{%
     \newcommand{\doctypename}{Masterarbeit}
     \newcommand*{\includetitlepage}{\emtTitleStudent}
     \renewcommand*{\includeproblemstatement}{\emtProblemStatement}
     \renewcommand*{\includeaffirmation}{\emtAffirmation}
+    \renewcommand*{\hasbackmatter}{true}
 }{}
 \Ifstr{\doctype}{project}{%
     \newcommand{\doctypename}{Projektarbeit}
@@ -206,6 +209,7 @@
     \newcommand*{\includetitlepage}{\emtTitleStudent}
     \renewcommand*{\includeproblemstatement}{\emtProblemStatement}
     \renewcommand*{\includeaffirmation}{\emtAffirmation}
+    \renewcommand*{\hasbackmatter}{true}
 }{}
 \Ifstrstart{\doctype}{dr}{%
     \newcommand{\doctypename}{Dissertation}
@@ -216,6 +220,7 @@
         \renewcommand*{\includepreface}{\emtPreface}
     }{%
         \newcommand*{\includetitlepage}{\emtTitleDocSubmission}
+        \renewcommand*{\hasbackmatter}{true}
     }
     \renewcommand*{\includeabstracts}{\emtAbstractDE\emtAbstractEN}
 }{}
@@ -244,8 +249,14 @@
 \Ifstr{\abstracts}{none}{\renewcommand*{\includeabstracts}{}}{}
 \Ifstr{\problem}{always}{\renewcommand*{\includeproblemstatement}{\emtProblemStatement}}{}
 \Ifstr{\problem}{never}{\renewcommand*{\includeproblemstatement}{}}{}
-\Ifstr{\affirmation}{always}{\renewcommand*{\includeaffirmation}{\emtAffirmation}}{}
-\Ifstr{\affirmation}{never}{\renewcommand*{\includeaffirmation}{}}{}
+\Ifstr{\affirmation}{always}{%
+    \renewcommand*{\includeaffirmation}{\emtAffirmation}%
+    \renewcommand*{\hasbackmatter}{true}%
+}{}
+\Ifstr{\affirmation}{never}{%
+    \renewcommand*{\includeaffirmation}{}%
+    \renewcommand*{\hasbackmatter}{false}%
+}{}
 
 % }}}
 
@@ -811,7 +822,7 @@
     \tikzifexternalizing{}{\emtFront}
 }
 \AtEndDocument{%
-    \emtBack
+    \Ifstr{\hasbackmatter}{true}{\emtBack}{}
 }
 % }}}
 % vim: foldmethod=marker
