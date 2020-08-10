@@ -9,6 +9,26 @@
 \DefineFamily{emtthesis}
 \DefineFamilyMember{emtthesis}
 
+% Document type
+% Choices:
+% * bachelors: Bachelor's thesis (default).
+% * dring: Doctoral thesis (Dr. Ing.).
+% * drrernat: Doctoral thesis (Dr. rer. nat.).
+% * masters: Master's thesis.
+% * project: Project ("Projektarbeit").
+% * report: EMT-branded report.
+% * sa: "Studienarbeit".
+\newcommand{\doctype}{bachelors}
+\FamilyNumericalKey{emtthesis}{doctype}{doctype}{%
+    {bachelors}{bachelors},%
+    {dring}{dring},%
+    {drrernat}{drrernat},%
+    {masters}{masters},%
+    {project}{project},%
+    {report}{report},%
+    {sa}{sa},%
+}
+
 % Document state
 % For doctoral theses, two variants of the title page are required, depending
 % on whether the thesis is being submitted ("Prüfungsexemplar") or has already
@@ -94,20 +114,7 @@
     {none}{none},%
 }
 
-% Single author cite labels
-% If enabled, publications are always represented by a single-name cite label,
-% even if multiple authors are defined. For authors Mustermann and Doe, the
-% result would e.g. be [Mus18], not [MD18].
-% Choices:
-% * false Disable single-author labels (default).
-% * true: Enable single-author labels.
-\newcommand{\singlecitelabel}{false}
-\FamilyNumericalKey{emtthesis}{singlecitelabel}{singlecitelabel}{%
-    {false}{false},%
-    {true}{true},%
-}
-
-% Affirmation
+% Affirmation display switch
 % For student theses, this is to affirm that the submitting author is the
 % original author of the content and all external content has been fully
 % declared.
@@ -122,24 +129,17 @@
     {never}{never},%
 }
 
-% Document type
+% Single author cite labels
+% If enabled, publications are always represented by a single-name cite label,
+% even if multiple authors are defined. For authors Mustermann and Doe, the
+% result would e.g. be [Mus18], not [MD18].
 % Choices:
-% * bachelors: Bachelor's thesis (default).
-% * dring: Doctoral thesis (Dr. Ing.).
-% * drrernat: Doctoral thesis (Dr. rer. nat.).
-% * masters: Master's thesis.
-% * project: Project ("Projektarbeit").
-% * report: EMT-branded report.
-% * sa: "Studienarbeit".
-\newcommand{\doctype}{bachelors}
-\FamilyNumericalKey{emtthesis}{doctype}{doctype}{%
-    {bachelors}{bachelors},%
-    {dring}{dring},%
-    {drrernat}{drrernat},%
-    {masters}{masters},%
-    {project}{project},%
-    {report}{report},%
-    {sa}{sa},%
+% * false Disable single-author labels (default).
+% * true: Enable single-author labels.
+\newcommand{\singlecitelabel}{false}
+\FamilyNumericalKey{emtthesis}{singlecitelabel}{singlecitelabel}{%
+    {false}{false},%
+    {true}{true},%
 }
 
 % Minted package loading
