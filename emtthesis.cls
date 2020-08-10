@@ -129,6 +129,7 @@
 % * drrernat: Doctoral thesis (Dr. rer. nat.).
 % * masters: Master's thesis.
 % * project: Project ("Projektarbeit").
+% * report: EMT-branded report.
 % * sa: "Studienarbeit".
 \newcommand{\doctype}{bachelors}
 \FamilyNumericalKey{emtthesis}{doctype}{doctype}{%
@@ -137,6 +138,7 @@
     {drrernat}{drrernat},%
     {masters}{masters},%
     {project}{project},%
+    {report}{report},%
     {sa}{sa},%
 }
 
@@ -194,6 +196,10 @@
 \Ifstr{\doctype}{project}{%
     \newcommand{\doctypename}{Projektarbeit}
     \newcommand*{\includetitlepage}{\emtTitleStudent}
+}{}
+\Ifstr{\doctype}{report}{%
+    \newcommand{\doctypename}{Projektbericht}
+    \newcommand*{\includetitlepage}{\emtTitleReport}
 }{}
 \Ifstr{\doctype}{sa}{%
     \newcommand{\doctypename}{Studienarbeit}
@@ -603,6 +609,35 @@
                             & \@advisorB
             \end{tabular}
             \vspace{10mm}
+
+            Paderborn, im \@date
+        \end{center}
+
+        \emtfooter%
+    \end{titlepage}
+}
+
+% - Report (not actually a thesis, oh well...)
+\newcommand*{\emtTitleReport}{%
+    \begin{titlepage}
+        \eimheader%
+
+        \vspace{10mm}
+
+        \begin{center}
+            \large
+            {\doctypename}
+            \vspace{10mm}
+
+            % Note: \par at the end is required for proper line spacing.
+            {\LARGE\bfseries\sffamily\@title\par}
+            \vspace{10mm}
+
+            von
+            \vspace{5mm}
+
+            {\Large \@author}
+            \vfill
 
             Paderborn, im \@date
         \end{center}
