@@ -180,29 +180,29 @@
 
 % Decisions by document type
 \Ifstr{\doctype}{bachelors}{%
-    \newcommand{\thesisname}{Bachelorarbeit}
+    \newcommand{\doctypename}{Bachelorarbeit}
     \newcommand*{\includetitlepage}{\emtTitleStudent}
     \renewcommand*{\includeproblemstatement}{\emtProblemStatement}
     \renewcommand*{\includeaffirmation}{\emtAffirmation}
 }{}
 \Ifstr{\doctype}{masters}{%
-    \newcommand{\thesisname}{Masterarbeit}
+    \newcommand{\doctypename}{Masterarbeit}
     \newcommand*{\includetitlepage}{\emtTitleStudent}
     \renewcommand*{\includeproblemstatement}{\emtProblemStatement}
     \renewcommand*{\includeaffirmation}{\emtAffirmation}
 }{}
 \Ifstr{\doctype}{project}{%
-    \newcommand{\thesisname}{Projektarbeit}
+    \newcommand{\doctypename}{Projektarbeit}
     \newcommand*{\includetitlepage}{\emtTitleStudent}
 }{}
 \Ifstr{\doctype}{sa}{%
-    \newcommand{\thesisname}{Studienarbeit}
+    \newcommand{\doctypename}{Studienarbeit}
     \newcommand*{\includetitlepage}{\emtTitleStudent}
     \renewcommand*{\includeproblemstatement}{\emtProblemStatement}
     \renewcommand*{\includeaffirmation}{\emtAffirmation}
 }{}
 \Ifstrstart{\doctype}{dr}{%
-    \newcommand{\thesisname}{Dissertation}
+    \newcommand{\doctypename}{Dissertation}
     \Ifstr{\doctype}{dring}{\newcommand*{\doctoraltitle}{Doktor der Ingenieurswissenschaften (Dr.-Ing.)}}{}
     \Ifstr{\doctype}{drrernat}{\newcommand*{\doctoraltitle}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}}{}
     \Ifstr{\docstate}{accepted}{%
@@ -585,7 +585,7 @@
 
         \begin{center}
             \large
-            {\thesisname}
+            {\doctypename}
             \vspace{10mm}
 
             % Note: \par at the end is required for proper line spacing.
@@ -626,7 +626,7 @@
         \eimheader%
 
         \begin{center}
-            \large\thesisname%
+            \large\doctypename%
             \vspace{3mm}
 
             für
