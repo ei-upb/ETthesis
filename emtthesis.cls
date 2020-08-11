@@ -12,7 +12,7 @@
 % Document type
 % Choices:
 % * bachelors: Bachelor's thesis (default).
-% * dring: Doctoral thesis (Dr. Ing.).
+% * dring: Doctoral thesis (Dr.-Ing.).
 % * drrernat: Doctoral thesis (Dr. rer. nat.).
 % * masters: Master's thesis.
 % * project: Project ("Projektarbeit").
@@ -131,7 +131,7 @@
 % even if multiple authors are defined. For authors Mustermann and Doe, the
 % result would e.g. be [Mus18], not [MD18].
 % Choices:
-% * false Disable single-author labels (default).
+% * false: Disable single-author labels (default).
 % * true: Enable single-author labels.
 \newcommand{\singlecitelabel}{false}
 \FamilyNumericalKey{emtthesis}{singlecitelabel}{singlecitelabel}{%
@@ -145,8 +145,8 @@
 % Because of sub-dependencies on packages required by this class, minted cannot
 % be loaded by the user in their preamble, so it must be supported here.
 % Choices:
-% * false Do not load the minted package (default).
-% * true Do load the minted package.
+% * false: Do not load the minted package (default).
+% * true: Do load the minted package.
 \newcommand{\useminted}{false}
 \FamilyNumericalKey{emtthesis}{useminted}{useminted}{%
     {false}{false},%
