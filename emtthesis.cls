@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{emtthesis}[2018/10/18 EMTthesis]
+\ProvidesClass{emtthesis}[2020/08/11 EMTthesis]
 
-% We live in 2018.
+% We live in 2020.
 \usepackage[utf8]{inputenc}
 
 % {{{ Class options
