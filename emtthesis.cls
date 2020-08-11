@@ -30,11 +30,9 @@
 }
 
 % Document state
-% For doctoral theses, two variants of the title page are required, depending
-% on whether the thesis is being submitted ("Prüfungsexemplar") or has already
-% been accepted and is now to be published ("Belegexemplar"). This also
-% enables or disables some pages in the back of the document that are required
-% upon submission by official regulations ("Promotionsordnung").
+% Publication state of the document. This affects the default line spacing for
+% all documents as well as the title page and backmatter of doctoral theses
+% ("Prüfungsexemplar" and "Belegexemplar", as per the official requirements).
 % For reduced-anxiety editing, a preliminary mode is also available, providing
 % document like the "submission" variant, but with scary parts like the very
 % officially-looking title page removed.
@@ -52,18 +50,17 @@
 }
 
 % Line spacing
-% By default, when theses are typeset for submission and grading, we use 1.5x
-% line spacing, while for publishing, we use regular single spacing (the
+% By default, when documents are typeset for submission and grading, we use
+% 1.5x line spacing, while for publishing, we use regular single spacing (the
 % latter usually occurring for doctoral theses only).
 % Note that this rule only applies to the author's own written text, i.e. the
 % main body of the document. Conversely, the table of contents, list of figures
 % and tables, list of symbols, bibliography, problem statement and affirmation
-% are always typeset with single spacing.
+% are always typeset with single spacing, if present.
 % Choices:
-% * auto: Use above rules, according to the publication state (default).
+% * auto: Use above rules, according to the value of \docstate (default).
 % * single: Use single spacing everywhere.
-% * onehalf: Use 1.5x line spacing for author text (main chapters, appendices,
-%            abstracts and preface).
+% * onehalf: Use 1.5x line spacing for author text.
 \newcommand{\linespacing}{auto}
 \FamilyNumericalKey{emtthesis}{linespacing}{linespacing}{%
     {auto}{auto},%
@@ -73,10 +70,9 @@
 
 % Preface display switch
 % Choices:
-% * auto: Display preface for doctoral theses, but not for Bachelor's or
-%         Master's theses (default).
-% * never: Do not display the preface for any thesis type.
-% * always: Display the preface for any thesis type.
+% * auto: Display preface for doctoral theses only (default).
+% * never: Do not display the preface.
+% * always: Display the preface.
 \newcommand{\preface}{auto}
 \FamilyNumericalKey{emtthesis}{preface}{preface}{%
     {auto}{auto},%
@@ -98,13 +94,14 @@
 
 % Abstract display switch
 % Typically, abstracts in german and english are required for doctoral theses.
-% For student theses, it is just the german abstract.
+% For student theses, it is just the german abstract. Reports have no abstract
+% by default.
 % Choices:
-% * auto: Enable both abstracts for doctoral theses, german for student theses.
-% * both: Enable both abstracts.
-% * english: Enable only the english abstract.
-% * german: Enable only the german abstract.
-% * none: Disable abstracts.
+% * auto: Use above rules, according to the value of \docstate (default).
+% * both: Display both abstracts (german and english).
+% * english: Display only the english abstract.
+% * german: Display only the german abstract.
+% * none: Do not display abstracts.
 \newcommand{\abstracts}{auto}
 \FamilyNumericalKey{emtthesis}{abstracts}{abstracts}{%
     {auto}{auto},%
@@ -119,9 +116,9 @@
 % original author of the content and all external content has been fully
 % declared.
 % Choices:
-% * auto: Enable for student theses, disable for other documents (default).
-% * always: Enable affirmation.
-% * never: Disable affirmation.
+% * auto: Display for student theses only (default).
+% * always: Display affirmation.
+% * never: Do not display affirmation.
 \newcommand{\affirmation}{auto}
 \FamilyNumericalKey{emtthesis}{affirmation}{affirmation}{%
     {auto}{auto},%
@@ -165,6 +162,7 @@
     \Ifstrstart{\CurrentOption}{onehalfspacingmode}{%
         \ClassError{emtthesis}{Using obsolete option 'onehalfspacingmode', use 'linespacing' instead}{The 'onehalfspacingmode' option is obsolete and can no longer be used. Use 'linespacing' instead.}
     }{}
+    % Show error if using invalid class options
     \ClassError{emtthesis}{Unknown option '\CurrentOption'.}{Check the documentation for valid options.}
 }
 
@@ -713,8 +711,6 @@
 }
 % - Cited sources by others (i.e. not the thesis author), to be combined with \emtBibOwn
 \newcommand*{\emtBibOthers}{%
-    % Include only other's publications for submission variant of doctoral theses.
-    % In this variant, the author's own publications are set in a separate bibliography.
     \printbibliography[title=Literaturverzeichnis, notkeyword=own, segment=0, prenote=bibsorting]
 }
 % - Author's own sources, even if not cited in the document
@@ -737,11 +733,10 @@
 % {{{ Frontmatter composition
 % The overall structure of the frontmatter is this:
 % * Titlepage
-% * Problem statement (student theses only)
-% * Affirmation (student theses only)
-% * Preface (default on for doctoral, off for student theses)
-% * Abstract
-% * Abstract in english (only for doctoral theses)
+% * Problem statement (default for student theses)
+% * Preface (default for doctoral theses)
+% * Abstract (default for all except reports)
+% * Abstract in english (default for doctoral theses)
 % * Table of Contents
 % * List of figures
 % * List of tables
@@ -794,9 +789,9 @@
 
 % {{{ Backmatter composition
 % The structure of the backmatter is this:
-% * CV (doctoral theses only)
-% * Bibliography of own publications (doctoral theses only)
-% * Affirmation (student theses only)
+% * CV (doctoral theses for submission only)
+% * Bibliography of own publications (doctoral theses for submission only)
+% * Affirmation (default for student theses)
 \newcommand*{\emtBack}{%
     \backmatter%
 
@@ -816,7 +811,7 @@
 }
 % }}}
 
-% {{{ Document structure
+% {{{ Include frontmatter and backmatter in the document
 \AtBeginDocument{%
     \providecommand\tikzifexternalizing[2]{#2} % Prevent errors if not using tikz.
     \tikzifexternalizing{}{\emtFront}
