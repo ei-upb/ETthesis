@@ -201,6 +201,7 @@
 \Ifstr{\doctype}{report}{%
     \newcommand{\doctypename}{Projektbericht}
     \newcommand*{\includetitlepage}{\emtTitleReport}
+    \renewcommand*{\includeabstracts}{}
 }{}
 \Ifstr{\doctype}{sa}{%
     \newcommand{\doctypename}{Studienarbeit}
