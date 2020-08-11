@@ -696,9 +696,7 @@
 }
 
 % Preface
-\newcommand*{\emtPreface}{%
-    \input{\prefacefile}
-}
+\newcommand*{\emtPreface}{\input{\prefacefile}}
 
 % Abstracts
 \newcommand*{\emtAbstractDE}{\input{\germanabstractfile}}
