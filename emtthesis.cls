@@ -18,7 +18,7 @@
 % * project: Project ("Projektarbeit").
 % * report: EMT-branded report.
 % * sa: "Studienarbeit".
-\newcommand{\doctype}{bachelors}
+\newcommand*{\doctype}{bachelors}
 \FamilyNumericalKey{emtthesis}{doctype}{doctype}{%
     {bachelors}{bachelors},%
     {dring}{dring},%
@@ -42,7 +42,7 @@
 %                anxiety (default).
 % * submission: Typeset the submission variant / Prüfungsexemplar.
 % * accepted: Typeset the publishing variant / Belegexemplar.
-\newcommand{\docstate}{preliminary}
+\newcommand*{\docstate}{preliminary}
 \FamilyNumericalKey{emtthesis}{docstate}{docstate}{%
     {submission}{submission},%
     {accepted}{accepted},%
@@ -61,7 +61,7 @@
 % * auto: Use above rules, according to the value of \docstate (default).
 % * single: Use single spacing everywhere.
 % * onehalf: Use 1.5x line spacing for author text.
-\newcommand{\linespacing}{auto}
+\newcommand*{\linespacing}{auto}
 \FamilyNumericalKey{emtthesis}{linespacing}{linespacing}{%
     {auto}{auto},%
     {single}{single},%
@@ -73,7 +73,7 @@
 % * auto: Display preface for doctoral theses only (default).
 % * never: Do not display the preface.
 % * always: Display the preface.
-\newcommand{\preface}{auto}
+\newcommand*{\preface}{auto}
 \FamilyNumericalKey{emtthesis}{preface}{preface}{%
     {auto}{auto},%
     {never}{never},%
@@ -85,7 +85,7 @@
 % * auto: Display problem statement for student theses only (default).
 % * never: Do not display the problem statement.
 % * always: Display the problem statement.
-\newcommand{\problem}{auto}
+\newcommand*{\problem}{auto}
 \FamilyNumericalKey{emtthesis}{problem}{problem}{%
     {auto}{auto},%
     {never}{never},%
@@ -102,7 +102,7 @@
 % * english: Display only the english abstract.
 % * german: Display only the german abstract.
 % * none: Do not display abstracts.
-\newcommand{\abstracts}{auto}
+\newcommand*{\abstracts}{auto}
 \FamilyNumericalKey{emtthesis}{abstracts}{abstracts}{%
     {auto}{auto},%
     {both}{both},%
@@ -119,7 +119,7 @@
 % * auto: Display for student theses only (default).
 % * always: Display affirmation.
 % * never: Do not display affirmation.
-\newcommand{\affirmation}{auto}
+\newcommand*{\affirmation}{auto}
 \FamilyNumericalKey{emtthesis}{affirmation}{affirmation}{%
     {auto}{auto},%
     {always}{always},%
@@ -133,7 +133,7 @@
 % Choices:
 % * false: Disable single-author labels (default).
 % * true: Enable single-author labels.
-\newcommand{\singlecitelabel}{false}
+\newcommand*{\singlecitelabel}{false}
 \FamilyNumericalKey{emtthesis}{singlecitelabel}{singlecitelabel}{%
     {false}{false},%
     {true}{true},%
@@ -147,7 +147,7 @@
 % Choices:
 % * false: Do not load the minted package (default).
 % * true: Do load the minted package.
-\newcommand{\useminted}{false}
+\newcommand*{\useminted}{false}
 \FamilyNumericalKey{emtthesis}{useminted}{useminted}{%
     {false}{false},%
     {true}{true},%
@@ -181,37 +181,37 @@
 
 % Decisions by document type
 \Ifstr{\doctype}{bachelors}{%
-    \newcommand{\doctypename}{Bachelorarbeit}
+    \newcommand*{\doctypename}{Bachelorarbeit}
     \newcommand*{\includetitlepage}{\emtTitleStudent}
     \renewcommand*{\includeproblemstatement}{\emtProblemStatement}
     \renewcommand*{\includeaffirmation}{\emtAffirmation}
     \renewcommand*{\hasbackmatter}{true}
 }{}
 \Ifstr{\doctype}{masters}{%
-    \newcommand{\doctypename}{Masterarbeit}
+    \newcommand*{\doctypename}{Masterarbeit}
     \newcommand*{\includetitlepage}{\emtTitleStudent}
     \renewcommand*{\includeproblemstatement}{\emtProblemStatement}
     \renewcommand*{\includeaffirmation}{\emtAffirmation}
     \renewcommand*{\hasbackmatter}{true}
 }{}
 \Ifstr{\doctype}{project}{%
-    \newcommand{\doctypename}{Projektarbeit}
+    \newcommand*{\doctypename}{Projektarbeit}
     \newcommand*{\includetitlepage}{\emtTitleStudent}
 }{}
 \Ifstr{\doctype}{report}{%
-    \newcommand{\doctypename}{Projektbericht}
+    \newcommand*{\doctypename}{Projektbericht}
     \newcommand*{\includetitlepage}{\emtTitleReport}
     \renewcommand*{\includeabstracts}{}
 }{}
 \Ifstr{\doctype}{sa}{%
-    \newcommand{\doctypename}{Studienarbeit}
+    \newcommand*{\doctypename}{Studienarbeit}
     \newcommand*{\includetitlepage}{\emtTitleStudent}
     \renewcommand*{\includeproblemstatement}{\emtProblemStatement}
     \renewcommand*{\includeaffirmation}{\emtAffirmation}
     \renewcommand*{\hasbackmatter}{true}
 }{}
 \Ifstrstart{\doctype}{dr}{%
-    \newcommand{\doctypename}{Dissertation}
+    \newcommand*{\doctypename}{Dissertation}
     \Ifstr{\doctype}{dring}{\newcommand*{\doctoraltitle}{Doktor der Ingenieurswissenschaften (Dr.-Ing.)}}{}
     \Ifstr{\doctype}{drrernat}{\newcommand*{\doctoraltitle}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}}{}
     \Ifstr{\docstate}{accepted}{%
@@ -226,9 +226,9 @@
 
 % Decide citation label format
 \Ifstr{\singlecitelabel}{true}{%
-    \newcommand{\citelabelauthornum}{1}
+    \newcommand*{\citelabelauthornum}{1}
 }{%
-    \newcommand{\citelabelauthornum}{3}
+    \newcommand*{\citelabelauthornum}{3}
 }
 
 % Decide on line spacing in the main body of the document
@@ -301,7 +301,7 @@
 }
 
 % Page header with UPB / EIM branding
-\newcommand{\eimheader}{%
+\newcommand*{\eimheader}{%
     \begin{minipage}{0.45\textwidth}
         \includegraphics[height=20mm]{logos/upb.pdf}
     \end{minipage}
@@ -314,7 +314,7 @@
 }
 
 % Page footer with EMT branding
-\newcommand{\emtfooter}{%
+\newcommand*{\emtfooter}{%
     \vfill
     \begin{minipage}{0.7\textwidth}
         \footnotesize
@@ -340,24 +340,24 @@
 % }}}
 
 % {{{ Document metadata
-\newcommand{\@salutation}{}
-\newcommand{\salutation}[1]{\gdef\@salutation{#1}}
-\newcommand{\@nameprefix}{}
-\newcommand{\nameprefix}[1]{\gdef\@nameprefix{#1}}
-\newcommand{\@namesuffix}{}
-\newcommand{\namesuffix}[2][,]{\gdef\@namesuffix{#1~#2}}
-\newcommand{\@advisorA}{}
-\newcommand{\advisorA}[1]{\gdef\@advisorA{#1}}
-\newcommand{\@advisorB}{}
-\newcommand{\advisorB}[1]{\gdef\@advisorB{#1}}
-\newcommand{\@examdate}{}
-\newcommand{\examdate}[1]{\gdef\@examdate{#1}}
-\newcommand{\@thesisnumber}{}
-\newcommand{\thesisnumber}[1]{\gdef\@thesisnumber{#1}}
-\newcommand{\@birthdate}{}
-\newcommand{\birthdate}[1]{\gdef\@birthdate{#1}}
-\newcommand{\@birthplace}{}
-\newcommand{\birthplace}[1]{\gdef\@birthplace{#1}}
+\newcommand*{\@salutation}{}
+\newcommand*{\salutation}[1]{\gdef\@salutation{#1}}
+\newcommand*{\@nameprefix}{}
+\newcommand*{\nameprefix}[1]{\gdef\@nameprefix{#1}}
+\newcommand*{\@namesuffix}{}
+\newcommand*{\namesuffix}[2][,]{\gdef\@namesuffix{#1~#2}}
+\newcommand*{\@advisorA}{}
+\newcommand*{\advisorA}[1]{\gdef\@advisorA{#1}}
+\newcommand*{\@advisorB}{}
+\newcommand*{\advisorB}[1]{\gdef\@advisorB{#1}}
+\newcommand*{\@examdate}{}
+\newcommand*{\examdate}[1]{\gdef\@examdate{#1}}
+\newcommand*{\@thesisnumber}{}
+\newcommand*{\thesisnumber}[1]{\gdef\@thesisnumber{#1}}
+\newcommand*{\@birthdate}{}
+\newcommand*{\birthdate}[1]{\gdef\@birthdate{#1}}
+\newcommand*{\@birthplace}{}
+\newcommand*{\birthplace}[1]{\gdef\@birthplace{#1}}
 % }}}
 
 % {{{ Included file names
@@ -368,13 +368,13 @@
 % However, the class should not include hard-coded file names, but allow the
 % user to configure file inclusion. Therefore, we provide macros for each file,
 % to be redefined if the user so chooses.
-\newcommand{\prefacefile}{frontmatter/preface}
-\newcommand{\germanabstractfile}{frontmatter/abstract_de}
-\newcommand{\englishabstractfile}{frontmatter/abstract_en}
-\newcommand{\symbolsfile}{frontmatter/symbols}
-\newcommand{\problemstatementfile}{frontmatter/problemstatement}
-\newcommand{\cvfile}{backmatter/cv}
-\newcommand{\affirmationfile}{backmatter/affirmation}
+\newcommand*{\prefacefile}{frontmatter/preface}
+\newcommand*{\germanabstractfile}{frontmatter/abstract_de}
+\newcommand*{\englishabstractfile}{frontmatter/abstract_en}
+\newcommand*{\symbolsfile}{frontmatter/symbols}
+\newcommand*{\problemstatementfile}{frontmatter/problemstatement}
+\newcommand*{\cvfile}{backmatter/cv}
+\newcommand*{\affirmationfile}{backmatter/affirmation}
 % }}}
 
 % {{{ Used Packages
