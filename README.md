@@ -1,7 +1,7 @@
 EMTthesis
 =========
 
-EMTthesis is a LaTeX class and template for academic theses prepared at the Measurement Engineering Group at Paderborn University, Germany.
+EMTthesis is a LaTeX class and template for academic theses and documents prepared at the Measurement Engineering Group at Paderborn University, Germany.
 
 
 Contents
@@ -17,40 +17,30 @@ Contents
 Features
 --------
 
-* Support for different thesis types:
-  * Bachelor's thesis (pursuing B.Sc.)
-  * Master's thesis (pursuing M.Sc.)
-  * Doctoral thesis (pursuing Dr.-Ing. or Dr. rer. nat.)
-* Support both variants of a doctoral thesis:
-  * Pre-acceptance variant, for submission ("Prüfexemplar")
-    * Required title page
-    * CV
-    * Separate list of all own publications (even if they have not been cited in the thesis)
-    * Keywords
-  * Accepted variant, for publication ("Belegexemplar")
-    * Required title page
-    * Preface enabled by default
-    * Regular bibliography with other's and own publications
-    * No CV and keywords
-  * Preliminary variant, for reduced-anxiety editing
-    * Unofficial-looking title page
+* Support for different document types
+  * Student theses (Bachelor's, Master's)
+  * Doctoral theses
+  * Student projects and similar ("Projektarbeit", "Studienarbeit")
+  * Generic reports (non-thesis)
+* Support for different document states, e.g. "Prüfexemplar" and "Belegexemplar" for doctoral theses
 * Compliance with university, faculty and work group requirements (no guarantees though)
 * Metadata (author name, thesis title etc.) centrally defined in main document
 * Page layout, fonts etc. according to typographical standards
-* Document structure:
+* Configurable document structure:
   * Title page
-  * Preface (optional)
-  * Abstract
+  * Problem statement (default for student theses)
+  * Preface (default for accepted doctoral theses)
+  * Abstract (german and/or english)
   * Table of Contents
   * List of figures
   * List of tables
   * List of abbreviations and symbols
   * (Main content)
   * Bibliography
-  * Appendices (optional)
-  * CV (doctoral, submission variant only)
-  * Own publications (doctoral, submission variant only)
-  * Keywords (doctoral, submission variant only)
+  * Appendices (if any)
+  * CV (for submission variant of doctoral theses)
+  * Own publications (for submission variant of doctoral theses)
+  * Affirmation of own independent work (default for student theses)
 * Common packages already included, e.g.
   * babel
   * biblatex
@@ -71,23 +61,40 @@ The EMTthesis document class supports the following options, which can be given 
 
         \documentclass[option1=value1, option2=value2]{emtthesis}
 
-* **thesistype**: Thesis type, by pursued degree:
-  * `bsc`: Bachelor of Science (B.Sc.) [default]
-  * `msc`: Master of Science (M.Sc.)
-  * `dring`: Doktor der Ingenieurwissenschaften (Dr.-Ing.)
-  * `drrernat`: Doktor der Naturwissenschaften (Dr. rer. nat.)
-* **preface**: Whether to include a preface in the document.
+* **doctype**: Document type:
+  * `bachelors`: Bachelor's thesis [default]
+  * `dring`: Doctoral thesis (Dr.-Ing.)
+  * `drrernat`: Doctoral thesis (Dr. rer. nat.)
+  * `masters`: Master's thesis (M.Sc.)
+  * `project`: Student project ("Projektarbeit")
+  * `report`: Generic report
+  * `sa`: "Studienarbeit"
+* **docstate**: Document publication state:
+  * `preliminary`: Like `submission`, but without the official-looking title page. [default]
+  * `submission`: Typeset for submission / grading, e.g. with 1.5x line spacing by default. For doctoral theses, typeset "Prüfexemplar" (see above for details).
+  * `accepted`: Typeset for print / publication, e.g. with single line spacing. For doctoral theses, typeset "Belegexemplar" (see above for details).
+* **linespacing**: When to use 1.5x line spacing in the document:
+  * `auto`: Use 1.5x line spacing for all `submission` documents and single spacing for `accepted` documents.
+  * `single`: Use single line spacing.
+  * `onehalf`: Use 1.5x line spacing.
+* **preface**: Whether to display the preface:
   * `auto`: Include for accepted doctoral theses only. [default]
   * `always`: Enable preface.
   * `never`: Disable preface.
-* **onehalfspacingmode**: When to use 1.5x line spacing in the document.
-  * `auto`: Use 1.5x spacing for all user-provided text, but single spacing for the table of contents, lists of figures etc. and bibliography. [default]
-  * `mainmatter`: Use 1.5x spacing only for the mainmatter, i.e. keep preface and abstracts in single spacing.
-  * `never`: Typeset the entire document with single spacing.
-* **docstate**: Select document state / variant for doctoral theses.
-  * `preliminary`: Typeset the `submission` variant with possible causes for author anxiety omitted. [default]
-  * `submission`: Typeset the to-be-submitted variant ("Prüfexemplar") with the appropriate title page and a backmatter containing the CV, list of all own publications and keywords.
-  * `accepted`: Typeset the accepted variant, for publishing ("Belegexemplar").
+* **problem**: Whether to display the problem statement:
+  * `auto`: Include for student theses only. [default]
+  * `always`: Enable problem statement.
+  * `never`: Disable problem statement.
+* **abstracts**: Whether to display the abstract(s):
+  * `auto`: Include german and english abstract for doctoral theses, none for reports and only the german abstract for all other document types. [default]
+  * `both`: Enable both the german and english abstract.
+  * `english`: Enable only the english abstract.
+  * `german`: Enable only the german abstract.
+  * `none`: Disable abstracts.
+* **affirmation**: Whether to display the affirmation:
+  * `auto`: Include for student theses only. [default]
+  * `always`: Enable affirmation.
+  * `never`: Disable affirmation.
 * **singlecitelabel**: Toggle cite label format for multi-author sources.
   * `false`: Use up to three author's initials in label. For Mustermann and Doe, set [MD18]. [default]
   * `true`: Always use only the first author's name in label. For Mustermann and Doe, set [Mus18].
