@@ -239,7 +239,7 @@
 \Ifstr{\linespacing}{onehalf}{\newcommand*{\bodylinespacing}{\onehalfspacing}}{}
 
 % Explicit / independent settings
-\Ifstr{\docstate}{preliminary}{\newcommand*{\includetitlepage}{\emtTitlePrelim}}{}
+\Ifstr{\docstate}{preliminary}{\renewcommand*{\includetitlepage}{\emtTitlePrelim}}{}
 \Ifstr{\preface}{always}{\renewcommand*{\includepreface}{\emtPreface}}{}
 \Ifstr{\preface}{never}{\renewcommand*{\includepreface}{}}{}
 \Ifstr{\abstracts}{both}{\renewcommand*{\includeabstracts}{\emtAbstractDE\emtAbstractEN}}{}
