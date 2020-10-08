@@ -9,6 +9,11 @@
 \DefineFamily{emtthesis}
 \DefineFamilyMember{emtthesis}
 
+% Ensure compatibility with KOMA Script before version 3.28
+% (as per https://komascript.de/faq_deprecatedif)
+\providecommand*{\Ifstr}{\ifstr}
+\providecommand*{\Ifstrstart}{\ifstrstart}
+
 % Document type
 % Choices:
 % * bachelors: Bachelor's thesis (default).
