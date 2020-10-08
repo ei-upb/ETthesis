@@ -217,7 +217,7 @@
 }{}
 \Ifstrstart{\doctype}{dr}{%
     \newcommand*{\doctypename}{Dissertation}
-    \Ifstr{\doctype}{dring}{\newcommand*{\doctoraltitle}{Doktor der Ingenieurswissenschaften (Dr.-Ing.)}}{}
+    \Ifstr{\doctype}{dring}{\newcommand*{\doctoraltitle}{Doktor der Ingenieurwissenschaften (Dr.-Ing.)}}{}
     \Ifstr{\doctype}{drrernat}{\newcommand*{\doctoraltitle}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}}{}
     \Ifstr{\docstate}{accepted}{%
         \newcommand*{\includetitlepage}{\emtTitleDocAccepted}
