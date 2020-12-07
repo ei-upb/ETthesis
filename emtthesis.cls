@@ -73,6 +73,16 @@
     {onehalf}{onehalf}%
 }
 
+% Paper format
+% Choices:
+% * a4: Use DIN A4 paper format with 12pt font size (default).
+% * a5: Use DIN A5 paper format with 10pt font size for a more compact layout.
+\newcommand*{\paperformat}{a4}
+\FamilyNumericalKey{emtthesis}{paperformat}{paperformat}{%
+    {a4}{a4},%
+    {a5}{a5},%
+}
+
 % Preface display switch
 % Choices:
 % * auto: Display preface for doctoral theses only (default).
@@ -278,8 +288,6 @@
     % put the \caption statement. This setting only controls spacing etc.
     captions=tableheading,
     %
-    fontsize=12pt,
-    %
     % Do not use a period/dot at the end of chapter/section numbers.
     % Note: This is in direct violation of DUDEN guidelines! Normally, ending
     % periods are required whenever non-arabic digits are used for numbering.
@@ -291,6 +299,21 @@
 % }}}
 
 % {{{ Page layout
+% Set paper format
+\Ifstr{\paperformat}{a4}{%
+    \KOMAoptions{
+        paper=a4,
+        fontsize=12pt,
+    }%
+}{}
+\Ifstr{\paperformat}{a5}{%
+    \KOMAoptions{
+        paper=a5,
+        fontsize=10pt,
+        headinclude=true,
+    }%
+}{}
+
 % Set main content's line spacing to be respected by the DIV-calculation.
 \RequirePackage{setspace}
 \bodylinespacing
