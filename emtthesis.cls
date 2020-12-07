@@ -307,15 +307,14 @@
 
 % Page header with UPB / EIM branding
 \newcommand*{\eimheader}{%
-    \begin{minipage}{0.45\textwidth}
-        \includegraphics[height=20mm]{logos/upb.pdf}
+    \begin{minipage}{0.6\textwidth}
+        \includegraphics[height=5em]{logos/upb.pdf}
     \end{minipage}
     \hfill
-    \begin{minipage}{0.4\textwidth}
+    \begin{minipage}{0.35\textwidth}
         \flushright%
-        \includegraphics[height=20mm]{logos/eim.pdf}
+        \includegraphics[height=5em]{logos/eim.pdf}
     \end{minipage}
-    \vspace{10mm}
 }
 
 % Page footer with EMT branding
@@ -329,7 +328,7 @@
     \hfill
     \begin{minipage}{0.25\textwidth}
         \flushright%
-        \includegraphics[height=15mm]{logos/emt.pdf}
+        \includegraphics[height=3.75em]{logos/emt.pdf}
     \end{minipage}
 }
 % }}}
@@ -526,38 +525,39 @@
     \begin{titlepage}
         \begin{center}
             \eimheader%
+            \vspace{4.5em}
 
-            \vfill
             {\Large\bfseries\sffamily\@title\par}
-            \vspace{15mm}
+            \vspace{3em}
 
             {Von der Fakultät für Elektrotechnik, Informatik und Mathematik\\ der Universität Paderborn}
-            \vspace{2mm}
+            \vspace{0.5em}
 
             zur Erlangung des akademischen Grades
-            \vspace{5mm}
+            \vspace{1.5em}
 
             {\large\doctoraltitle}
-            \vspace{5mm}
+            \vspace{1.5em}
 
             genehmigte Dissertation
-            \vspace{2mm}
+            \vspace{0.5em}
 
             von
-            \vspace{5mm}
+            \vspace{1.5em}
 
             {\large\@nameprefix~\@author\@namesuffix}
-            \vspace{15mm}
+            \vspace{1.5em}
 
+            \vfill
             \begin{tabular}{ll}
                 Erster Gutachter: & \@advisorA\\
-                Zweiter Gutachter: & \@advisorB\\[1em]
+                Zweiter Gutachter: & \@advisorB\\[0.5em]
                 Tag der mündlichen Prüfung: & \@examdate\\
             \end{tabular}
-            \vspace{10mm}
+            \vspace{1.5em}
 
             Paderborn, \@date
-            \vspace{10mm}
+            \vspace{1.5em}
 
             Diss. EIM-E/\@thesisnumber
         \end{center}
@@ -569,28 +569,28 @@
     \begin{titlepage}
         \begin{center}
             \eimheader%
+            \vspace{8em}
 
-            \vspace{25mm}
             {\Large\bfseries\sffamily\@title\par}
-            \vspace{15mm}
+            \vspace{3em}
 
             {Der Fakultät für Elektrotechnik, Informatik und Mathematik\\ der Universität Paderborn}
-            \vspace{2mm}
+            \vspace{0.5em}
 
             zur Erlangung des akademischen Grades
-            \vspace{5mm}
+            \vspace{1.5em}
 
             {\large\doctoraltitle}
-            \vspace{5mm}
+            \vspace{1.5em}
 
             vorgelegte Dissertation
-            \vspace{2mm}
+            \vspace{0.5em}
 
             von
-            \vspace{5mm}
+            \vspace{1.5em}
 
             {\large\@nameprefix~\@author\@namesuffix}
-            \vspace{5mm}
+            \vspace{1.5em}
 
             geboren am \@birthdate~in \@birthplace
         \end{center}
@@ -602,28 +602,29 @@
     \begin{titlepage}
         \eimheader%
 
-        \vspace{10mm}
+        \vspace{3em}
 
         \begin{center}
             \large
             {\doctypename}
-            \vspace{10mm}
+            \vspace{3em}
 
             % Note: \par at the end is required for proper line spacing.
             {\LARGE\bfseries\sffamily\@title\par}
-            \vspace{10mm}
+            \vspace{3em}
 
             von
-            \vspace{5mm}
+            \vspace{1.5em}
 
             {\Large \@author}
-            \vspace{20mm}
+            \vspace{1.5em}
 
+            \vfill
             \begin{tabular}{ll}
                 Betreuer:   & \@advisorA\\
                             & \@advisorB
             \end{tabular}
-            \vspace{10mm}
+            \vspace{3em}
 
             Paderborn, im \@date
         \end{center}
@@ -637,23 +638,24 @@
     \begin{titlepage}
         \eimheader%
 
-        \vspace{10mm}
+        \vspace{3em}
 
         \begin{center}
             \large
             {\doctypename}
-            \vspace{10mm}
+            \vspace{3em}
 
             % Note: \par at the end is required for proper line spacing.
             {\LARGE\bfseries\sffamily\@title\par}
-            \vspace{10mm}
+            \vspace{3em}
 
             von
-            \vspace{5mm}
+            \vspace{1.5em}
 
             {\Large \@author}
-            \vfill
+            \vspace{1.5em}
 
+            \vfill
             Paderborn, im \@date
         \end{center}
 
@@ -674,28 +676,27 @@
 \newcommand*{\emtProblemStatement}{%
     \begin{titlepage}
         \eimheader%
+        \vspace{3em}
 
         \begin{center}
             \large\doctypename%
-            \vspace{3mm}
+            \vspace{0.5em}
 
             für
-            \vspace{3mm}
+            \vspace{0.5em}
 
             \@salutation~\@author
         \end{center}
-
-        \vspace{5mm}
+        \vspace{1.5em}
 
         \noindent\textsf{\textbf{\@title}}
-
-        \vspace{5mm}
+        \vspace{0.5em}
 
         \noindent\input{\problemstatementfile}
-
-        \vspace{10mm}
+        \vspace{1.5em}
 
         \noindent\@advisorA
+        \vspace{4.5em}
 
         \emtfooter%
     \end{titlepage}
