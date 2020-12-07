@@ -605,18 +605,17 @@
         \vspace{3em}
 
         \begin{center}
-            \large
             {\doctypename}
             \vspace{3em}
 
             % Note: \par at the end is required for proper line spacing.
-            {\LARGE\bfseries\sffamily\@title\par}
+            {\Large\bfseries\sffamily\@title\par}
             \vspace{3em}
 
             von
             \vspace{1.5em}
 
-            {\Large \@author}
+            {\large \@author}
             \vspace{1.5em}
 
             \vfill
@@ -641,18 +640,17 @@
         \vspace{3em}
 
         \begin{center}
-            \large
             {\doctypename}
             \vspace{3em}
 
             % Note: \par at the end is required for proper line spacing.
-            {\LARGE\bfseries\sffamily\@title\par}
+            {\Large\bfseries\sffamily\@title\par}
             \vspace{3em}
 
             von
             \vspace{1.5em}
 
-            {\Large \@author}
+            {\large \@author}
             \vspace{1.5em}
 
             \vfill
