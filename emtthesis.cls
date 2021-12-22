@@ -492,6 +492,11 @@
     }
 }
 
+% To be able to use properly formatted physical units throughout the complete
+% document siunitx is provided in this class.
+\RequirePackage{textcomp} % avoid warnings e.g. when using \micro
+\RequirePackage{siunitx}
+
 % Hyperref should be loaded last
 \RequirePackage[
     hidelinks,

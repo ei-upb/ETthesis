@@ -10,14 +10,13 @@
 \usepackage{amssymb} % additional math fonts
 \usepackage{trfsigns} % symbols for transformation pairs etc.
 
-%% Properly formatted physical units
-\usepackage{textcomp} % avoid warnings e.g. when using \micro
-\usepackage[
+%% Configure siunitx for properly formatted physical units
+\sisetup{
     list-final-separator={ und },
     list-pair-separator={ und },
     range-phrase={ bis },
     output-decimal-marker={,}
-]{siunitx}
+}
 
 %% Bibliography
 \addbibresource{thesis.bib}
