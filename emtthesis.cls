@@ -844,6 +844,7 @@
 
 % {{{ Include frontmatter and backmatter in the document
 \AtBeginDocument{%
+    \hypersetup{pdftitle={\@title},pdfauthor={\@author}} % Set pdf metadata.
     \providecommand\tikzifexternalizing[2]{#2} % Prevent errors if not using tikz.
     \tikzifexternalizing{}{\emtFront}
 }
