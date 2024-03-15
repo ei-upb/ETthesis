@@ -330,13 +330,13 @@
 
 % Page header with UPB / EIM branding
 \newcommand*{\eimheader}{%
-    \begin{minipage}{0.6\textwidth}
-        \includegraphics[height=5em]{logos/upb.pdf}
+    \begin{minipage}[b]{0.6\textwidth}
+        \includegraphics[height=4em]{logos/upb.pdf}
     \end{minipage}
     \hfill
-    \begin{minipage}{0.35\textwidth}
+    \begin{minipage}[b]{0.35\textwidth}
         \flushright%
-        \includegraphics[height=5em]{logos/eim.pdf}
+        \includegraphics[height=1.4em]{logos/eim.pdf}
     \end{minipage}
 }
 
