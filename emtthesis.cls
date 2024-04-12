@@ -385,6 +385,10 @@
 \newcommand*{\birthdate}[1]{\gdef\@birthdate{#1}}
 \newcommand*{\@birthplace}{}
 \newcommand*{\birthplace}[1]{\gdef\@birthplace{#1}}
+\newcommand*{\@abstract}{}
+\newcommand*{\abstract}[1]{\gdef\@abstract{#1}}
+\newcommand*{\@keywords}{}
+\newcommand*{\keywords}[1]{\gdef\@keywords{#1}}
 % }}}
 
 % {{{ Included file names
@@ -497,10 +501,6 @@
 \RequirePackage{textcomp} % avoid warnings e.g. when using \micro
 \RequirePackage{siunitx}
 
-% Hyperref should be loaded last
-\RequirePackage[
-    hidelinks,
-]{hyperref}
 
 % Automatically mark publications containing the given author name with the
 % keyword "own", for later filtering.
@@ -514,6 +514,47 @@
         }
     }
 }
+% }}}
+
+% {{{ PDF/A-2b compliance measures
+% Based on a guide by Tampere University: https://webpages.tuni.fi/latex/pdfa-guide.pdf
+
+% Populate \@abstract macro to allow access for metadata.
+\input{\germanabstractfile}
+% Create metadata file (*.xmpdata) only if it does not already exist. Creating
+% it on every build seems to cause a race condition leading to empty metadata
+% fields in the output PDF file.
+\IfFileExists{\jobname.xmpdata}{}{
+% Use low level file output method because the "filecontents" environment is
+% only good for verbatim output and can not expand macros like \@title.
+% Backslashes and line feeds need a workaround, though.
+    \newwrite\xmpoutput
+    \immediate\openout\xmpoutput=\jobname.xmpdata
+    %
+    \write\xmpoutput{%
+        \@backslashchar Title{\@title}^^J%
+        \@backslashchar Author{\@author}^^J%
+        \@backslashchar Language{de-DE}^^J%
+        \@backslashchar Subject{\@abstract}^^J%
+        \@backslashchar Keywords{\@keywords}%
+    }
+}
+
+% PDF/A-2 is based on PDF 1.7, so we want the document to be in that version.
+\pdfminorversion=7
+% Although colorprofiles will be loaded by the pdfx package, loading is
+% skipped if colorprofiles is not installed. Loading it explicitly ensures
+% that we have it present.
+\RequirePackage{colorprofiles}
+% Specify the standard we want to adhere to as PDF/A-2b. The mathxmp option
+% is used to allow mathematical expressions the the metadata. The option
+% (2018/12/22) ensures that a version not older that the specified date is used
+% because earlier versions have some shortcomings.
+\RequirePackage[a-2b,mathxmp]{pdfx}[2018/12/22]
+
+% pdfx already imports hyperref, so we pass the options here. The empty
+% pdfstartview= ensures no illegal values are passed to that option.
+\hypersetup{pdfstartview=, hidelinks}
 % }}}
 
 % {{{ Bibliography
@@ -732,7 +773,7 @@
 \newcommand*{\emtPreface}{\input{\prefacefile}}
 
 % Abstracts
-\newcommand*{\emtAbstractDE}{\input{\germanabstractfile}}
+\newcommand*{\emtAbstractDE}{\chapter{Kurzfassung}\@abstract}
 \newcommand*{\emtAbstractEN}{\input{\englishabstractfile}}
 
 % Bibliography
@@ -844,7 +885,6 @@
 
 % {{{ Include frontmatter and backmatter in the document
 \AtBeginDocument{%
-    \hypersetup{pdftitle={\@title},pdfauthor={\@author}} % Set pdf metadata.
     \providecommand\tikzifexternalizing[2]{#2} % Prevent errors if not using tikz.
     \tikzifexternalizing{}{\emtFront}
 }
