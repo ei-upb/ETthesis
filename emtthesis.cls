@@ -842,7 +842,7 @@
     \tableofcontents
 
     % Lists of figures and tables
-    % Conditionally included, i.e. the list is not shown if it is emtpy.
+    % Conditionally included, i.e. the list is not shown if it is empty.
     \iftotalfigures
         \listoffigures
     \fi
