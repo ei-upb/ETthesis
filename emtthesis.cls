@@ -76,10 +76,13 @@
 % Paper format
 % Choices:
 % * a4: Use DIN A4 paper format with 12pt font size (default).
+% * a4onesided: Use DIN A4 paper format with 12pt font size, one-sided
+%               layout and no binding correction for digital submission.
 % * a5: Use DIN A5 paper format with 10pt font size for a more compact layout.
 \newcommand*{\paperformat}{a4}
 \FamilyNumericalKey{emtthesis}{paperformat}{paperformat}{%
     {a4}{a4},%
+    {a4onesided}{a4onesided},%
     {a5}{a5},%
 }
 
@@ -304,6 +307,14 @@
     \KOMAoptions{
         paper=a4,
         fontsize=12pt,
+    }%
+}{}
+\Ifstr{\paperformat}{a4onesided}{%
+    \KOMAoptions{
+        paper=a4,
+        fontsize=12pt,
+        twoside=false,
+        BCOR=0mm,
     }%
 }{}
 \Ifstr{\paperformat}{a5}{%

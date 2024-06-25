@@ -79,6 +79,7 @@ The EMTthesis document class supports the following options, which can be given 
   * `onehalf`: Use 1.5x line spacing.
 * **paperformat**: Which paper format to use:
   * `a4`: Use DIN A4 paper format with 12pt font size. [default]
+  * `a4onesided`: Use DIN A4 paper format with 12pt font size, one-sided layout, and no binding correction. Suggested for digital submission.
   * `a5`: Use DIN A5 paper format with 10pt font size for a more compact layout.
 * **preface**: Whether to display the preface:
   * `auto`: Include for accepted doctoral theses only. [default]
