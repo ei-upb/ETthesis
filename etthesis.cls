@@ -360,10 +360,13 @@
         Warburger Straße 100 \(\cdot\) 33098 Paderborn
     \end{minipage}
     \hfill
-    \begin{minipage}{0.25\textwidth}
-        \flushright%
-        \includegraphics[height=3.75em]{logos/emt.pdf}
-    \end{minipage}
+    % Create mini page only if group logo path is not empty
+    \Ifstr{\@grouplogo}{}{}{%
+        \begin{minipage}{0.25\textwidth}
+            \flushright%
+            \includegraphics[width=\linewidth]{\@grouplogo}
+        \end{minipage}
+    }
 }
 % }}}
 
@@ -380,6 +383,8 @@
 % {{{ Document metadata
 \newcommand*{\@group}{}
 \newcommand*{\group}[1]{\gdef\@group{#1}}
+\newcommand*{\@grouplogo}{}
+\newcommand*{\grouplogo}[1]{\gdef\@grouplogo{#1}}
 \newcommand*{\@salutation}{}
 \newcommand*{\salutation}[1]{\gdef\@salutation{#1}}
 \newcommand*{\@nameprefix}{}
