@@ -351,12 +351,12 @@
     \end{minipage}
 }
 
-% Page footer with ET branding
+% Page footer with group branding
 \newcommand*{\etfooter}{%
     \vfill
     \begin{minipage}{0.7\textwidth}
         \footnotesize
-        Fachgebiet Elektrische Messtechnik \(\cdot\) EIM-E\\
+        \@group{} \(\cdot\) EIM-E\\
         Warburger Straße 100 \(\cdot\) 33098 Paderborn
     \end{minipage}
     \hfill
@@ -378,6 +378,8 @@
 % }}}
 
 % {{{ Document metadata
+\newcommand*{\@group}{}
+\newcommand*{\group}[1]{\gdef\@group{#1}}
 \newcommand*{\@salutation}{}
 \newcommand*{\salutation}[1]{\gdef\@salutation{#1}}
 \newcommand*{\@nameprefix}{}
