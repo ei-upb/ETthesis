@@ -1,13 +1,13 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{emtthesis}[2020/08/11 EMTthesis]
+\ProvidesClass{etthesis}[2020/08/11 ETthesis]
 
 % We live in 2020.
 \usepackage[utf8]{inputenc}
 
 % {{{ Class options
 \RequirePackage{scrbase}
-\DefineFamily{emtthesis}
-\DefineFamilyMember{emtthesis}
+\DefineFamily{etthesis}
+\DefineFamilyMember{etthesis}
 
 % Ensure compatibility with KOMA Script before version 3.28
 % (as per https://komascript.de/faq_deprecatedif)
@@ -21,10 +21,10 @@
 % * drrernat: Doctoral thesis (Dr. rer. nat.).
 % * masters: Master's thesis.
 % * project: Project ("Projektarbeit").
-% * report: EMT-branded report.
+% * report: ET-branded report.
 % * sa: "Studienarbeit".
 \newcommand*{\doctype}{bachelors}
-\FamilyNumericalKey{emtthesis}{doctype}{doctype}{%
+\FamilyNumericalKey{etthesis}{doctype}{doctype}{%
     {bachelors}{bachelors},%
     {dring}{dring},%
     {drrernat}{drrernat},%
@@ -48,7 +48,7 @@
 % * submission: Typeset the submission variant / Prüfungsexemplar.
 % * accepted: Typeset the publishing variant / Belegexemplar.
 \newcommand*{\docstate}{preliminary}
-\FamilyNumericalKey{emtthesis}{docstate}{docstate}{%
+\FamilyNumericalKey{etthesis}{docstate}{docstate}{%
     {submission}{submission},%
     {accepted}{accepted},%
     {preliminary}{preliminary},%
@@ -67,7 +67,7 @@
 % * single: Use single spacing everywhere.
 % * onehalf: Use 1.5x line spacing for author text.
 \newcommand*{\linespacing}{auto}
-\FamilyNumericalKey{emtthesis}{linespacing}{linespacing}{%
+\FamilyNumericalKey{etthesis}{linespacing}{linespacing}{%
     {auto}{auto},%
     {single}{single},%
     {onehalf}{onehalf}%
@@ -80,7 +80,7 @@
 %               layout and no binding correction for digital submission.
 % * a5: Use DIN A5 paper format with 10pt font size for a more compact layout.
 \newcommand*{\paperformat}{a4}
-\FamilyNumericalKey{emtthesis}{paperformat}{paperformat}{%
+\FamilyNumericalKey{etthesis}{paperformat}{paperformat}{%
     {a4}{a4},%
     {a4onesided}{a4onesided},%
     {a5}{a5},%
@@ -92,7 +92,7 @@
 % * never: Do not display the preface.
 % * always: Display the preface.
 \newcommand*{\preface}{auto}
-\FamilyNumericalKey{emtthesis}{preface}{preface}{%
+\FamilyNumericalKey{etthesis}{preface}{preface}{%
     {auto}{auto},%
     {never}{never},%
     {always}{always}%
@@ -104,7 +104,7 @@
 % * never: Do not display the problem statement.
 % * always: Display the problem statement.
 \newcommand*{\problem}{auto}
-\FamilyNumericalKey{emtthesis}{problem}{problem}{%
+\FamilyNumericalKey{etthesis}{problem}{problem}{%
     {auto}{auto},%
     {never}{never},%
     {always}{always}%
@@ -121,7 +121,7 @@
 % * german: Display only the german abstract.
 % * none: Do not display abstracts.
 \newcommand*{\abstracts}{auto}
-\FamilyNumericalKey{emtthesis}{abstracts}{abstracts}{%
+\FamilyNumericalKey{etthesis}{abstracts}{abstracts}{%
     {auto}{auto},%
     {both}{both},%
     {english}{english},%
@@ -138,7 +138,7 @@
 % * always: Display affirmation.
 % * never: Do not display affirmation.
 \newcommand*{\affirmation}{auto}
-\FamilyNumericalKey{emtthesis}{affirmation}{affirmation}{%
+\FamilyNumericalKey{etthesis}{affirmation}{affirmation}{%
     {auto}{auto},%
     {always}{always},%
     {never}{never},%
@@ -152,7 +152,7 @@
 % * false: Disable single-author labels (default).
 % * true: Enable single-author labels.
 \newcommand*{\singlecitelabel}{false}
-\FamilyNumericalKey{emtthesis}{singlecitelabel}{singlecitelabel}{%
+\FamilyNumericalKey{etthesis}{singlecitelabel}{singlecitelabel}{%
     {false}{false},%
     {true}{true},%
 }
@@ -166,7 +166,7 @@
 % * false: Do not load the minted package (default).
 % * true: Do load the minted package.
 \newcommand*{\useminted}{false}
-\FamilyNumericalKey{emtthesis}{useminted}{useminted}{%
+\FamilyNumericalKey{etthesis}{useminted}{useminted}{%
     {false}{false},%
     {true}{true},%
 }
@@ -175,24 +175,24 @@
 \DeclareOption*{%
     % Show error if using obsolete class options
     \Ifstrstart{\CurrentOption}{thesistype}{%
-        \ClassError{emtthesis}{Using obsolete option 'thesistype', use 'doctype' instead}{The 'thesistype' option is obsolete and can no longer be used. Use 'doctype' instead.}
+        \ClassError{etthesis}{Using obsolete option 'thesistype', use 'doctype' instead}{The 'thesistype' option is obsolete and can no longer be used. Use 'doctype' instead.}
     }{}
     \Ifstrstart{\CurrentOption}{onehalfspacingmode}{%
-        \ClassError{emtthesis}{Using obsolete option 'onehalfspacingmode', use 'linespacing' instead}{The 'onehalfspacingmode' option is obsolete and can no longer be used. Use 'linespacing' instead.}
+        \ClassError{etthesis}{Using obsolete option 'onehalfspacingmode', use 'linespacing' instead}{The 'onehalfspacingmode' option is obsolete and can no longer be used. Use 'linespacing' instead.}
     }{}
     % Show error if using invalid class options
-    \ClassError{emtthesis}{Unknown option '\CurrentOption'.}{Check the documentation for valid options.}
+    \ClassError{etthesis}{Unknown option '\CurrentOption'.}{Check the documentation for valid options.}
 }
 
 % End of options section
-\FamilyProcessOptions{emtthesis}
+\FamilyProcessOptions{etthesis}
 % }}}
 
 % {{{ Class option handling
 
 % Default options
 \newcommand*{\includepreface}{}
-\newcommand*{\includeabstracts}{\emtAbstractDE}
+\newcommand*{\includeabstracts}{\etAbstractDE}
 \newcommand*{\includeproblemstatement}{}
 \newcommand*{\includeaffirmation}{}
 \newcommand*{\hasbackmatter}{false}
@@ -200,32 +200,32 @@
 % Decisions by document type
 \Ifstr{\doctype}{bachelors}{%
     \newcommand*{\doctypename}{Bachelorarbeit}
-    \newcommand*{\includetitlepage}{\emtTitleStudent}
-    \renewcommand*{\includeproblemstatement}{\emtProblemStatement}
-    \renewcommand*{\includeaffirmation}{\emtAffirmation}
+    \newcommand*{\includetitlepage}{\etTitleStudent}
+    \renewcommand*{\includeproblemstatement}{\etProblemStatement}
+    \renewcommand*{\includeaffirmation}{\etAffirmation}
     \renewcommand*{\hasbackmatter}{true}
 }{}
 \Ifstr{\doctype}{masters}{%
     \newcommand*{\doctypename}{Masterarbeit}
-    \newcommand*{\includetitlepage}{\emtTitleStudent}
-    \renewcommand*{\includeproblemstatement}{\emtProblemStatement}
-    \renewcommand*{\includeaffirmation}{\emtAffirmation}
+    \newcommand*{\includetitlepage}{\etTitleStudent}
+    \renewcommand*{\includeproblemstatement}{\etProblemStatement}
+    \renewcommand*{\includeaffirmation}{\etAffirmation}
     \renewcommand*{\hasbackmatter}{true}
 }{}
 \Ifstr{\doctype}{project}{%
     \newcommand*{\doctypename}{Projektarbeit}
-    \newcommand*{\includetitlepage}{\emtTitleStudent}
+    \newcommand*{\includetitlepage}{\etTitleStudent}
 }{}
 \Ifstr{\doctype}{report}{%
     \newcommand*{\doctypename}{Projektbericht}
-    \newcommand*{\includetitlepage}{\emtTitleReport}
+    \newcommand*{\includetitlepage}{\etTitleReport}
     \renewcommand*{\includeabstracts}{}
 }{}
 \Ifstr{\doctype}{sa}{%
     \newcommand*{\doctypename}{Studienarbeit}
-    \newcommand*{\includetitlepage}{\emtTitleStudent}
-    \renewcommand*{\includeproblemstatement}{\emtProblemStatement}
-    \renewcommand*{\includeaffirmation}{\emtAffirmation}
+    \newcommand*{\includetitlepage}{\etTitleStudent}
+    \renewcommand*{\includeproblemstatement}{\etProblemStatement}
+    \renewcommand*{\includeaffirmation}{\etAffirmation}
     \renewcommand*{\hasbackmatter}{true}
 }{}
 \Ifstrstart{\doctype}{dr}{%
@@ -233,13 +233,13 @@
     \Ifstr{\doctype}{dring}{\newcommand*{\doctoraltitle}{Doktor der Ingenieurwissenschaften (Dr.-Ing.)}}{}
     \Ifstr{\doctype}{drrernat}{\newcommand*{\doctoraltitle}{Doktor der Naturwissenschaften (Dr.~rer.~nat.)}}{}
     \Ifstr{\docstate}{accepted}{%
-        \newcommand*{\includetitlepage}{\emtTitleDocAccepted}
-        \renewcommand*{\includepreface}{\emtPreface}
+        \newcommand*{\includetitlepage}{\etTitleDocAccepted}
+        \renewcommand*{\includepreface}{\etPreface}
     }{%
-        \newcommand*{\includetitlepage}{\emtTitleDocSubmission}
+        \newcommand*{\includetitlepage}{\etTitleDocSubmission}
         \renewcommand*{\hasbackmatter}{true}
     }
-    \renewcommand*{\includeabstracts}{\emtAbstractDE\emtAbstractEN}
+    \renewcommand*{\includeabstracts}{\etAbstractDE\etAbstractEN}
 }{}
 
 % Decide citation label format
@@ -257,17 +257,17 @@
 \Ifstr{\linespacing}{onehalf}{\newcommand*{\bodylinespacing}{\onehalfspacing}}{}
 
 % Explicit / independent settings
-\Ifstr{\docstate}{preliminary}{\renewcommand*{\includetitlepage}{\emtTitlePrelim}}{}
-\Ifstr{\preface}{always}{\renewcommand*{\includepreface}{\emtPreface}}{}
+\Ifstr{\docstate}{preliminary}{\renewcommand*{\includetitlepage}{\etTitlePrelim}}{}
+\Ifstr{\preface}{always}{\renewcommand*{\includepreface}{\etPreface}}{}
 \Ifstr{\preface}{never}{\renewcommand*{\includepreface}{}}{}
-\Ifstr{\abstracts}{both}{\renewcommand*{\includeabstracts}{\emtAbstractDE\emtAbstractEN}}{}
-\Ifstr{\abstracts}{english}{\renewcommand*{\includeabstracts}{\emtAbstractEN}}{}
-\Ifstr{\abstracts}{german}{\renewcommand*{\includeabstracts}{\emtAbstractDE}}{}
+\Ifstr{\abstracts}{both}{\renewcommand*{\includeabstracts}{\etAbstractDE\etAbstractEN}}{}
+\Ifstr{\abstracts}{english}{\renewcommand*{\includeabstracts}{\etAbstractEN}}{}
+\Ifstr{\abstracts}{german}{\renewcommand*{\includeabstracts}{\etAbstractDE}}{}
 \Ifstr{\abstracts}{none}{\renewcommand*{\includeabstracts}{}}{}
-\Ifstr{\problem}{always}{\renewcommand*{\includeproblemstatement}{\emtProblemStatement}}{}
+\Ifstr{\problem}{always}{\renewcommand*{\includeproblemstatement}{\etProblemStatement}}{}
 \Ifstr{\problem}{never}{\renewcommand*{\includeproblemstatement}{}}{}
 \Ifstr{\affirmation}{always}{%
-    \renewcommand*{\includeaffirmation}{\emtAffirmation}%
+    \renewcommand*{\includeaffirmation}{\etAffirmation}%
     \renewcommand*{\hasbackmatter}{true}%
 }{}
 \Ifstr{\affirmation}{never}{%
@@ -351,8 +351,8 @@
     \end{minipage}
 }
 
-% Page footer with EMT branding
-\newcommand*{\emtfooter}{%
+% Page footer with ET branding
+\newcommand*{\etfooter}{%
     \vfill
     \begin{minipage}{0.7\textwidth}
         \footnotesize
@@ -583,12 +583,12 @@
     \singlespacing\KOMAoptions{DIV=current}
     \Ifstrstart{\doctype}{dr}{%
         \Ifstr{\docstate}{accepted}{%
-            \emtBibAll
+            \etBibAll
         }{%
-            \emtBibOthers
+            \etBibOthers
         }
     }{%
-        \emtBibAll
+        \etBibAll
     }
     \bodylinespacing\KOMAoptions{DIV=current}
 }
@@ -601,7 +601,7 @@
 %
 % Titlepages
 % - Doctoral theses, accepted variant ("Belegexemplar")
-\newcommand*{\emtTitleDocAccepted}{%
+\newcommand*{\etTitleDocAccepted}{%
     \begin{titlepage}
         \begin{center}
             \eimheader%
@@ -645,7 +645,7 @@
 }
 
 % - Doctoral theses, submission variant ("Belegexemplar")
-\newcommand*{\emtTitleDocSubmission}{%
+\newcommand*{\etTitleDocSubmission}{%
     \begin{titlepage}
         \begin{center}
             \eimheader%
@@ -678,7 +678,7 @@
 }
 
 % - Student theses (Bachelor's and Master's)
-\newcommand*{\emtTitleStudent}{%
+\newcommand*{\etTitleStudent}{%
     \begin{titlepage}
         \eimheader%
 
@@ -708,12 +708,12 @@
             Paderborn, im \@date
         \end{center}
 
-        \emtfooter%
+        \etfooter%
     \end{titlepage}
 }
 
 % - Report (not actually a thesis, oh well...)
-\newcommand*{\emtTitleReport}{%
+\newcommand*{\etTitleReport}{%
     \begin{titlepage}
         \eimheader%
 
@@ -737,12 +737,12 @@
             Paderborn, im \@date
         \end{center}
 
-        \emtfooter%
+        \etfooter%
     \end{titlepage}
 }
 
 % - Preliminary mode (reduced-anxiety title page)
-\newcommand*{\emtTitlePrelim}{%
+\newcommand*{\etTitlePrelim}{%
     \begin{titlepage}
         \begin{center}
             Einige Notizen von \@author~zum Thema \@title.
@@ -751,7 +751,7 @@
 }
 
 % Problem statement
-\newcommand*{\emtProblemStatement}{%
+\newcommand*{\etProblemStatement}{%
     \begin{titlepage}
         \eimheader%
         \vspace{3em}
@@ -776,28 +776,28 @@
         \noindent\@advisorA
         \vspace{4.5em}
 
-        \emtfooter%
+        \etfooter%
     \end{titlepage}
 }
 
 % Preface
-\newcommand*{\emtPreface}{\input{\prefacefile}}
+\newcommand*{\etPreface}{\input{\prefacefile}}
 
 % Abstracts
-\newcommand*{\emtAbstractDE}{\chapter{Kurzfassung}\@abstract}
-\newcommand*{\emtAbstractEN}{\input{\englishabstractfile}}
+\newcommand*{\etAbstractDE}{\chapter{Kurzfassung}\@abstract}
+\newcommand*{\etAbstractEN}{\input{\englishabstractfile}}
 
 % Bibliography
 % - All cited sources (accepted doctoral and student theses)
-\newcommand*{\emtBibAll}{%
+\newcommand*{\etBibAll}{%
     \printbibliography[title=Literaturverzeichnis, segment=0, prenote=bibsorting]
 }
-% - Cited sources by others (i.e. not the thesis author), to be combined with \emtBibOwn
-\newcommand*{\emtBibOthers}{%
+% - Cited sources by others (i.e. not the thesis author), to be combined with \etBibOwn
+\newcommand*{\etBibOthers}{%
     \printbibliography[title=Literaturverzeichnis, notkeyword=own, segment=0, prenote=bibsorting]
 }
 % - Author's own sources, even if not cited in the document
-\newcommand*{\emtBibOwn}{%
+\newcommand*{\etBibOwn}{%
     % Automatically include all sources that are marked with the keyword "own".
     \begin{refsegment}
         \nocite{*}
@@ -810,7 +810,7 @@
 }
 
 % Affirmation
-\newcommand*{\emtAffirmation}{\input{\affirmationfile}}
+\newcommand*{\etAffirmation}{\input{\affirmationfile}}
 % }}}
 
 % {{{ Frontmatter composition
@@ -827,7 +827,7 @@
 % * List of mathematical symbols / operators
 % * List of mathematical variables
 
-\newcommand*{\emtFront}{%
+\newcommand*{\etFront}{%
     % Begin frontmatter (enable roman page numbering etc.)
     \frontmatter
 
@@ -875,7 +875,7 @@
 % * CV (doctoral theses for submission only)
 % * Bibliography of own publications (doctoral theses for submission only)
 % * Affirmation (default for student theses)
-\newcommand*{\emtBack}{%
+\newcommand*{\etBack}{%
     \backmatter%
 
     \singlespacing\KOMAoptions{DIV=current}
@@ -887,7 +887,7 @@
             \input{\cvfile}
 
             % Bibliography of own publications
-            \emtBibOwn
+            \etBibOwn
         }
     }{}
     \includeaffirmation
@@ -897,10 +897,10 @@
 % {{{ Include frontmatter and backmatter in the document
 \AtBeginDocument{%
     \providecommand\tikzifexternalizing[2]{#2} % Prevent errors if not using tikz.
-    \tikzifexternalizing{}{\emtFront}
+    \tikzifexternalizing{}{\etFront}
 }
 \AtEndDocument{%
-    \Ifstr{\hasbackmatter}{true}{\emtBack}{}
+    \Ifstr{\hasbackmatter}{true}{\etBack}{}
 }
 % }}}
 % vim: foldmethod=marker

@@ -1,13 +1,13 @@
-EMTthesis
+ETthesis
 =========
 
-EMTthesis is a LaTeX class and template for academic theses and documents prepared at the Measurement Engineering Group at Paderborn University, Germany.
+ETthesis is a LaTeX class and template for academic theses and documents prepared at the Department of Electrical Engineering and Information Technology at Paderborn University, Germany.
 
 
 Contents
 --------
 
-* `emtthesis.cls`: Document class file, an extension to `scrbook`. Provides all structure, formatting and processing.
+* `etthesis.cls`: Document class file, an extension to `scrbook`. Provides all structure, formatting and processing.
 * `thesis.tex`: Main file of the exemplary document.
 * `custom.sty`: Local package for user customization. Contents are suggestions, not required for the class to work.
 * `thesis.bib`: Bibliography file. Multiple source files are supported.
@@ -57,9 +57,9 @@ Features
 Class options
 -------------
 
-The EMTthesis document class supports the following options, which can be given via:
+The ETthesis document class supports the following options, which can be given via:
 
-        \documentclass[option1=value1, option2=value2]{emtthesis}
+        \documentclass[option1=value1, option2=value2]{etthesis}
 
 * **doctype**: Document type:
   * `bachelors`: Bachelor's thesis [default]
@@ -135,4 +135,4 @@ Now, you can start with a fresh template, with the following behaviour:
 * Pushing your changes with `git push` will push them to your own remote (not the template).
 * Calling `git pull template master` again will update the template.
 * Updating the template will *not* overwrite your local changes.
-* As long as you do not change core files like `emtthesis.cls`, no merge conflicts should occur.
+* As long as you do not change core files like `etthesis.cls`, no merge conflicts should occur.

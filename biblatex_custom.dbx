@@ -1,4 +1,4 @@
-% BibLaTeX customization for EMTthesis
+% BibLaTeX customization for ETthesis
 %
 % Provides a new entry type "@norm" for citing norms and standards.
 % Norms are defined via type (e.g. DIN, ISO) and number, as well as title and
