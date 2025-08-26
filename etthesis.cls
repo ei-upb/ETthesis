@@ -298,6 +298,10 @@
     % However, the class author strongly dislikes ending periods and therefore
     % takes the liberty of intentionally violating the guidelines.
     numbers=noendperiod,
+    %
+    % New versions of the KOMA classes use the bookmark package, which causes
+    % issues with hyperref. This feature is thus currently disabled.
+    bookmarkpackage=false,
 ]{scrbook}
 % }}}
 
