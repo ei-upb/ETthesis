@@ -1,8 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{etthesis}[2020/08/11 ETthesis]
-
-% We live in 2020.
-\usepackage[utf8]{inputenc}
+\ProvidesClass{etthesis}[2025 ETthesis]
 
 % {{{ Class options
 \RequirePackage{scrbase}
@@ -431,8 +428,13 @@
 % }}}
 
 % {{{ Used Packages
-% Essential packages
-\RequirePackage[T1]{fontenc}
+% LaTeX engine detection
+\RequirePackage{iftex}
+
+% Packages for font formatting
+\ifpdftex
+    \RequirePackage[T1]{fontenc}
+\fi
 \RequirePackage{lmodern}
 \RequirePackage{microtype}
 
@@ -563,7 +565,11 @@
 }
 
 % PDF/A-2 is based on PDF 1.7, so we want the document to be in that version.
-\pdfminorversion=7
+\ifluatex
+    \directlua{pdf.setminorversion(7)}
+\else
+    \pdfminorversion=7
+\fi
 % Although colorprofiles will be loaded by the pdfx package, loading is
 % skipped if colorprofiles is not installed. Loading it explicitly ensures
 % that we have it present.
