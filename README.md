@@ -74,8 +74,8 @@ The ETthesis document class supports the following options, which can be given v
   * `report`: Generic report
   * `sa`: "Studienarbeit"
 * **docstate**: Document publication state:
-  * `preliminary`: Like `submission`, but without the official-looking title page. [default]
-  * `submission`: Typeset for submission / grading, e.g. with 1.5x line spacing by default. For doctoral theses, typeset "Prüfexemplar" (see above for details).
+  * `preliminary`: Like `submission`, but without the official-looking title page.
+  * `submission`: Typeset for submission / grading, e.g. with 1.5x line spacing by default. For doctoral theses, typeset "Prüfexemplar" (see above for details). [default]
   * `accepted`: Typeset for print / publication, e.g. with single line spacing. For doctoral theses, typeset "Belegexemplar" (see above for details).
 * **linespacing**: When to use 1.5x line spacing in the document:
   * `auto`: Use 1.5x line spacing for all `submission` documents and single spacing for `accepted` documents.

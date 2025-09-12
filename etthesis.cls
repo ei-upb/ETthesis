@@ -52,10 +52,10 @@
 %
 % Choices:
 % * preliminary: Like "submission", but eliminate possible sources of author
-%                anxiety (default).
-% * submission: Typeset the submission variant / Prüfungsexemplar.
+%                anxiety.
+% * submission: Typeset the submission variant / Prüfungsexemplar (default).
 % * accepted: Typeset the publishing variant / Belegexemplar.
-\newcommand*{\docstate}{preliminary}
+\newcommand*{\docstate}{submission}
 \FamilyNumericalKey{etthesis}{docstate}{docstate}{%
     {submission}{submission},%
     {accepted}{accepted},%
