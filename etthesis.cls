@@ -11,6 +11,17 @@
 \providecommand*{\Ifstr}{\ifstr}
 \providecommand*{\Ifstrstart}{\ifstrstart}
 
+% Language
+% Choose between english or german to adjust titles, logos, etc.
+% Choices:
+% * german (default)
+% * english
+\newcommand*{\lang}{german}
+\FamilyNumericalKey{etthesis}{lang}{lang}{%
+    {german}{german},%
+    {english}{english},%
+}
+
 % Document type
 % Choices:
 % * bachelors: Bachelor's thesis (default).
@@ -109,20 +120,18 @@
 
 % Abstract display switch
 % Typically, abstracts in german and english are required for doctoral theses.
-% For student theses, it is just the german abstract. Reports have no abstract
-% by default.
+% For student theses, it is an abstract in the theses' language. Reports have
+% no abstract by default.
 % Choices:
 % * auto: Use above rules, according to the value of \docstate (default).
+% * one: Display only one abstract.
 % * both: Display both abstracts (german and english).
-% * english: Display only the english abstract.
-% * german: Display only the german abstract.
 % * none: Do not display abstracts.
 \newcommand*{\abstracts}{auto}
 \FamilyNumericalKey{etthesis}{abstracts}{abstracts}{%
     {auto}{auto},%
+    {one}{one},%
     {both}{both},%
-    {english}{english},%
-    {german}{german},%
     {none}{none},%
 }
 
@@ -187,39 +196,42 @@
 
 % {{{ Class option handling
 
+% Load translations
+\input{translate.sty}
+
 % Default options
 \newcommand*{\includepreface}{}
-\newcommand*{\includeabstracts}{\etAbstractDE}
+\newcommand*{\includeabstracts}{\etAbstract}
 \newcommand*{\includeproblemstatement}{}
 \newcommand*{\includeaffirmation}{}
 \newcommand*{\hasbackmatter}{false}
 
 % Decisions by document type
 \Ifstr{\doctype}{bachelors}{%
-    \newcommand*{\doctypename}{Bachelorarbeit}
+    \newcommand*{\doctypename}{\bachelorsthesis}
     \newcommand*{\includetitlepage}{\etTitleStudent}
     \renewcommand*{\includeproblemstatement}{\etProblemStatement}
     \renewcommand*{\includeaffirmation}{\etAffirmation}
     \renewcommand*{\hasbackmatter}{true}
 }{}
 \Ifstr{\doctype}{masters}{%
-    \newcommand*{\doctypename}{Masterarbeit}
+    \newcommand*{\doctypename}{\mastersthesis}
     \newcommand*{\includetitlepage}{\etTitleStudent}
     \renewcommand*{\includeproblemstatement}{\etProblemStatement}
     \renewcommand*{\includeaffirmation}{\etAffirmation}
     \renewcommand*{\hasbackmatter}{true}
 }{}
 \Ifstr{\doctype}{project}{%
-    \newcommand*{\doctypename}{Projektarbeit}
+    \newcommand*{\doctypename}{\projectreport}
     \newcommand*{\includetitlepage}{\etTitleStudent}
 }{}
 \Ifstr{\doctype}{report}{%
-    \newcommand*{\doctypename}{Projektbericht}
+    \newcommand*{\doctypename}{\report}
     \newcommand*{\includetitlepage}{\etTitleReport}
     \renewcommand*{\includeabstracts}{}
 }{}
 \Ifstr{\doctype}{sa}{%
-    \newcommand*{\doctypename}{Studienarbeit}
+    \newcommand*{\doctypename}{\studentpaper}
     \newcommand*{\includetitlepage}{\etTitleStudent}
     \renewcommand*{\includeproblemstatement}{\etProblemStatement}
     \renewcommand*{\includeaffirmation}{\etAffirmation}
@@ -236,7 +248,7 @@
         \newcommand*{\includetitlepage}{\etTitleDocSubmission}
         \renewcommand*{\hasbackmatter}{true}
     }
-    \renewcommand*{\includeabstracts}{\etAbstractDE\etAbstractEN}
+    \renewcommand*{\includeabstracts}{\etAbstract\etAbstractAdd}
 }{}
 
 % Decide citation label format
@@ -257,9 +269,8 @@
 \Ifstr{\docstate}{preliminary}{\renewcommand*{\includetitlepage}{\etTitlePrelim}}{}
 \Ifstr{\preface}{always}{\renewcommand*{\includepreface}{\etPreface}}{}
 \Ifstr{\preface}{never}{\renewcommand*{\includepreface}{}}{}
-\Ifstr{\abstracts}{both}{\renewcommand*{\includeabstracts}{\etAbstractDE\etAbstractEN}}{}
-\Ifstr{\abstracts}{english}{\renewcommand*{\includeabstracts}{\etAbstractEN}}{}
-\Ifstr{\abstracts}{german}{\renewcommand*{\includeabstracts}{\etAbstractDE}}{}
+\Ifstr{\abstracts}{one}{\renewcommand*{\includeabstracts}{\etAbstract}}{}
+\Ifstr{\abstracts}{both}{\renewcommand*{\includeabstracts}{\etAbstract\etAbstractAdd}}{}
 \Ifstr{\abstracts}{none}{\renewcommand*{\includeabstracts}{}}{}
 \Ifstr{\problem}{always}{\renewcommand*{\includeproblemstatement}{\etProblemStatement}}{}
 \Ifstr{\problem}{never}{\renewcommand*{\includeproblemstatement}{}}{}
@@ -342,13 +353,13 @@
 
 % Page header with UPB / EIM branding
 \newcommand*{\eimheader}{%
-    \begin{minipage}[b]{0.6\textwidth}
-        \includegraphics[height=4em]{logos/upb.pdf}
+    \begin{minipage}[t]{0.4\textwidth}
+        \includegraphics[height=4em]{\upblogopath}
     \end{minipage}
     \hfill
-    \begin{minipage}[b]{0.35\textwidth}
+    \begin{minipage}[t]{0.4\textwidth}
         \flushright%
-        \includegraphics[height=1.4em]{logos/eim.pdf}
+        \includegraphics[height=1.5em]{\eimlogopath}
     \end{minipage}
 }
 
@@ -419,8 +430,8 @@
 % user to configure file inclusion. Therefore, we provide macros for each file,
 % to be redefined if the user so chooses.
 \newcommand*{\prefacefile}{frontmatter/preface}
-\newcommand*{\germanabstractfile}{frontmatter/abstract_de}
-\newcommand*{\englishabstractfile}{frontmatter/abstract_en}
+\newcommand*{\abstractfile}{frontmatter/abstract}
+\newcommand*{\addabstractfile}{frontmatter/abstract_add}
 \newcommand*{\symbolsfile}{frontmatter/symbols}
 \newcommand*{\problemstatementfile}{frontmatter/problemstatement}
 \newcommand*{\cvfile}{backmatter/cv}
@@ -460,12 +471,19 @@
         fontsize=\normalsize,
     }
 
-    % Name to be used for floating listings.
-    \SetupFloatingEnvironment{listing}{name={Codebeispiel}}
+    % Name to be used for floating listings in german documents.
+    \Ifstr{\lang}{german}{
+        \SetupFloatingEnvironment{listing}{name={Codebeispiel}}
+    }{}
 }{}
 
 % Language-related
-\RequirePackage[english,ngerman]{babel}
+\Ifstr{\lang}{german}{
+    \RequirePackage[english,main=ngerman]{babel}
+}{}
+\Ifstr{\lang}{english}{
+    \RequirePackage[main=english,ngerman]{babel}
+}{}
 \RequirePackage[autostyle=true]{csquotes}
 
 % Figure handling
@@ -544,7 +562,7 @@
 % Based on a guide by Tampere University: https://webpages.tuni.fi/latex/pdfa-guide.pdf
 
 % Populate \@abstract macro to allow access for metadata.
-\input{\germanabstractfile}
+\input{\abstractfile}
 % Create metadata file (*.xmpdata) only if it does not already exist. Creating
 % it on every build seems to cause a race condition leading to empty metadata
 % fields in the output PDF file.
@@ -558,7 +576,7 @@
     \write\xmpoutput{%
         \@backslashchar Title{\@title}^^J%
         \@backslashchar Author{\@author}^^J%
-        \@backslashchar Language{de-DE}^^J%
+        \@backslashchar Language{\langid}^^J%
         \@backslashchar Subject{\@abstract}^^J%
         \@backslashchar Keywords{\@keywords}%
     }
@@ -587,7 +605,7 @@
 
 % {{{ Bibliography
 % Define note describing bibliography sorting.
-\defbibnote{bibsorting}{Die Literaturangaben sind alphabetisch nach dem Nachnamen des ersten Autors und anschließend nach dem Erscheinungsjahr sortiert.}
+\defbibnote{bibsorting}{\bibnote}
 
 % The bibliography is typeset with single line spacing, while the previous
 % content (mainmatter) is usually set with 1.5x spacing. So, spacing must
@@ -709,7 +727,7 @@
             {\Large\bfseries\sffamily\@title\par}
             \vspace{3em}
 
-            von
+            \by
             \vspace{1.5em}
 
             {\large \@author}
@@ -717,12 +735,12 @@
 
             \vfill
             \begin{tabular}{ll}
-                Betreuer:   & \@advisorA\\
+                \advisor    & \@advisorA\\
                             & \@advisorB
             \end{tabular}
             \vspace{3em}
 
-            Paderborn, im \@date
+            \placedate
         \end{center}
 
         \etfooter%
@@ -744,14 +762,14 @@
             {\Large\bfseries\sffamily\@title\par}
             \vspace{3em}
 
-            von
+            \by
             \vspace{1.5em}
 
             {\large \@author}
             \vspace{1.5em}
 
             \vfill
-            Paderborn, im \@date
+            \placedate
         \end{center}
 
         \etfooter%
@@ -762,7 +780,7 @@
 \newcommand*{\etTitlePrelim}{%
     \begin{titlepage}
         \begin{center}
-            Einige Notizen von \@author~zum Thema \@title.
+            \preliminarynote
         \end{center}
     \end{titlepage}
 }
@@ -777,7 +795,7 @@
             \large\doctypename%
             \vspace{0.5em}
 
-            für
+            \for
             \vspace{0.5em}
 
             \@salutation~\@author
@@ -801,17 +819,17 @@
 \newcommand*{\etPreface}{\input{\prefacefile}}
 
 % Abstracts
-\newcommand*{\etAbstractDE}{\chapter{Kurzfassung}\@abstract}
-\newcommand*{\etAbstractEN}{\input{\englishabstractfile}}
+\newcommand*{\etAbstract}{\chapter{\abstracttitle}\@abstract}
+\newcommand*{\etAbstractAdd}{\chapter{\addabstracttitle}\input{\addabstractfile}}
 
 % Bibliography
 % - All cited sources (accepted doctoral and student theses)
 \newcommand*{\etBibAll}{%
-    \printbibliography[title=Literaturverzeichnis, segment=0, prenote=bibsorting]
+    \printbibliography[title=\bibtitle, segment=0, prenote=bibsorting]
 }
 % - Cited sources by others (i.e. not the thesis author), to be combined with \etBibOwn
 \newcommand*{\etBibOthers}{%
-    \printbibliography[title=Literaturverzeichnis, notkeyword=own, segment=0, prenote=bibsorting]
+    \printbibliography[title=\bibtitle, notkeyword=own, segment=0, prenote=bibsorting]
 }
 % - Author's own sources, even if not cited in the document
 \newcommand*{\etBibOwn}{%
@@ -823,7 +841,7 @@
     % Sort author's own publications chronologically (i.e. by year, name instead of name, year)
     \newrefcontext[sorting=ynt]
 
-    \printbibliography[title={Eigene Publikationen}, keyword=own, segment=1]
+    \printbibliography[title=\authorspublications, keyword=own, segment=1]
 }
 
 % Affirmation

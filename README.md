@@ -22,6 +22,7 @@ Features
   * Doctoral theses
   * Student projects and similar ("Projektarbeit", "Studienarbeit")
   * Generic reports (non-thesis)
+* English and German language variants
 * Support for different document states, e.g. "Prüfexemplar" and "Belegexemplar" for doctoral theses
 * Compliance with university, faculty and work group requirements (no guarantees though)
 * Metadata (author name, thesis title etc.) centrally defined in main document
@@ -61,6 +62,9 @@ The ETthesis document class supports the following options, which can be given v
 
         \documentclass[option1=value1, option2=value2]{etthesis}
 
+* **lang**: Template language:
+  * `german`: German version [default]
+  * `english`: English version
 * **doctype**: Document type:
   * `bachelors`: Bachelor's thesis [default]
   * `dring`: Doctoral thesis (Dr.-Ing.)
@@ -90,10 +94,9 @@ The ETthesis document class supports the following options, which can be given v
   * `always`: Enable problem statement.
   * `never`: Disable problem statement.
 * **abstracts**: Whether to display the abstract(s):
-  * `auto`: Include german and english abstract for doctoral theses, none for reports and only the german abstract for all other document types. [default]
+  * `auto`: Include german and english abstract for doctoral theses, none for reports and only an abstract in the document's language for all other document types. [default]
+  * `one`: Enable only the abstract in the document's language.
   * `both`: Enable both the german and english abstract.
-  * `english`: Enable only the english abstract.
-  * `german`: Enable only the german abstract.
   * `none`: Disable abstracts.
 * **affirmation**: Whether to display the affirmation:
   * `auto`: Include for student theses only. [default]

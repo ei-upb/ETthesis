@@ -1,0 +1,48 @@
+% String translations for "etthesis" class.
+
+\Ifstr{\lang}{german}{%
+    \newcommand{\bachelorsthesis}{Bachelorarbeit}
+    \newcommand{\mastersthesis}{Masterarbeit}
+    \newcommand{\projectreport}{Projektarbeit}
+    \newcommand{\report}{Projektbericht}
+    \newcommand{\studentpaper}{Studienarbeit}
+    \newcommand{\upblogopath}{logos/upb_de.pdf}
+    \newcommand{\eimlogopath}{logos/eim_de.pdf}
+    \newcommand{\langid}{de-DE}
+    \newcommand{\bibnote}{Die Literaturangaben sind alphabetisch nach dem Nachnamen des ersten Autors und anschließend nach dem Erscheinungsjahr sortiert.}
+    \newcommand{\advisor}{Betreuer:}
+    \newcommand{\by}{von}
+    \newcommand{\placedate}{Paderborn, im \@date}
+    \newcommand{\preliminarynote}{Einige Notizen von \@author~zum Thema \@title.}
+    \newcommand{\for}{für}
+    \newcommand{\abstracttitle}{Kurzfassung}
+    \newcommand{\addabstracttitle}{Abstract}
+    \newcommand{\bibtitle}{Literaturverzeichnis}
+    \newcommand{\authorspublications}{Eigene Publikationen}
+}{}
+
+\Ifstr{\lang}{english}{%
+    \newcommand{\bachelorsthesis}{Bachelor's Thesis}
+    \newcommand{\mastersthesis}{Master's Thesis}
+    \newcommand{\projectreport}{Project Report}
+    \newcommand{\report}{Report}
+    \newcommand{\studentpaper}{Student Paper}
+    \Ifstrstart{\doctype}{dr}{% Dissertations always use german title pages
+        \newcommand{\upblogopath}{logos/upb_de.pdf}
+        \newcommand{\eimlogopath}{logos/eim_de.pdf}
+    }{
+        \newcommand{\upblogopath}{logos/upb_en.pdf}
+        \newcommand{\eimlogopath}{logos/eim_en.pdf}
+    }
+    \newcommand{\langid}{en-GB}
+    \newcommand{\bibnote}{References are sorted alphabetically by the surname of the first author and then by the year of publication.}
+    \newcommand{\advisor}{Advisor:}
+    \newcommand{\by}{by}
+    \newcommand{\placedate}{Paderborn, in \@date}
+    \newcommand{\preliminarynote}{A few notes on \@title~by \@author.}
+    \newcommand{\for}{for}
+    \newcommand{\abstracttitle}{Abstract}
+    \newcommand{\addabstracttitle}{Kurzfassung}
+    \newcommand{\bibtitle}{References}
+    \newcommand{\authorspublications}{Author's Publications}
+}{}
