@@ -263,7 +263,7 @@
 \Ifstr{\linespacing}{auto}{%
     \Ifstr{\docstate}{accepted}{}{\renewcommand*{\bodylinespacing}{\onehalfspacing}}
 }{}
-\Ifstr{\linespacing}{onehalf}{\newcommand*{\bodylinespacing}{\onehalfspacing}}{}
+\Ifstr{\linespacing}{onehalf}{\renewcommand*{\bodylinespacing}{\onehalfspacing}}{}
 
 % Explicit / independent settings
 \Ifstr{\docstate}{preliminary}{\renewcommand*{\includetitlepage}{\etTitlePrelim}}{}
@@ -313,6 +313,13 @@
 ]{scrbook}
 % }}}
 
+% Default binding correction.
+% Users may override this by using e.g. \KOMAoptions{BCOR=15mm}.
+\KOMAoptions{    % Default binding correction.
+	% Users may override this by using e.g. \KOMAoptions{BCOR=15mm}.
+	BCOR=12mm,
+	}%
+%
 % {{{ Page layout
 % Set paper format
 \Ifstr{\paperformat}{a4}{%
@@ -337,18 +344,20 @@
     }%
 }{}
 
-% Set main content's line spacing to be respected by the DIV-calculation.
+% Load setspace package for easy use of \singlespacing, \onehalfspacing and \doublespacing commands
 \RequirePackage{setspace}
-\bodylinespacing
 
 % General page layout
 \KOMAoptions{%
-    % Default binding correction.
-    % Users may override this by using e.g. \KOMAoptions{BCOR=15mm}.
-    BCOR=12mm,
-    %
     % Automatic calculation of type area.
     DIV=calc,
+}
+
+% Set main content's line spacing to be respected by the DIV-calculation.
+\bodylinespacing
+\KOMAoptions{%
+	% Recalculation of type area.
+	DIV=last,
 }
 
 % Page header with UPB / EIM branding
