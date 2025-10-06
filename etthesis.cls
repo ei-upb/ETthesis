@@ -314,11 +314,13 @@
 % }}}
 
 % {{{ Page layout
-% Set paper format
+% Set paper format.
+% Binding correction is 12 mm. Override by using \KOMAoptions{BCOR=15mm}.
 \Ifstr{\paperformat}{a4}{%
     \KOMAoptions{
         paper=a4,
         fontsize=12pt,
+        BCOR=12mm,
     }%
 }{}
 \Ifstr{\paperformat}{a4onesided}{%
@@ -334,6 +336,7 @@
         paper=a5,
         fontsize=10pt,
         headinclude=true,
+        BCOR=12mm,
     }%
 }{}
 
@@ -343,10 +346,6 @@
 
 % General page layout
 \KOMAoptions{%
-    % Default binding correction.
-    % Users may override this by using e.g. \KOMAoptions{BCOR=15mm}.
-    BCOR=12mm,
-    %
     % Automatic calculation of type area.
     DIV=calc,
 }
