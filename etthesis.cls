@@ -454,8 +454,9 @@
 % Packages for font formatting
 \ifpdftex
     \RequirePackage[T1]{fontenc}
+    \RequirePackage{lmodern}
 \fi
-\RequirePackage{lmodern}
+
 \RequirePackage{microtype}
 
 % Source code listings
@@ -594,6 +595,7 @@
 % PDF/A-2 is based on PDF 1.7, so we want the document to be in that version.
 \ifluatex
     \directlua{pdf.setminorversion(7)}
+    \RequirePackage{fontspec} % Enables loading of OpenType fonts. Latin Modern is still default.
 \else
     \pdfminorversion=7
 \fi
