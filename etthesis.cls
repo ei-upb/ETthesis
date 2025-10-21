@@ -445,8 +445,8 @@
 % Packages for font formatting
 \ifpdftex
     \RequirePackage[T1]{fontenc}
+    \RequirePackage{lmodern}
 \fi
-\RequirePackage{lmodern}
 \RequirePackage{microtype}
 
 % Source code listings
