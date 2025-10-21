@@ -442,10 +442,13 @@
 % LaTeX engine detection
 \RequirePackage{iftex}
 
-% Packages for font formatting
+% Packages for font formatting and encoding
 \ifpdftex
     \RequirePackage[T1]{fontenc}
     \RequirePackage{lmodern}
+\fi
+\ifluatex
+    \RequirePackage{fontspec}
 \fi
 \RequirePackage{microtype}
 
