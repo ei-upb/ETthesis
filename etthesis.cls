@@ -263,7 +263,7 @@
 \Ifstr{\linespacing}{auto}{%
     \Ifstr{\docstate}{accepted}{}{\renewcommand*{\bodylinespacing}{\onehalfspacing}}
 }{}
-\Ifstr{\linespacing}{onehalf}{\newcommand*{\bodylinespacing}{\onehalfspacing}}{}
+\Ifstr{\linespacing}{onehalf}{\renewcommand*{\bodylinespacing}{\onehalfspacing}}{}
 
 % Explicit / independent settings
 \Ifstr{\docstate}{preliminary}{\renewcommand*{\includetitlepage}{\etTitlePrelim}}{}
