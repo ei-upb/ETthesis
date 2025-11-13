@@ -481,10 +481,10 @@
 
 % Language-related
 \Ifstr{\lang}{german}{
-    \RequirePackage[english,main=ngerman]{babel}
+    \RequirePackage[english,ngerman]{babel}
 }{}
 \Ifstr{\lang}{english}{
-    \RequirePackage[main=english,ngerman]{babel}
+    \RequirePackage[ngerman,english]{babel}
 }{}
 \RequirePackage[autostyle=true]{csquotes}
 
